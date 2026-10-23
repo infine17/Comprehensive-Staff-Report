@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Spider's Web — 17 Staff Comprehensive Performance Audit</title>
   
   <!-- Fonts: Modern, Crisp, High Readability Typography -->
@@ -38,15 +38,11 @@
               950: '#091628',
             },
             glacier: {
+              400: '#5eead4',
               500: '#2dd4bf',
               600: '#14b8a6',
               700: '#0f766e',
               900: '#134e4a',
-            },
-            nord: {
-              card: 'rgba(17, 36, 66, 0.72)',
-              hover: 'rgba(24, 49, 88, 0.85)',
-              border: 'rgba(56, 189, 248, 0.22)',
             }
           }
         }
@@ -62,20 +58,24 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* Natural Cool Color Palette & Custom Scrollbar */
+    /* Natural Cool Color Palette & Mobile Scrolling */
     body {
       background-color: #091628;
-      background-image: 
-        radial-gradient(ellipse at 50% 0%, #17365d 0%, #0c203b 40%, #081424 100%);
+      background-image: radial-gradient(ellipse at 50% 0%, #17365d 0%, #0c203b 40%, #081424 100%);
       color: #e2e8f0;
       min-height: 100vh;
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #071220; }
     ::-webkit-scrollbar-thumb { background: #1c3d69; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #2d5a99; }
+
+    /* Hide horizontal scrollbars on mobile filter bar while keeping swipe functional */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
     /* Canvas in Background with high clarity */
     #bg-canvas {
@@ -92,70 +92,64 @@
     .aurora-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(100px);
+      filter: blur(80px);
       pointer-events: none;
       z-index: 1;
-      opacity: 0.35;
+      opacity: 0.30;
       animation: floatAurora 18s ease-in-out infinite alternate;
     }
     .aurora-1 {
       top: 5%;
       left: 10%;
-      width: 450px;
-      height: 450px;
+      width: 320px;
+      height: 320px;
       background: radial-gradient(circle, #0284c7 0%, transparent 70%);
     }
     .aurora-2 {
       top: 40%;
-      right: 8%;
-      width: 500px;
-      height: 500px;
+      right: 5%;
+      width: 360px;
+      height: 360px;
       background: radial-gradient(circle, #0d9488 0%, transparent 70%);
       animation-delay: -7s;
     }
-    .aurora-3 {
-      bottom: 10%;
-      left: 25%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #1e40af 0%, transparent 70%);
-      animation-delay: -12s;
-    }
     @keyframes floatAurora {
       0% { transform: translateY(0px) translateX(0px) scale(1); }
-      50% { transform: translateY(-40px) translateX(30px) scale(1.1); }
-      100% { transform: translateY(20px) translateX(-30px) scale(0.95); }
+      50% { transform: translateY(-30px) translateX(25px) scale(1.08); }
+      100% { transform: translateY(15px) translateX(-20px) scale(0.95); }
     }
 
     /* Frosted Glass Components in Natural Cool Glaze */
     .glass-nav {
-      background: rgba(10, 24, 46, 0.85);
+      background: rgba(10, 24, 46, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(56, 189, 248, 0.18);
     }
     .glass-panel {
-      background: rgba(13, 29, 54, 0.72);
+      background: rgba(13, 29, 54, 0.75);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(56, 189, 248, 0.18);
-      box-shadow: 0 12px 36px rgba(4, 12, 24, 0.45);
+      box-shadow: 0 10px 32px rgba(4, 12, 24, 0.45);
     }
     .glass-card {
-      background: rgba(15, 33, 62, 0.70);
+      background: rgba(15, 33, 62, 0.72);
       backdrop-filter: blur(14px);
       border: 1px solid rgba(56, 189, 248, 0.20);
-      box-shadow: 0 8px 28px rgba(3, 10, 20, 0.35);
+      box-shadow: 0 8px 24px rgba(3, 10, 20, 0.35);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .glass-card:hover {
-      background: rgba(22, 48, 88, 0.85);
-      border-color: rgba(56, 189, 248, 0.45);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(2, 8, 16, 0.55), 0 0 20px rgba(56, 189, 248, 0.15);
+    @media (hover: hover) {
+      .glass-card:hover {
+        background: rgba(22, 48, 88, 0.88);
+        border-color: rgba(56, 189, 248, 0.45);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 36px rgba(2, 8, 16, 0.55), 0 0 20px rgba(56, 189, 248, 0.15);
+      }
     }
 
-    /* Statbot Image Card Hover zoom */
+    /* Statbot Image Card Box */
     .statbot-img-box {
       position: relative;
       overflow: hidden;
@@ -167,16 +161,18 @@
     .statbot-img-box img {
       transition: transform 0.3s ease, filter 0.3s ease;
     }
-    .statbot-img-box:hover img {
-      transform: scale(1.03);
-      filter: brightness(1.08);
+    @media (hover: hover) {
+      .statbot-img-box:hover img {
+        transform: scale(1.03);
+        filter: brightness(1.08);
+      }
     }
 
     /* Tab Pill Active Styles */
     .tab-btn.active {
-      background: #0284c7;
-      color: #ffffff;
-      border-color: #38bdf8;
+      background: #0284c7 !important;
+      color: #ffffff !important;
+      border-color: #38bdf8 !important;
       box-shadow: 0 0 16px rgba(14, 165, 233, 0.4);
     }
 
@@ -200,41 +196,44 @@
   <!-- Ambient Natural Cool Aurora Orbs -->
   <div class="aurora-orb aurora-1"></div>
   <div class="aurora-orb aurora-2"></div>
-  <div class="aurora-orb aurora-3"></div>
 
   <!-- Main Application Wrapper -->
   <div class="relative z-10 flex flex-col min-h-screen">
     
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation Bar (Mobile Friendly) -->
     <header class="sticky top-0 z-50 glass-nav border-b">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-teal-400 p-0.5 flex items-center justify-center shadow-lg shadow-cyan-500/25">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+        
+        <div class="flex items-center space-x-2.5 sm:space-x-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-teal-400 p-0.5 flex items-center justify-center shadow-lg shadow-cyan-500/25 shrink-0">
             <div class="w-full h-full bg-[#0a182c] rounded-[10px] flex items-center justify-center">
-              <i data-lucide="shield-check" class="w-5 h-5 text-cyan-400"></i>
+              <i data-lucide="shield-check" class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400"></i>
             </div>
           </div>
           <div>
-            <span class="font-heading font-extrabold text-lg tracking-wider text-slate-100 flex items-center gap-2">
-              SPIDER'S WEB <span class="text-xs px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 font-mono font-semibold">STAFF AUDIT</span>
+            <span class="font-heading font-extrabold text-sm sm:text-lg tracking-wider text-slate-100 flex items-center gap-1.5 sm:gap-2">
+              SPIDER'S WEB <span class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 font-mono font-semibold">AUDIT</span>
             </span>
-            <p class="text-[11px] text-slate-400 font-mono">17 Staff Telemetry & Field Analysis</p>
+            <p class="text-[10px] text-slate-400 font-mono hidden xs:block sm:block">17 Staff Telemetry & Review</p>
           </div>
         </div>
 
+        <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center space-x-1 font-medium text-sm text-slate-300">
           <a href="#overview" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Overview</a>
           <a href="#analytics" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Analytics (6 Charts)</a>
           <a href="#staff-cards" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Staff Assessments</a>
-          <a href="#action-directives" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Operational Directives</a>
+          <a href="#action-directives" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Directives</a>
         </nav>
 
-        <div class="flex items-center space-x-3">
-          <div class="flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+        <!-- Right Header Items -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <div class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-300 text-[11px] sm:text-xs font-mono">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>All 17 Statbot Cards Synced</span>
+            <span class="hidden sm:inline">All 17 Statbot Cards Synced</span>
+            <span class="sm:hidden">17 Synced</span>
           </div>
-          <a href="https://github.com/infine17/Comprehensive-Staff-Report" target="_blank" class="p-2 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 transition">
+          <a href="https://github.com/infine17/Comprehensive-Staff-Report" target="_blank" class="p-1.5 sm:p-2 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 transition" title="GitHub Repository">
             <i data-lucide="github" class="w-4 h-4"></i>
           </a>
         </div>
@@ -242,87 +241,90 @@
     </header>
 
     <!-- Main Content Area -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12" id="overview">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-8 sm:space-y-12" id="overview">
 
       <!-- HERO SECTION: Executive Overview -->
-      <section class="glass-panel rounded-2xl p-6 sm:p-8 relative overflow-hidden">
-        <div class="absolute top-0 right-0 -mt-8 -mr-8 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -mb-8 -ml-8 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <section class="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mt-8 -mr-8 w-60 sm:w-80 h-60 sm:h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="relative z-10 space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-900/40 border border-cyan-400/30 text-cyan-300 text-xs font-mono font-medium">
-              <i data-lucide="activity" class="w-3.5 h-3.5 text-cyan-400"></i>
-              <span>EXECUTIVE PERFORMANCE AUDIT • SPIDER'S WEB</span>
+        <div class="relative z-10 space-y-4 sm:space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+            <div class="inline-flex items-center space-x-2 px-2.5 sm:px-3 py-1 rounded-full bg-cyan-900/40 border border-cyan-400/30 text-cyan-300 text-[10px] sm:text-xs font-mono font-medium">
+              <i data-lucide="activity" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400"></i>
+              <span>EXECUTIVE AUDIT • SPIDER'S WEB</span>
             </div>
-            <div class="text-xs text-slate-400 font-mono">
-              Cycle: October 2026 • Lead Evaluator: Aditya
+            <div class="text-[11px] text-slate-400 font-mono">
+              Cycle: October 2026 • Verified Roster
             </div>
           </div>
 
-          <div class="max-w-4xl space-y-3">
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-tight leading-tight">
+          <div class="max-w-4xl space-y-2 sm:space-y-3">
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-tight leading-tight">
               17-Staff Comprehensive Performance & Telemetry Matrix
             </h1>
-            <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+            <p class="text-xs sm:text-base lg:text-lg text-slate-300 leading-relaxed font-normal">
               Empirical 30-day activity logs, verified Discord Statbot telemetry cards, and qualitative operational field assessments for all 17 moderators and trial moderators.
             </p>
           </div>
 
-          <!-- Policy & Scope Notice -->
-          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/80 flex items-start gap-3 text-xs sm:text-sm text-slate-300">
-            <i data-lucide="info" class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5"></i>
-            <div>
-              <span class="font-semibold text-white">Administrative Scope:</span>
-              This audit evaluates duty throughput, public channel presence, ticket bravery, and punctuality. 
-              <span class="text-cyan-300 font-medium">All final personnel designations, duty roster shifts, and disciplinary actions remain strictly under Higher Leadership (NOT_ADITYA, Mike, DeadSoul).</span>
+          <!-- Official Discord Policy Mandate Banner (Fixing Trial Mod Misconceptions) -->
+          <div class="p-3.5 sm:p-4 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-start gap-3 text-xs sm:text-sm text-slate-200">
+            <i data-lucide="alert-octagon" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0 mt-0.5"></i>
+            <div class="space-y-1">
+              <span class="font-bold text-amber-300 block font-heading uppercase tracking-wide">
+                Official Server Policy (#updates mandate):
+              </span>
+              <p class="text-slate-300 leading-relaxed">
+                <span class="text-amber-200 font-semibold">"All Trial Moderators are not allowed to claim and solve reports and tickets unless assigned to the ticket department."</span>
+                Trial Mod evaluations strictly measure <span class="text-white font-medium">chat moderation, public lounge vigilance, rule adherence, and team communication</span>. Ticket handling is not assigned to general Trial Mods.
+              </p>
             </div>
           </div>
 
-          <!-- 4 Bento KPI Metric Cards -->
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <!-- 4 Bento KPI Metric Cards (Responsive 2x2 on Mobile, 4x1 on Desktop) -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 pt-1">
             
-            <div class="glass-card p-4 rounded-xl space-y-1">
+            <div class="glass-card p-3 sm:p-4 rounded-xl space-y-1">
               <div class="flex items-center justify-between text-slate-400">
-                <span class="text-xs font-medium font-mono uppercase tracking-wider">Staff Audited</span>
-                <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
+                <span class="text-[10px] sm:text-xs font-medium font-mono uppercase tracking-wider">Staff Audited</span>
+                <i data-lucide="users" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400"></i>
               </div>
-              <div class="text-3xl font-heading font-bold text-white">17 / 17</div>
-              <p class="text-[11px] text-cyan-400 flex items-center gap-1 font-mono">
-                <i data-lucide="check" class="w-3 h-3"></i> 100% Statbot Cards on Disk
+              <div class="text-2xl sm:text-3xl font-heading font-bold text-white">17 / 17</div>
+              <p class="text-[10px] sm:text-[11px] text-cyan-400 flex items-center gap-1 font-mono">
+                <i data-lucide="check" class="w-3 h-3"></i> 100% Statbot Cards
               </p>
             </div>
 
-            <div class="glass-card p-4 rounded-xl space-y-1">
+            <div class="glass-card p-3 sm:p-4 rounded-xl space-y-1">
               <div class="flex items-center justify-between text-slate-400">
-                <span class="text-xs font-medium font-mono uppercase tracking-wider">30d Messages Logged</span>
-                <i data-lucide="message-square" class="w-4 h-4 text-teal-400"></i>
+                <span class="text-[10px] sm:text-xs font-medium font-mono uppercase tracking-wider">30d Messages</span>
+                <i data-lucide="message-square" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-400"></i>
               </div>
-              <div class="text-3xl font-heading font-bold text-white">134,800+</div>
-              <p class="text-[11px] text-teal-400 flex items-center gap-1 font-mono">
-                <i data-lucide="trending-up" class="w-3 h-3"></i> High Activity Output
+              <div class="text-2xl sm:text-3xl font-heading font-bold text-white">134,800+</div>
+              <p class="text-[10px] sm:text-[11px] text-teal-400 flex items-center gap-1 font-mono">
+                <i data-lucide="trending-up" class="w-3 h-3"></i> Total Logged Volume
               </p>
             </div>
 
-            <div class="glass-card p-4 rounded-xl space-y-1">
+            <div class="glass-card p-3 sm:p-4 rounded-xl space-y-1">
               <div class="flex items-center justify-between text-slate-400">
-                <span class="text-xs font-medium font-mono uppercase tracking-wider">Voice Hours Logged</span>
-                <i data-lucide="mic" class="w-4 h-4 text-sky-400"></i>
+                <span class="text-[10px] sm:text-xs font-medium font-mono uppercase tracking-wider">Voice Hours</span>
+                <i data-lucide="mic" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-sky-400"></i>
               </div>
-              <div class="text-3xl font-heading font-bold text-white">582 hrs</div>
-              <p class="text-[11px] text-sky-400 flex items-center gap-1 font-mono">
-                <i data-lucide="radio" class="w-3 h-3"></i> 17 Staff VC Telemetry
+              <div class="text-2xl sm:text-3xl font-heading font-bold text-white">582 hrs</div>
+              <p class="text-[10px] sm:text-[11px] text-sky-400 flex items-center gap-1 font-mono">
+                <i data-lucide="radio" class="w-3 h-3"></i> Voice Telemetry
               </p>
             </div>
 
-            <div class="glass-card p-4 rounded-xl space-y-1">
+            <div class="glass-card p-3 sm:p-4 rounded-xl space-y-1">
               <div class="flex items-center justify-between text-slate-400">
-                <span class="text-xs font-medium font-mono uppercase tracking-wider">Operational Actions</span>
-                <i data-lucide="compass" class="w-4 h-4 text-amber-400"></i>
+                <span class="text-[10px] sm:text-xs font-medium font-mono uppercase tracking-wider">Roster Structure</span>
+                <i data-lucide="layers" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400"></i>
               </div>
-              <div class="text-3xl font-heading font-bold text-white">8 Focus Targets</div>
-              <p class="text-[11px] text-amber-300 flex items-center gap-1 font-mono">
-                <i data-lucide="alert-circle" class="w-3 h-3"></i> Mentorship & SLA Mandates
+              <div class="text-2xl sm:text-3xl font-heading font-bold text-white">3 H / 4 M / 10 T</div>
+              <p class="text-[10px] sm:text-[11px] text-amber-300 flex items-center gap-1 font-mono">
+                <i data-lucide="shield" class="w-3 h-3"></i> 10 Trial Moderators
               </p>
             </div>
 
@@ -330,105 +332,105 @@
         </div>
       </section>
 
-      <!-- ANALYTICS SECTION: 6 Rich Interactive Charts -->
-      <section id="analytics" class="space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <!-- ANALYTICS SECTION: 6 Rich Interactive Charts (Mobile Responsive) -->
+      <section id="analytics" class="space-y-4 sm:space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
-            <h2 class="text-2xl font-heading font-bold text-white flex items-center gap-2">
-              <i data-lucide="bar-chart-3" class="w-6 h-6 text-cyan-400"></i>
+            <h2 class="text-xl sm:text-2xl font-heading font-bold text-white flex items-center gap-2">
+              <i data-lucide="bar-chart-3" class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400"></i>
               Staff Telemetry & Analytics Hub (6 Charts)
             </h2>
-            <p class="text-sm text-slate-400">Multi-dimensional operational metrics compiled from 30-day Statbot telemetry.</p>
+            <p class="text-xs sm:text-sm text-slate-400">Multi-dimensional operational metrics compiled from 30-day Statbot telemetry.</p>
           </div>
-          <div class="flex items-center gap-2 font-mono text-xs">
-            <span class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">Source: Discord Statbot</span>
-            <span class="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">Range: 30 Days</span>
+          <div class="flex items-center gap-2 font-mono text-[10px] sm:text-xs">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Source: Statbot</span>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">Range: 30 Days</span>
           </div>
         </div>
 
         <!-- 6 Complete Graphs Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
 
           <!-- Chart 1: 30-Day Message Output by Staff -->
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div class="flex items-center justify-between mb-3">
+          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
-                <h3 class="font-heading font-semibold text-white text-base">30-Day Message Output</h3>
-                <p class="text-xs text-slate-400">Total text messages in thousands (k)</p>
+                <h3 class="font-heading font-semibold text-white text-sm sm:text-base">30-Day Message Output</h3>
+                <p class="text-[11px] text-slate-400">Total text messages in thousands (k)</p>
               </div>
               <i data-lucide="message-circle" class="w-4 h-4 text-cyan-400"></i>
             </div>
-            <div class="h-64 relative">
+            <div class="h-56 sm:h-64 relative">
               <canvas id="chartMessages"></canvas>
             </div>
           </div>
 
           <!-- Chart 2: Voice Channel Immersion (Hours) -->
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div class="flex items-center justify-between mb-3">
+          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
-                <h3 class="font-heading font-semibold text-white text-base">Voice Channel Presence</h3>
-                <p class="text-xs text-slate-400">Total hours spent in active voice channels</p>
+                <h3 class="font-heading font-semibold text-white text-sm sm:text-base">Voice Channel Presence</h3>
+                <p class="text-[11px] text-slate-400">Total hours spent in active voice channels</p>
               </div>
               <i data-lucide="headphones" class="w-4 h-4 text-teal-400"></i>
             </div>
-            <div class="h-64 relative">
+            <div class="h-56 sm:h-64 relative">
               <canvas id="chartVoice"></canvas>
             </div>
           </div>
 
           <!-- Chart 3: Operational Standing Distribution -->
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div class="flex items-center justify-between mb-3">
+          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
-                <h3 class="font-heading font-semibold text-white text-base">Staff Operational Standing</h3>
-                <p class="text-xs text-slate-400">Distribution across 17 audited staff</p>
+                <h3 class="font-heading font-semibold text-white text-sm sm:text-base">Operational Standing</h3>
+                <p class="text-[11px] text-slate-400">Distribution across 17 audited staff</p>
               </div>
               <i data-lucide="pie-chart" class="w-4 h-4 text-sky-400"></i>
             </div>
-            <div class="h-64 relative flex items-center justify-center">
+            <div class="h-56 sm:h-64 relative flex items-center justify-center">
               <canvas id="chartStanding"></canvas>
             </div>
           </div>
 
           <!-- Chart 4: Multi-Axis Competency Radar -->
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div class="flex items-center justify-between mb-3">
+          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
-                <h3 class="font-heading font-semibold text-white text-base">Leadership Competency Radar</h3>
-                <p class="text-xs text-slate-400">Comparison of 4 Core Operational Leads</p>
+                <h3 class="font-heading font-semibold text-white text-sm sm:text-base">Operational Competency Radar</h3>
+                <p class="text-[11px] text-slate-400">Comparison across Core Staff Leads</p>
               </div>
               <i data-lucide="crosshair" class="w-4 h-4 text-cyan-400"></i>
             </div>
-            <div class="h-64 relative flex items-center justify-center">
+            <div class="h-56 sm:h-64 relative flex items-center justify-center">
               <canvas id="chartRadar"></canvas>
             </div>
           </div>
 
-          <!-- Chart 5: 24h Coverage Distribution -->
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div class="flex items-center justify-between mb-3">
+          <!-- Chart 5: 24h Coverage Profile -->
+          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
-                <h3 class="font-heading font-semibold text-white text-base">24-Hour Coverage Profile</h3>
-                <p class="text-xs text-slate-400">Team activity by time shift</p>
+                <h3 class="font-heading font-semibold text-white text-sm sm:text-base">24-Hour Coverage Profile</h3>
+                <p class="text-[11px] text-slate-400">Team activity by time shift</p>
               </div>
               <i data-lucide="clock" class="w-4 h-4 text-teal-400"></i>
             </div>
-            <div class="h-64 relative">
+            <div class="h-56 sm:h-64 relative">
               <canvas id="chartCoverage"></canvas>
             </div>
           </div>
 
           <!-- Chart 6: Messages vs Voice Engagement Correlation -->
-          <div class="glass-card p-5 rounded-2xl flex flex-col justify-between">
-            <div class="flex items-center justify-between mb-3">
+          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
-                <h3 class="font-heading font-semibold text-white text-base">Engagement Matrix</h3>
-                <p class="text-xs text-slate-400">Messages (X) vs Voice Hours (Y)</p>
+                <h3 class="font-heading font-semibold text-white text-sm sm:text-base">Engagement Matrix</h3>
+                <p class="text-[11px] text-slate-400">Messages (X) vs Voice Hours (Y)</p>
               </div>
               <i data-lucide="scatter-chart" class="w-4 h-4 text-emerald-400"></i>
             </div>
-            <div class="h-64 relative">
+            <div class="h-56 sm:h-64 relative">
               <canvas id="chartEngagement"></canvas>
             </div>
           </div>
@@ -437,24 +439,24 @@
       </section>
 
       <!-- STAFF ASSESSMENTS SECTION: All 17 Profiles with Statbot Cards -->
-      <section id="staff-cards" class="space-y-6">
+      <section id="staff-cards" class="space-y-4 sm:space-y-6">
         
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
-            <h2 class="text-2xl font-heading font-bold text-white flex items-center gap-2">
-              <i data-lucide="clipboard-list" class="w-6 h-6 text-cyan-400"></i>
-              Comprehensive Staff Profiles & Telemetry Cards (17)
+            <h2 class="text-xl sm:text-2xl font-heading font-bold text-white flex items-center gap-2">
+              <i data-lucide="clipboard-list" class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400"></i>
+              Staff Profiles & Statbot Cards (17)
             </h2>
-            <p class="text-sm text-slate-400">Each staff card contains verified Statbot telemetry, strengths, bottlenecks, and targeted directives.</p>
+            <p class="text-xs sm:text-sm text-slate-400">Detailed qualitative evaluations and verified Statbot telemetry images for all 17 personnel.</p>
           </div>
 
-          <!-- Quick Search & Sort -->
-          <div class="flex flex-wrap items-center gap-3">
-            <div class="relative">
+          <!-- Mobile Friendly Search & Sort Controls -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+            <div class="relative w-full sm:w-64">
               <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
-              <input type="text" id="staff-search" placeholder="Search staff name or role..." class="bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition w-56 sm:w-64">
+              <input type="text" id="staff-search" placeholder="Search staff name or role..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
             </div>
-            <select id="staff-sort" class="bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+            <select id="staff-sort" class="w-full sm:w-auto bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
               <option value="default">Default Order</option>
               <option value="msgs-desc">Highest Messages</option>
               <option value="vc-desc">Highest Voice Hours</option>
@@ -463,126 +465,126 @@
           </div>
         </div>
 
-        <!-- Filter Tab Buttons -->
-        <div class="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-3" id="filter-tabs">
-          <button class="tab-btn active px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium border border-transparent transition" data-filter="all">
+        <!-- Filter Tab Buttons (Horizontal Touch Swipe on Mobile) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 sm:pb-3 border-b border-slate-800" id="filter-tabs">
+          <button class="tab-btn active shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium border border-transparent transition" data-filter="all">
             All Staff (17)
           </button>
-          <button class="tab-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Core & Benchmark">
-            Core & Benchmark (4)
+          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Core & Benchmark">
+            Core Leads (4)
           </button>
-          <button class="tab-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="High Output">
-            High Output (4)
+          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="High Output">
+            High Activity (4)
           </button>
-          <button class="tab-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Targeted Mentorship">
-            Targeted Mentorship (4)
+          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Targeted Mentorship">
+            Mentorship (4)
           </button>
-          <button class="tab-btn px-4 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Review Roster">
+          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Review Roster">
             Attendance Review (5)
           </button>
         </div>
 
-        <!-- Dynamic Grid of 17 Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="staff-grid">
+        <!-- Dynamic Responsive Grid of 17 Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6" id="staff-grid">
           <!-- Dynamically populated by JS -->
         </div>
 
       </section>
 
       <!-- OPERATIONAL DIRECTIVES SECTION -->
-      <section id="action-directives" class="glass-panel rounded-2xl p-6 sm:p-8 space-y-6">
+      <section id="action-directives" class="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-8 space-y-4 sm:space-y-6">
         <div>
-          <h2 class="text-2xl font-heading font-bold text-white flex items-center gap-2">
-            <i data-lucide="target" class="w-6 h-6 text-cyan-400"></i>
+          <h2 class="text-xl sm:text-2xl font-heading font-bold text-white flex items-center gap-2">
+            <i data-lucide="target" class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400"></i>
             Operational Directives & Action Plan
           </h2>
-          <p class="text-sm text-slate-400">Structured recommendations for executive follow-up across the four operational focus cohorts.</p>
+          <p class="text-xs sm:text-sm text-slate-400">Structured recommendations across the four operational cohorts.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
 
           <!-- Cohort 1: Mentorship & Quality Control -->
-          <div class="glass-card p-5 rounded-xl space-y-3 border-l-4 border-l-cyan-400">
+          <div class="glass-card p-4 sm:p-5 rounded-xl space-y-2.5 sm:space-y-3 border-l-4 border-l-cyan-400">
             <div class="flex items-center justify-between">
-              <h3 class="font-heading font-bold text-white text-base flex items-center gap-2">
-                <i data-lucide="graduation-cap" class="w-5 h-5 text-cyan-400"></i>
+              <h3 class="font-heading font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-400"></i>
                 1. Mentorship & Quality Control
               </h3>
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">3 Staff</span>
+              <span class="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">3 Staff</span>
             </div>
-            <p class="text-xs text-slate-300">Targeting staff with enthusiasm but prone to rushed decisions or lacking procedural depth.</p>
+            <p class="text-xs text-slate-300">Targeting staff with enthusiasm who need guidance on maturity or policy boundaries.</p>
             <div class="space-y-2 text-xs text-slate-300">
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-cyan-300">Vansh (Meoww):</span> Pair with senior moderator; implement mandatory context-reading checklist prior to executing mod actions. Address immaturity feedback.
+                <span class="font-semibold text-cyan-300">Vansh (Meoww) [Full Mod]:</span> Address silly mistakes and immaturity; pair with a senior moderator for ticket oversight; mandate thorough reading of evidence before closing tickets.
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-cyan-300">DeadSpider:</span> Transition from casual chat-only presence into active ticket moderation; assign ticket review coaching with ProtexReaper.
+                <span class="font-semibold text-cyan-300">DeadSpider [Trial Mod]:</span> Focus on learning public chat moderation and active rule enforcement in general channels; increase communication in staff channels. (No tickets per policy).
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-cyan-300">VoidSoul:</span> Conduct procedural refresher course; supervise ticket handling for complex disputes.
+                <span class="font-semibold text-cyan-300">VoidSoul [Trial Mod]:</span> Basic chat moderation coaching; improve familiarity with warning thresholds and policy boundaries. (No tickets per policy).
               </div>
             </div>
           </div>
 
           <!-- Cohort 2: Timeliness & Response SLA -->
-          <div class="glass-card p-5 rounded-xl space-y-3 border-l-4 border-l-teal-400">
+          <div class="glass-card p-4 sm:p-5 rounded-xl space-y-2.5 sm:space-y-3 border-l-4 border-l-teal-400">
             <div class="flex items-center justify-between">
-              <h3 class="font-heading font-bold text-white text-base flex items-center gap-2">
-                <i data-lucide="timer" class="w-5 h-5 text-teal-400"></i>
+              <h3 class="font-heading font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="timer" class="w-4 h-4 text-teal-400"></i>
                 2. Timeliness & Response SLA
               </h3>
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-800">2 Staff</span>
+              <span class="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-800">2 Staff</span>
             </div>
             <p class="text-xs text-slate-300">Targeting staff whose slow response times bottleneck operational resolution.</p>
             <div class="space-y-2 text-xs text-slate-300">
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-teal-300">Murgi Bhaiya:</span> Establish mandatory ping response SLA (acknowledge critical mentions within 30 minutes); schedule dedicated active public chat windows.
+                <span class="font-semibold text-teal-300">Murgi Bhaiya [Head Mod]:</span> Establish mandatory ping response SLA (acknowledge critical mentions within 30 minutes); schedule dedicated active public chat windows.
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-teal-300">NeoSpectra (Neo):</span> Issue operational notice regarding ping avoidance; mandate consistent presence in ticket queues to leverage high past experience.
+                <span class="font-semibold text-teal-300">NeoSpectra (Neo) [Full Mod]:</span> Issue operational notice regarding ping avoidance; mandate regular presence to leverage past experience.
               </div>
             </div>
           </div>
 
           <!-- Cohort 3: Temperament & Public Conduct -->
-          <div class="glass-card p-5 rounded-xl space-y-3 border-l-4 border-l-amber-400">
+          <div class="glass-card p-4 sm:p-5 rounded-xl space-y-2.5 sm:space-y-3 border-l-4 border-l-amber-400">
             <div class="flex items-center justify-between">
-              <h3 class="font-heading font-bold text-white text-base flex items-center gap-2">
-                <i data-lucide="shield-alert" class="w-5 h-5 text-amber-400"></i>
+              <h3 class="font-heading font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400"></i>
                 3. Temperament & Conduct Calibration
               </h3>
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">2 Staff</span>
+              <span class="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">2 Staff</span>
             </div>
             <p class="text-xs text-slate-300">Refining communication tone for high-volume contributors to prevent member friction.</p>
             <div class="space-y-2 text-xs text-slate-300">
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-amber-300">perk adverd:</span> High volume (17.5k msgs, 80h VC) must be balanced with de-escalation; resolve multiple behavioral reports via formal counseling.
+                <span class="font-semibold text-amber-300">perk adverd [Trial Mod]:</span> Outstanding volume (17.5k msgs, 80h VC), but must resolve behavioral complaints; focus on calm chat moderation without provoking users. (No tickets per policy).
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-amber-300">opgamer:</span> Channel fearless first-responder mindset into structured dispute resolution while softening abrasive edge in public channels.
+                <span class="font-semibold text-amber-300">opgamer [Full Mod]:</span> High ticket bravery and major report resolution; soften attitude and abrasive edge in public discussions.
               </div>
             </div>
           </div>
 
           <!-- Cohort 4: Inactivity & Roster Reviews -->
-          <div class="glass-card p-5 rounded-xl space-y-3 border-l-4 border-l-sky-400">
+          <div class="glass-card p-4 sm:p-5 rounded-xl space-y-2.5 sm:space-y-3 border-l-4 border-l-sky-400">
             <div class="flex items-center justify-between">
-              <h3 class="font-heading font-bold text-white text-base flex items-center gap-2">
-                <i data-lucide="user-x" class="w-5 h-5 text-sky-400"></i>
+              <h3 class="font-heading font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                <i data-lucide="user-x" class="w-4 h-4 text-sky-400"></i>
                 4. Roster Re-Engagement & Verification
               </h3>
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">4 Staff</span>
+              <span class="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">4 Staff</span>
             </div>
             <p class="text-xs text-slate-300">Determining long-term roster placement based on verifiable participation.</p>
             <div class="space-y-2 text-xs text-slate-300">
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-sky-300">Zazzy & Nexaa:</span> Issue formal re-engagement notice; review roster continuation if no active moderation shift is logged within 7 days.
+                <span class="font-semibold text-sky-300">Zazzy [Full Mod] & Nexaa [Trial Mod]:</span> Issue formal re-engagement notice; review roster continuation if no active chat moderation is logged within 7 days.
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-sky-300">Jangli Billi:</span> Assess availability schedule; agree on minimum required shift hours to preserve good moderation skill baseline.
+                <span class="font-semibold text-sky-300">Jangli Billi [Trial Mod]:</span> Assess availability schedule; agree on minimum required shift hours to preserve good chat moderation skill baseline.
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-sky-300">wiz (wizard):</span> Formalize current Leave of Absence (LOA) end date; establish re-activation protocol upon return.
+                <span class="font-semibold text-sky-300">wiz (wizard) [Trial Mod]:</span> Formalize current Leave of Absence (LOA) end date; establish re-activation protocol upon return.
               </div>
             </div>
           </div>
@@ -594,9 +596,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="glass-nav border-t mt-12 py-6 text-center text-xs text-slate-400 font-mono">
-      <div class="max-w-7xl mx-auto px-4 space-y-2">
-        <p>SPIDER'S WEB OPERATIONS AUDIT • COMPILED FOR EXECUTIVE LEADERSHIP</p>
+    <footer class="glass-nav border-t mt-8 sm:mt-12 py-5 text-center text-[11px] sm:text-xs text-slate-400 font-mono">
+      <div class="max-w-7xl mx-auto px-4 space-y-1.5">
+        <p>SPIDER'S WEB OPERATIONS AUDIT • EXECUTIVE LEADERSHIP DOSSIER</p>
         <p class="text-slate-500">Live Telemetry Synchronized • Statbot Bot Telemetry Verified for All 17 Personnel • 2026</p>
       </div>
     </footer>
@@ -604,23 +606,23 @@
   </div>
 
   <!-- LIGHTBOX IMAGE MODAL -->
-  <div id="image-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md items-center justify-center p-4">
-    <div class="relative max-w-4xl w-full bg-slate-900 border border-cyan-500/40 rounded-2xl p-4 shadow-2xl flex flex-col space-y-3">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+  <div id="image-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-3 sm:p-4">
+    <div class="relative max-w-4xl w-full bg-slate-900 border border-cyan-500/40 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl flex flex-col space-y-3">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2 sm:pb-3">
         <div class="flex items-center gap-2">
-          <i data-lucide="image" class="w-5 h-5 text-cyan-400"></i>
-          <h3 id="modal-title" class="font-heading font-bold text-white text-lg">Statbot Telemetry Card</h3>
+          <i data-lucide="image" class="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400"></i>
+          <h3 id="modal-title" class="font-heading font-bold text-white text-sm sm:text-lg">Statbot Telemetry Card</h3>
         </div>
         <button onclick="closeModal()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
+          <i data-lucide="x" class="w-4 h-4 sm:w-5 sm:h-5"></i>
         </button>
       </div>
-      <div class="flex items-center justify-center p-2 bg-[#07111e] rounded-xl overflow-hidden max-h-[75vh]">
-        <img id="modal-img" src="" alt="Full Statbot Card" class="max-h-full max-w-full object-contain rounded-lg">
+      <div class="flex items-center justify-center p-2 bg-[#07111e] rounded-lg sm:rounded-xl overflow-hidden max-h-[70vh]">
+        <img id="modal-img" src="" alt="Full Statbot Card" class="max-h-full max-w-full object-contain rounded">
       </div>
-      <div class="flex items-center justify-between text-xs font-mono text-slate-400 pt-1">
+      <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1">
         <span>Verified Discord Statbot Render</span>
-        <button onclick="closeModal()" class="px-4 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg transition">Close</button>
+        <button onclick="closeModal()" class="px-3 sm:px-4 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg transition text-xs">Close</button>
       </div>
     </div>
   </div>
@@ -628,6 +630,7 @@
   <!-- DATA & SCRIPTS -->
   <script>
     // Complete, accurate staff dataset for all 17 members
+    // Respecting server policy: Trial Mods do NOT handle tickets; they moderate chat/channels.
     const staffData = [
       {
         id: "734136497447370842",
@@ -669,7 +672,7 @@
           "Occasional response latency in member direct messages during prolonged admin sessions"
         ],
         problemAddressing: [
-          "Standardize delegating Tier-1 member ticket inquiries to Trial Mods during admin sessions"
+          "Standardize delegating Tier-1 member chat inquiries during admin sessions"
         ]
       },
       {
@@ -704,7 +707,7 @@
         stats: { msgs30d: "3.8k+", vc30d: "45.0h", rankMsg: "High", rankVc: "Top 40", msgVal: 3.8, vcVal: 45.0 },
         strengths: [
           "High raw energy, enthusiastic chat presence, and quick response times",
-          "Willing to take on numerous routine ticket calls without hesitation"
+          "Active in taking on routine moderation calls without hesitation"
         ],
         bottlenecks: [
           "Displays immaturity in staff conduct and ticket execution",
@@ -727,7 +730,7 @@
         strengths: [
           "Exceptional bravery; consistently first to step forward during major incidents",
           "Unmatched volume with 23.3k messages and 57 hours in voice channels",
-          "Handles difficult tickets and complex member reports without hesitation"
+          "Handles difficult reports and complex member disputes without hesitation"
         ],
         bottlenecks: [
           "Noticed attitude and sharp tone when challenged in public discussions",
@@ -740,68 +743,68 @@
       },
       {
         id: "1288784540751499318",
-        name: "ProtexReaper",
-        role: "Moderator",
+        name: "T-Mod | ProtexReaper",
+        role: "Trial Moderator",
         category: "Core & Benchmark",
-        badge: "Benchmark Moderator",
+        badge: "Benchmark Trial Mod",
         badgeStyle: "bg-emerald-950 text-emerald-300 border-emerald-500/40",
         stats: { msgs30d: "4.88k", vc30d: "42.1h", rankMsg: "#47", rankVc: "#89", msgVal: 4.88, vcVal: 42.1 },
         strengths: [
-          "Top-notch moderation mechanics, procedural accuracy, and policy application",
+          "Top-notch chat moderation mechanics, procedural accuracy, and policy application",
           "Spotless record with zero valid staff reports against him",
           "Balanced activity across both voice channels (42.1h) and text channels (4.88k msgs)"
         ],
         bottlenecks: [
-          "Could proactively communicate more with trial moderators during slow morning hours"
+          "Could proactively communicate more with fellow staff during quiet morning hours"
         ],
         problemAddressing: [
-          "Retain as core benchmark moderator; assign as lead field trainer for incoming Trial Mods"
+          "Exemplary trial moderator adhering to chat moderation guidelines; field mentor for peer trial mods"
         ]
       },
       {
         id: "1420048312077389825",
-        name: "CHEF",
-        role: "Moderator",
+        name: "T-MOD | CHEF",
+        role: "Trial Moderator",
         category: "Core & Benchmark",
         badge: "Exemplary Conduct",
         badgeStyle: "bg-emerald-950 text-emerald-300 border-emerald-500/40",
         stats: { msgs30d: "6.77k", vc30d: "10.9h", rankMsg: "#30", rankVc: "#366", msgVal: 6.77, vcVal: 10.9 },
         strengths: [
-          "Exemplary conduct and professionalism in all interactions",
-          "Clean moderation mechanics, balanced tone, and consistent chat activity (6.77k msgs)",
+          "Exemplary conduct and professionalism in all community channels",
+          "Clean chat moderation mechanics, balanced tone, and consistent chat activity (6.77k msgs)",
           "Zero member friction or valid staff complaints"
         ],
         bottlenecks: [
           "Voice channel presence (10.9h) is relatively modest compared to strong text volume"
         ],
         problemAddressing: [
-          "Highly dependable pillar of staff team; encourage increased voice channel participation"
+          "Highly dependable pillar of the moderation team; encourage increased voice channel participation"
         ]
       },
       {
         id: "709521276967976980",
-        name: "potato",
-        role: "Moderator",
+        name: "[TMOD] | potato",
+        role: "Trial Moderator",
         category: "High Output",
-        badge: "Reliable Core Mod",
+        badge: "Reliable Chat Mod",
         badgeStyle: "bg-cyan-950 text-cyan-300 border-cyan-500/40",
         stats: { msgs30d: "6.27k", vc30d: "24.3h", rankMsg: "#32", rankVc: "#197", msgVal: 6.27, vcVal: 24.3 },
         strengths: [
           "Polite, respectful demeanor with consistent, reliable chat moderation",
-          "Zero major staff reports; handles routine tickets cleanly",
+          "Zero major staff reports; handles channel violations cleanly",
           "Balanced presence with 6.27k messages and 24.3 hours in voice"
         ],
         bottlenecks: [
           "Maintains a predictable routine; rarely takes charge in complex or ambiguous situations"
         ],
         problemAddressing: [
-          "Retain in primary moderation rotation; delegate higher-responsibility appeal tickets"
+          "Retain in primary chat moderation rotation; encourage initiative in high-traffic channels"
         ]
       },
       {
         id: "1214800662102020107",
-        name: "KuzeNikhil",
-        role: "Moderator",
+        name: "T mod | KuzeNikhil",
+        role: "Trial Moderator",
         category: "High Output",
         badge: "Roblox Specialist",
         badgeStyle: "bg-cyan-950 text-cyan-300 border-cyan-500/40",
@@ -820,8 +823,8 @@
       },
       {
         id: "1391381652462243913",
-        name: "perk adverd",
-        role: "Moderator",
+        name: "[TMOD] perk adverd",
+        role: "Trial Moderator",
         category: "High Output",
         badge: "Elite Activity / Needs Tone Check",
         badgeStyle: "bg-amber-950 text-amber-300 border-amber-500/40",
@@ -871,11 +874,11 @@
           "Approachable, friendly presence that connects well with community members"
         ],
         bottlenecks: [
-          "Still needs to master core moderation procedures, bot commands, and ticket handling",
+          "Still needs to master core chat moderation procedures, bot warning commands, and rule subtleties",
           "Insufficient communication with fellow staff; operates primarily in casual chit-chat"
         ],
         problemAddressing: [
-          "Pair with senior moderator ProtexReaper for ticket workflow training; mandate logging mod actions in staff channels"
+          "Pair with senior moderator for chat moderation coaching; encourage active communication in staff channels"
         ]
       },
       {
@@ -887,8 +890,8 @@
         badgeStyle: "bg-sky-950 text-sky-300 border-sky-500/40",
         stats: { msgs30d: "0.9k+", vc30d: "1.5h", rankMsg: "Low", rankVc: "Low", msgVal: 0.9, vcVal: 1.5 },
         strengths: [
-          "Decent behavior and solid natural moderation instincts",
-          "Applies correct rule enforcement without escalation when active"
+          "Decent behavior and solid natural chat moderation instincts",
+          "Applies correct rule enforcement in chat without escalation when active"
         ],
         bottlenecks: [
           "Extremely low activity levels; rarely online during critical shifts"
@@ -909,7 +912,7 @@
           "Clean disciplinary record; polite and respectful when online"
         ],
         bottlenecks: [
-          "Extremely inactive; rarely comes online; contributes almost zero ticket or chat moderation"
+          "Extremely inactive; rarely comes online; contributes almost zero chat moderation presence"
         ],
         problemAddressing: [
           "Official 7-day activity check to determine continuation or transfer to inactive roster"
@@ -917,7 +920,7 @@
       },
       {
         id: "829689719633215498",
-        name: "VoidSoul (Void)",
+        name: "T-MOD | VoidSoul",
         role: "Trial Moderator",
         category: "Targeted Mentorship",
         badge: "Needs Moderation Coaching",
@@ -927,17 +930,17 @@
           "Maintains moderate baseline activity in chat (3.55k messages, 10.7h VC)"
         ],
         bottlenecks: [
-          "Average behavioral conduct; struggles with nuanced moderation calls",
-          "Still lacks fundamental grasp of complex policy boundaries"
+          "Average behavioral conduct; struggles with nuanced rule enforcement",
+          "Still lacks fundamental grasp of complex policy boundaries in public channels"
         ],
         problemAddressing: [
-          "Assign targeted ticket monitoring; require review by a senior mod before closing contested tickets"
+          "Assign targeted channel monitoring; provide structured review of rule violations with senior mod"
         ]
       },
       {
         id: "928508915375808582",
-        name: "wiz (wizard)",
-        role: "Moderator",
+        name: "T-mod | wiz",
+        role: "Trial Moderator",
         category: "Review Roster",
         badge: "Extended Leave (LOA)",
         badgeStyle: "bg-slate-800 text-slate-300 border-slate-700",
@@ -964,7 +967,7 @@
           "Zero active controversies; familiar with basic staff structure"
         ],
         bottlenecks: [
-          "Extremely inactive; absent from daily moderation and tickets",
+          "Extremely inactive; absent from daily moderation duties",
           "Fails to meet baseline active requirements for standard moderator"
         ],
         problemAddressing: [
@@ -973,7 +976,7 @@
       }
     ];
 
-    // Render Staff Cards
+    // Render Staff Cards (Mobile Optimized)
     function renderStaffCards(filter = 'all', searchTerm = '', sortMode = 'default') {
       const container = document.getElementById('staff-grid');
       container.innerHTML = '';
@@ -1017,12 +1020,12 @@
 
       list.forEach(member => {
         const card = document.createElement('div');
-        card.className = "glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between space-y-5";
+        card.className = "glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between space-y-4 sm:space-y-5";
 
         // Positive checkmarks HTML
         const strengthsHTML = member.strengths.map(s => `
           <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
-            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5"></i>
             <span>${s}</span>
           </li>
         `).join('');
@@ -1030,7 +1033,7 @@
         // Bottlenecks warning HTML
         const bottlenecksHTML = member.bottlenecks.map(b => `
           <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-300">
-            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+            <i data-lucide="alert-triangle" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0 mt-0.5"></i>
             <span>${b}</span>
           </li>
         `).join('');
@@ -1038,49 +1041,49 @@
         // Problem Addressing / Directives HTML
         const directivesHTML = member.problemAddressing.map(d => `
           <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
-            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+            <i data-lucide="arrow-right-circle" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 shrink-0 mt-0.5"></i>
             <span>${d}</span>
           </li>
         `).join('');
 
         card.innerHTML = `
           <!-- Card Header -->
-          <div class="space-y-3">
-            <div class="flex items-start justify-between gap-3">
+          <div class="space-y-2.5 sm:space-y-3">
+            <div class="flex items-start justify-between gap-2 sm:gap-3">
               <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                  <span class="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                     ${member.role}
                   </span>
-                  <span class="text-xs font-mono px-2 py-0.5 rounded border font-semibold ${member.badgeStyle}">
+                  <span class="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded border font-semibold ${member.badgeStyle}">
                     ${member.badge}
                   </span>
                 </div>
-                <h3 class="text-xl font-heading font-bold text-white mt-1.5 flex items-center gap-2">
+                <h3 class="text-lg sm:text-xl font-heading font-bold text-white mt-1 flex items-center gap-2">
                   ${member.name}
                 </h3>
               </div>
-              <span class="text-[11px] font-mono text-slate-400 bg-slate-900/90 px-2 py-1 rounded border border-slate-800 shrink-0">
-                ID: ${member.id.substring(0, 8)}...
+              <span class="text-[10px] sm:text-[11px] font-mono text-slate-400 bg-slate-900/90 px-2 py-1 rounded border border-slate-800 shrink-0">
+                ID: ${member.id.substring(0, 6)}...
               </span>
             </div>
 
-            <!-- Bento Stats Pills -->
-            <div class="grid grid-cols-4 gap-2 pt-1">
+            <!-- Bento Stats Pills (2x2 on Mobile, 4x1 on Desktop) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
               <div class="bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-center">
-                <span class="text-[10px] text-slate-400 block font-mono">30d Msgs</span>
+                <span class="text-[9px] sm:text-[10px] text-slate-400 block font-mono">30d Msgs</span>
                 <span class="text-xs sm:text-sm font-bold text-white">${member.stats.msgs30d}</span>
               </div>
               <div class="bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-center">
-                <span class="text-[10px] text-slate-400 block font-mono">Voice</span>
+                <span class="text-[9px] sm:text-[10px] text-slate-400 block font-mono">Voice</span>
                 <span class="text-xs sm:text-sm font-bold text-teal-300">${member.stats.vc30d}</span>
               </div>
               <div class="bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-center">
-                <span class="text-[10px] text-slate-400 block font-mono">Msg Rank</span>
+                <span class="text-[9px] sm:text-[10px] text-slate-400 block font-mono">Msg Rank</span>
                 <span class="text-xs sm:text-sm font-bold text-cyan-300">${member.stats.rankMsg}</span>
               </div>
               <div class="bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-center">
-                <span class="text-[10px] text-slate-400 block font-mono">VC Rank</span>
+                <span class="text-[9px] sm:text-[10px] text-slate-400 block font-mono">VC Rank</span>
                 <span class="text-xs sm:text-sm font-bold text-sky-300">${member.stats.rankVc}</span>
               </div>
             </div>
@@ -1088,48 +1091,48 @@
 
           <!-- Verified Statbot Image Card -->
           <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+            <div class="flex items-center justify-between text-[11px] sm:text-xs text-slate-400 font-mono">
               <span class="flex items-center gap-1.5">
                 <i data-lucide="image" class="w-3.5 h-3.5 text-cyan-400"></i>
-                Verified Discord Statbot Card
+                Verified Statbot Card
               </span>
               <span class="text-[10px] text-cyan-400 flex items-center gap-1">
-                <i data-lucide="zoom-in" class="w-3 h-3"></i> Click to enlarge
+                <i data-lucide="zoom-in" class="w-3 h-3"></i> Tap to enlarge
               </span>
             </div>
             <div class="statbot-img-box" onclick="openModal('assets/statbot/${member.id}.png', '${member.name}')">
-              <img src="assets/statbot/${member.id}.png" alt="${member.name} Statbot Card" class="w-full h-auto object-cover max-h-48 rounded" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80';">
+              <img src="assets/statbot/${member.id}.png" alt="${member.name} Statbot Card" class="w-full h-auto object-cover max-h-40 sm:max-h-48 rounded" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80';">
             </div>
           </div>
 
           <!-- Evaluation Sections -->
-          <div class="space-y-3 pt-1">
+          <div class="space-y-2.5 sm:space-y-3 pt-1">
             <!-- Strengths -->
-            <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/25 space-y-2">
-              <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 uppercase tracking-wider font-mono">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/25 space-y-1.5 sm:space-y-2">
+              <span class="text-[11px] sm:text-xs font-semibold text-emerald-400 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i> Strengths & Contributions
               </span>
-              <ul class="space-y-1.5">
+              <ul class="space-y-1 sm:space-y-1.5">
                 ${strengthsHTML}
               </ul>
             </div>
 
             <!-- Bottlenecks -->
-            <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/25 space-y-2">
-              <span class="text-xs font-semibold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider font-mono">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/25 space-y-1.5 sm:space-y-2">
+              <span class="text-[11px] sm:text-xs font-semibold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Drawbacks & Operational Bottlenecks
               </span>
-              <ul class="space-y-1.5">
+              <ul class="space-y-1 sm:space-y-1.5">
                 ${bottlenecksHTML}
               </ul>
             </div>
 
             <!-- Directives -->
-            <div class="p-3.5 rounded-xl bg-cyan-950/20 border border-cyan-500/25 space-y-2">
-              <span class="text-xs font-semibold text-cyan-300 flex items-center gap-1.5 uppercase tracking-wider font-mono">
+            <div class="p-3 sm:p-3.5 rounded-xl bg-cyan-950/20 border border-cyan-500/25 space-y-1.5 sm:space-y-2">
+              <span class="text-[11px] sm:text-xs font-semibold text-cyan-300 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <i data-lucide="target" class="w-3.5 h-3.5"></i> Problem Addressing & Directives
               </span>
-              <ul class="space-y-1.5">
+              <ul class="space-y-1 sm:space-y-1.5">
                 ${directivesHTML}
               </ul>
             </div>
@@ -1148,7 +1151,7 @@
       const img = document.getElementById('modal-img');
       const title = document.getElementById('modal-title');
       img.src = imgSrc;
-      title.innerText = name + ' — Statbot Telemetry Card';
+      title.innerText = name + ' — Statbot Card';
       modal.classList.add('active');
     }
     function closeModal() {
@@ -1185,9 +1188,10 @@
       renderStaffCards(filter, search, e.target.value);
     });
 
-    // Initialize 6 Chart.js Visualizations
+    // Initialize 6 Chart.js Visualizations (Responsive)
     function initCharts() {
-      const fontDefault = { family: "'Plus Jakarta Sans', sans-serif" };
+      const isMobile = window.innerWidth < 640;
+      const tickFontSize = isMobile ? 9 : 10;
 
       // Chart 1: Messages Bar
       const ctx1 = document.getElementById('chartMessages').getContext('2d');
@@ -1201,7 +1205,7 @@
             backgroundColor: 'rgba(56, 189, 248, 0.65)',
             borderColor: '#38bdf8',
             borderWidth: 1.5,
-            borderRadius: 5
+            borderRadius: 4
           }]
         },
         options: {
@@ -1209,8 +1213,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
-            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(56, 189, 248, 0.1)' } }
+            x: { ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { display: false } },
+            y: { ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { color: 'rgba(56, 189, 248, 0.1)' } }
           }
         }
       });
@@ -1227,7 +1231,7 @@
             backgroundColor: 'rgba(45, 212, 191, 0.65)',
             borderColor: '#2dd4bf',
             borderWidth: 1.5,
-            borderRadius: 5
+            borderRadius: 4
           }]
         },
         options: {
@@ -1235,8 +1239,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
-            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(45, 212, 191, 0.1)' } }
+            x: { ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { display: false } },
+            y: { ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { color: 'rgba(45, 212, 191, 0.1)' } }
           }
         }
       });
@@ -1246,7 +1250,7 @@
       new Chart(ctx3, {
         type: 'doughnut',
         data: {
-          labels: ['Core & Benchmark', 'High Output', 'Targeted Mentorship', 'Review Roster'],
+          labels: ['Core Leads', 'High Activity', 'Mentorship', 'Review Roster'],
           datasets: [{
             data: [4, 4, 4, 5],
             backgroundColor: ['#2dd4bf', '#38bdf8', '#f59e0b', '#64748b'],
@@ -1258,18 +1262,18 @@
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
-            legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 }, padding: 12 } }
+            legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: tickFontSize }, padding: 10 } }
           },
           cutout: '68%'
         }
       });
 
-      // Chart 4: Leadership Competency Radar
+      // Chart 4: Multi-Axis Competency Radar (Incident Handling instead of Ticket Bravery)
       const ctx4 = document.getElementById('chartRadar').getContext('2d');
       new Chart(ctx4, {
         type: 'radar',
         data: {
-          labels: ['Chat Presence', 'Voice Immersion', 'Ticket Bravery', 'Policy Accuracy', 'Backhand Ops'],
+          labels: ['Chat Presence', 'Voice Immersion', 'Incident Response', 'Policy Accuracy', 'Backhand Ops'],
           datasets: [
             {
               label: 'opgamer',
@@ -1297,12 +1301,12 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } } },
+          plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: tickFontSize } } } },
           scales: {
             r: {
               angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
               grid: { color: 'rgba(255, 255, 255, 0.1)' },
-              pointLabels: { color: '#94a3b8', font: { size: 10 } },
+              pointLabels: { color: '#94a3b8', font: { size: tickFontSize } },
               ticks: { display: false }
             }
           }
@@ -1314,15 +1318,15 @@
       new Chart(ctx5, {
         type: 'line',
         data: {
-          labels: ['00:00 - 04:00', '04:00 - 08:00', '08:00 - 12:00', '12:00 - 16:00', '16:00 - 20:00', '20:00 - 00:00'],
+          labels: ['00:00-04:00', '04:00-08:00', '08:00-12:00', '12:00-16:00', '16:00-20:00', '20:00-00:00'],
           datasets: [{
-            label: 'Active Moderators on Duty',
+            label: 'Active Staff Coverage',
             data: [4, 2, 7, 12, 15, 11],
             borderColor: '#38bdf8',
             backgroundColor: 'rgba(56, 189, 248, 0.25)',
             fill: true,
             tension: 0.4,
-            borderWidth: 2.5
+            borderWidth: 2
           }]
         },
         options: {
@@ -1330,8 +1334,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
-            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(56, 189, 248, 0.1)' } }
+            x: { ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { display: false } },
+            y: { ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { color: 'rgba(56, 189, 248, 0.1)' } }
           }
         }
       });
@@ -1342,13 +1346,13 @@
         type: 'bubble',
         data: {
           datasets: [
-            { label: 'opgamer', data: [{ x: 23.3, y: 57.0, r: 14 }], backgroundColor: '#38bdf8' },
-            { label: 'perk adverd', data: [{ x: 17.5, y: 80.6, r: 13 }], backgroundColor: '#f59e0b' },
-            { label: 'KaidoXD', data: [{ x: 8.5, y: 35.0, r: 10 }], backgroundColor: '#2dd4bf' },
+            { label: 'opgamer', data: [{ x: 23.3, y: 57.0, r: 12 }], backgroundColor: '#38bdf8' },
+            { label: 'perk adverd', data: [{ x: 17.5, y: 80.6, r: 11 }], backgroundColor: '#f59e0b' },
+            { label: 'KaidoXD', data: [{ x: 8.5, y: 35.0, r: 9 }], backgroundColor: '#2dd4bf' },
             { label: 'CHEF', data: [{ x: 6.77, y: 10.9, r: 8 }], backgroundColor: '#10b981' },
             { label: 'potato', data: [{ x: 6.27, y: 24.3, r: 8 }], backgroundColor: '#06b6d4' },
-            { label: 'ProtexReaper', data: [{ x: 4.88, y: 42.1, r: 9 }], backgroundColor: '#14b8a6' },
-            { label: 'Vansh', data: [{ x: 3.8, y: 45.0, r: 9 }], backgroundColor: '#f97316' },
+            { label: 'ProtexReaper', data: [{ x: 4.88, y: 42.1, r: 8 }], backgroundColor: '#14b8a6' },
+            { label: 'Vansh', data: [{ x: 3.8, y: 45.0, r: 8 }], backgroundColor: '#f97316' },
             { label: 'Murgi', data: [{ x: 7.94, y: 27.0, r: 8 }], backgroundColor: '#eab308' },
             { label: 'Zazzy', data: [{ x: 1.88, y: 5.75, r: 5 }], backgroundColor: '#64748b' },
             { label: 'Neo', data: [{ x: 1.10, y: 2.11, r: 5 }], backgroundColor: '#64748b' }
@@ -1359,50 +1363,53 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { title: { display: true, text: 'Messages (k)', color: '#94a3b8' }, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
-            y: { title: { display: true, text: 'Voice (Hours)', color: '#94a3b8' }, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+            x: { title: { display: true, text: 'Msgs (k)', color: '#94a3b8', font: { size: tickFontSize } }, ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+            y: { title: { display: true, text: 'Voice (h)', color: '#94a3b8', font: { size: tickFontSize } }, ticks: { color: '#94a3b8', font: { size: tickFontSize } }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
           }
         }
       });
     }
 
-    // High-Visibility Interactive Three.js Background Animation
+    // High-Visibility Interactive Three.js Background Animation (Mobile Optimized)
     function initThreeConstellation() {
       const canvas = document.getElementById('bg-canvas');
+      const isMobile = window.innerWidth < 768;
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
       camera.position.z = 400;
 
-      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: !isMobile });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
 
       // 1. Rotating Geometric Polyhedron Crystal in Upper Background
-      const crystalGeo = new THREE.IcosahedronGeometry(130, 1);
+      const crystalRadius = isMobile ? 85 : 130;
+      const crystalGeo = new THREE.IcosahedronGeometry(crystalRadius, 1);
       const crystalMat = new THREE.MeshBasicMaterial({
         color: 0x38bdf8,
         wireframe: true,
         transparent: true,
-        opacity: 0.22
+        opacity: isMobile ? 0.16 : 0.22
       });
       const crystal = new THREE.Mesh(crystalGeo, crystalMat);
-      crystal.position.set(0, 80, -100);
+      crystal.position.set(0, isMobile ? 40 : 80, -100);
       scene.add(crystal);
 
       // Inner Core Dodecahedron
-      const coreGeo = new THREE.DodecahedronGeometry(80, 0);
+      const coreRadius = isMobile ? 50 : 80;
+      const coreGeo = new THREE.DodecahedronGeometry(coreRadius, 0);
       const coreMat = new THREE.MeshBasicMaterial({
         color: 0x2dd4bf,
         wireframe: true,
         transparent: true,
-        opacity: 0.18
+        opacity: isMobile ? 0.12 : 0.18
       });
       const core = new THREE.Mesh(coreGeo, coreMat);
-      core.position.set(0, 80, -100);
+      core.position.set(0, isMobile ? 40 : 80, -100);
       scene.add(core);
 
-      // 2. Interactive Constellation Particles & Proximity Web
-      const particleCount = 140;
+      // 2. Constellation Particles (Optimized count for mobile)
+      const particleCount = isMobile ? 65 : 140;
       const positions = new Float32Array(particleCount * 3);
       const velocities = [];
 
@@ -1412,9 +1419,9 @@
         positions[i * 3 + 2] = (Math.random() - 0.5) * 300;
 
         velocities.push({
-          x: (Math.random() - 0.5) * 0.6,
-          y: (Math.random() - 0.5) * 0.6,
-          z: (Math.random() - 0.5) * 0.3
+          x: (Math.random() - 0.5) * 0.5,
+          y: (Math.random() - 0.5) * 0.5,
+          z: (Math.random() - 0.5) * 0.25
         });
       }
 
@@ -1435,7 +1442,7 @@
 
       const pTexture = new THREE.CanvasTexture(pCanvas);
       const particleMat = new THREE.PointsMaterial({
-        size: 5,
+        size: isMobile ? 4 : 5,
         map: pTexture,
         transparent: true,
         opacity: 0.85,
@@ -1462,13 +1469,19 @@
       const lines = new THREE.LineSegments(lineGeo, lineMat);
       scene.add(lines);
 
-      // Mouse tracking
+      // Mouse & Touch tracking
       let mouseX = 0, mouseY = 0;
       let targetMouseX = 0, targetMouseY = 0;
-      window.addEventListener('mousemove', (e) => {
-        targetMouseX = (e.clientX - window.innerWidth / 2);
-        targetMouseY = -(e.clientY - window.innerHeight / 2);
-      });
+
+      function updatePointer(clientX, clientY) {
+        targetMouseX = (clientX - window.innerWidth / 2);
+        targetMouseY = -(clientY - window.innerHeight / 2);
+      }
+
+      window.addEventListener('mousemove', (e) => updatePointer(e.clientX, e.clientY));
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
 
       // Window resize
       window.addEventListener('resize', () => {
@@ -1476,6 +1489,8 @@
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
+
+      const maxDist = isMobile ? 85 : 110;
 
       // Animation Loop
       function animate() {
@@ -1515,7 +1530,7 @@
             const dz = pos[i * 3 + 2] - pos[j * 3 + 2];
             const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-            if (dist < 110) {
+            if (dist < maxDist) {
               linePositions[lineIdx++] = pos[i * 3];
               linePositions[lineIdx++] = pos[i * 3 + 1];
               linePositions[lineIdx++] = pos[i * 3 + 2];
