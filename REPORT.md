@@ -203,19 +203,19 @@
 
 ## Executive Summary Matrix
 
-| Staff Member | Role | 30-Day Activity (Statbot) | Complaints & Quality Drawbacks | Problem Addressing & Resolution Quality | Promotion / Action Verdict |
+| Staff Member | Role | 30-Day Activity (Statbot) | Complaints & Quality Drawbacks | Problem Addressing & Resolution Quality | Performance Standing & Recommendation |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **!H-MOD \| INFINE** | Head Mod | 25+ tix/wk, 12.5h VC | Overthinking, needs detailed briefings | Thorough backend investigator & protocol enforcer | **Retain Core Operational Lead** |
-| **H-MOD \| KaidoXD** | Head Mod | 200–450+ daily msgs | Response latency during extended VC meetings | Benchmark mediator, meeting host, excellent tact | **Exemplary (Benchmark Lead)** |
+| **H-MOD \| KaidoXD** | Head Mod | 200–450+ daily msgs | Response latency during extended VC meetings | Benchmark mediator, meeting host, excellent tact | **Exemplary Performance (Benchmark Lead)** |
 | **H-MOD \| Murgi** | Head Mod | 7.94k msgs, 27h VC | Inactive in chat, late replies to pings | Calm, patient junior mentor in #tmods-chat | **Needs Timeliness / Punctuality Mandate** |
 | **Vansh (Meoww)** | Moderator | 820+ msgs/wk, 12h VC | Immaturity, doesn't read context, ignores head warnings | Fast ticket handler, but trades quality for speed | **Counseling on Maturity & Thoroughness** |
 | **[MOD] Zazzy** | Moderator | 3.03k msgs, 24.4h VC | Severe inactivity; absentee moderator | Investigates alts in #contact-heads when prompted | **Urgent Activity Warning / Review** |
 | **opgamer** | Moderator | 3.55k msgs, 21.3h VC | Noticeable attitude problem, blunt friction | Fearless first responder; brave dispute solver | **Key Asset (Needs Attitude Tempering)** |
 | **MOD \| NeoSpectra** | Moderator | 7.71k msgs, 4.55h VC | Inactivity bottleneck, ignores complaint pings | Skilled automod technician, but non-operational | **Activity Mandate Required** |
-| **[TMOD] \| potato** | Trial Mod | 17.6k msgs, 84.4h VC | Minor over-vigilance (clean record) | Proactive alt/AFK detector; calm de-escalation | **Immediate Full Mod Promotion** |
-| **T-Mod \| Protex** | Trial Mod | 12.0k msgs, 40.5h VC | Banters with toxic users before closing reports | Top-notch mod skills, fearless enforcer | **Immediate Full Mod Promotion** |
-| **T-MOD \| CHEF** | Trial Mod | 16.5k msgs, 73.8h VC | None (clean record) | All-round solid; quiet, drama-free execution | **Promote to Full Moderator** |
-| **[T-MOD] Nexaa** | Trial Mod | Rare online appearance | Extended absence; rarely comes online | High technical automod competency when online | **Withhold Promotion Pending Activity** |
+| **[TMOD] \| potato** | Trial Mod | 17.6k msgs, 84.4h VC | Minor over-vigilance (clean record) | Proactive alt/AFK detector; calm de-escalation | **Benchmark Performer (Top Tier Competency)** |
+| **T-Mod \| Protex** | Trial Mod | 12.0k msgs, 40.5h VC | Banters with toxic users before closing reports | Top-notch mod skills, fearless enforcer | **Benchmark Performer (Coaching on Closure)** |
+| **T-MOD \| CHEF** | Trial Mod | 16.5k msgs, 73.8h VC | None (clean record) | All-round solid; quiet, drama-free execution | **Benchmark Performer (Flawless Conduct Record)** |
+| **[T-MOD] Nexaa** | Trial Mod | Rare online appearance | Extended absence; rarely comes online | High technical automod competency when online | **Hold Status Pending Activity Recovery** |
 | **T mod \| KuzeNikhil** | Trial Mod | 3.81k msgs, 36.9h VC | Category-locked in Roblox, slowing activity | Diligent Roblox moderator; needs wider scope | **Conditional Retention on Expanded Duties** |
 | **[TMOD] perk adverd** | Trial Mod | 18.2k msgs, 105.1h VC | Multiple reports for bad actions & overreach | High activity, but poor discretion & authority abuse | **Formal Review / Disciplinary Demotion** |
 | **T-MOD \| VoidSoul** | Trial Mod | 2.81k msgs, 30.7h VC | Inactive, false VC mutes/kicks, dismissive tone | Apologetic when confronted, but lacks mod judgment | **Trial Extension & Strict Supervision** |

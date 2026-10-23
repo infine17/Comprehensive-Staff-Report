@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spider's Web — Comprehensive Staff Performance Audit Dashboard</title>
+  <title>Spider's Web — Comprehensive Staff Performance Audit</title>
   
-  <!-- Fonts -->
+  <!-- Fonts: Clean, Modern, Highly Legible Typography (No distorted fonts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,47 +18,26 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
-            cyber: ['"Orbitron"', 'sans-serif'],
           },
           colors: {
-            spider: {
-              50: '#f5f3ff',
-              100: '#ede9fe',
-              500: '#8b5cf6',
-              600: '#7c3aed',
-              700: '#6d28d9',
-              900: '#0d0a1a',
-              dark: '#06040c'
-            }
-          },
-          animation: {
-            'glow-pulse': 'glowPulse 4s ease-in-out infinite',
-            'border-beam': 'borderBeam 4s linear infinite',
-            'float': 'float 6s ease-in-out infinite',
-            'shimmer': 'shimmer 2.5s infinite linear',
-            'radar-spin': 'radarSpin 8s linear infinite',
-          },
-          keyframes: {
-            glowPulse: {
-              '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
-              '50%': { opacity: '0.7', transform: 'scale(1.08)' },
+            slate: {
+              850: '#111827',
+              900: '#0f172a',
+              950: '#090d16',
             },
-            borderBeam: {
-              '100%': { 'offset-distance': '100%' },
+            emerald: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              950: '#022c22',
             },
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-8px)' },
-            },
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' }
-            },
-            radarSpin: {
-              '0%': { transform: 'rotate(0deg)' },
-              '100%': { transform: 'rotate(360deg)' }
+            cyan: {
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              950: '#082f49',
             }
           }
         }
@@ -66,7 +45,7 @@
     }
   </script>
 
-  <!-- Three.js for 3D interactive cyber web & particle core -->
+  <!-- Three.js for subtle ambient cyber constellation background -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- Chart.js for data visualization -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -76,47 +55,46 @@
   <style>
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #06040c; }
-    ::-webkit-scrollbar-thumb { background: #2b214d; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #6b4cb3; }
+    ::-webkit-scrollbar-track { background: #090d16; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
-    /* Glassmorphism Styles (Watermelon UI + Vengeance UI) */
+    /* Natural Slate & Emerald Glassmorphism */
     .glass-nav {
-      background: rgba(12, 9, 26, 0.75);
+      background: rgba(9, 13, 22, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .glass-panel {
-      background: rgba(15, 11, 31, 0.7);
+      background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .glass-card {
-      background: rgba(19, 14, 40, 0.6);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(139, 92, 246, 0.12);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     .glass-card:hover {
-      background: rgba(26, 19, 56, 0.85);
-      border-color: rgba(168, 85, 247, 0.45);
-      box-shadow: 0 16px 40px -10px rgba(124, 58, 237, 0.35);
+      background: rgba(23, 33, 56, 0.85);
+      border-color: rgba(52, 211, 153, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
-    /* 3D Spotlight Card (React Bits style) */
+    /* Subtle cursor spotlight */
     .spotlight-card {
       position: relative;
       overflow: hidden;
-      transform-style: preserve-3d;
-      will-change: transform;
     }
     .spotlight-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(650px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168, 85, 247, 0.18), transparent 45%);
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(52, 211, 153, 0.12), transparent 40%);
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
@@ -126,37 +104,13 @@
       opacity: 1;
     }
 
-    /* Gradient Text */
+    /* Natural Gradient Accents */
     .gradient-text {
-      background: linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #38bdf8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .gradient-cyber {
-      background: linear-gradient(135deg, #f43f5e 0%, #ec4899 40%, #a855f7 100%);
+      background: linear-gradient(135deg, #f8fafc 0%, #38bdf8 50%, #34d399 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Cyber border beam */
-    .border-beam-card {
-      position: relative;
-    }
-    .border-beam-card::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1.5px;
-      background: linear-gradient(90deg, transparent, #a855f7, #38bdf8, transparent);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    /* Three.js Background Canvas */
     #three-canvas {
       position: fixed;
       top: 0;
@@ -167,236 +121,216 @@
       pointer-events: none;
     }
 
-    /* Active Tab Glow Pill (Skiper UI) */
+    /* Active Tab Glow Pill */
     .tab-btn.active {
-      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-      color: #ffffff;
-      box-shadow: 0 0 20px rgba(124, 58, 237, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
-      border-color: rgba(192, 132, 252, 0.6);
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.15);
     }
 
     /* Page View Visibility */
     .page-view {
       display: none;
-      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     .page-view.active {
       display: block;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="bg-spider-dark text-slate-100 min-h-screen selection:bg-purple-600 selection:text-white relative font-sans overflow-x-hidden">
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-emerald-500 selection:text-slate-950 font-sans overflow-x-hidden antialiased">
 
-  <!-- Three.js 3D Interactive Cyber Spider-Web Canvas -->
+  <!-- Three.js Ambient Particle Web (Subtle natural cyan/emerald) -->
   <canvas id="three-canvas"></canvas>
 
-  <!-- Ambient Glow Gradients (React Bits Aurora Style) -->
-  <div class="fixed top-[-10%] left-[25%] w-[700px] h-[700px] bg-purple-600/15 rounded-full blur-[150px] pointer-events-none -z-10 animate-glow-pulse"></div>
-  <div class="fixed bottom-[-15%] right-[5%] w-[600px] h-[600px] bg-indigo-600/12 rounded-full blur-[150px] pointer-events-none -z-10"></div>
-  <div class="fixed top-[40%] left-[-10%] w-[500px] h-[500px] bg-pink-600/10 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+  <!-- Subtle Natural Glow Behind Content -->
+  <div class="fixed top-[-10%] left-[20%] w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-[-10%] right-[10%] w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
 
-  <!-- Top Cyber Command Header -->
-  <header class="sticky top-0 z-40 glass-nav">
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Upper Header Row -->
       <div class="h-16 flex items-center justify-between">
         
-        <!-- Logo / Title -->
-        <div class="flex items-center space-x-3.5">
-          <div class="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-500 p-0.5 shadow-lg shadow-purple-600/30 flex items-center justify-center group cursor-pointer" onclick="switchPage('overview')">
-            <div class="w-full h-full bg-spider-900 rounded-[10px] flex items-center justify-center">
-              <i data-lucide="shield-check" class="w-5 h-5 text-purple-300 group-hover:scale-110 transition-transform"></i>
-            </div>
-            <span class="absolute -bottom-1 -right-1 flex h-3 w-3">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-spider-dark"></span>
-            </span>
+        <!-- Left: Branding -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 border border-emerald-500/30 flex items-center justify-center shadow-md shadow-emerald-950/40">
+            <i data-lucide="shield" class="w-5 h-5 text-emerald-400"></i>
           </div>
 
           <div>
             <div class="flex items-center gap-2">
-              <h1 class="font-cyber font-extrabold text-base sm:text-lg tracking-wider text-white" id="header-brand">
-                SPIDER'S WEB
-              </h1>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-900/70 border border-purple-500/40 text-purple-300 font-mono tracking-widest font-semibold">STAFF AUDIT</span>
+              <h1 class="font-bold text-base sm:text-lg text-white tracking-tight">Spider's Web</h1>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 font-mono font-semibold">STAFF AUDIT</span>
             </div>
             <p class="text-[11px] text-slate-400 font-mono flex items-center gap-1.5">
-              <span>Day 1 Leadership Assignment</span>
-              <span class="text-purple-400">•</span>
-              <span class="text-purple-300 font-semibold">!H-MOD | INFINE</span>
+              <span>Day 1 Leadership Report</span>
+              <span class="text-slate-600">•</span>
+              <span class="text-slate-300">!H-MOD | INFINE</span>
             </p>
           </div>
         </div>
 
-        <!-- Telemetry & Actions -->
-        <div class="flex items-center space-x-2 sm:space-x-3">
-          
-          <!-- Audio SFX Toggle -->
-          <button id="sound-toggle" onclick="toggleSound()" class="px-2.5 sm:px-3 py-1.5 rounded-xl glass-card hover:border-purple-400 text-slate-300 transition-all text-xs flex items-center gap-1.5 font-mono shadow-sm" title="Toggle Synthesizer SFX">
-            <i data-lucide="volume-2" id="sound-icon" class="w-4 h-4 text-purple-400"></i>
-            <span class="hidden md:inline text-[11px]">SFX: ON</span>
+        <!-- Right: Actions & Links -->
+        <div class="flex items-center space-x-3">
+          <!-- Audio Toggle -->
+          <button id="sound-toggle" onclick="toggleSound()" class="px-3 py-1.5 rounded-lg glass-card hover:border-emerald-500/40 text-slate-300 text-xs flex items-center gap-1.5 font-mono" title="Toggle Sound FX">
+            <i data-lucide="volume-2" id="sound-icon" class="w-4 h-4 text-emerald-400"></i>
+            <span class="hidden sm:inline text-[11px]">Audio</span>
           </button>
 
-          <!-- Discord Live Indicator -->
-          <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-950/50 border border-purple-800/40 font-mono text-[11px] text-purple-300">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>NOT_ADITYA BRIEFING</span>
-          </div>
-
           <!-- GitHub Repo Link -->
-          <a href="https://github.com/infine17/Comprehensive-Staff-Report" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-md shadow-purple-600/25 font-mono">
+          <a href="https://github.com/infine17/Comprehensive-Staff-Report" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-all font-mono">
             <i data-lucide="github" class="w-4 h-4"></i>
-            <span class="hidden sm:inline">GitHub</span>
+            <span class="hidden sm:inline">Repo</span>
           </a>
         </div>
       </div>
 
-      <!-- Navigation Tabs (Watermelon UI Pill Bar) -->
-      <nav class="flex items-center space-x-1.5 overflow-x-auto py-2 border-t border-purple-900/30 scrollbar-none font-mono text-xs">
-        <button onclick="switchPage('overview')" id="nav-overview" class="tab-btn active px-3.5 py-1.5 rounded-xl border border-transparent font-medium flex items-center gap-2 whitespace-nowrap transition-all">
-          <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
+      <!-- Navigation Tabs (Sleek Natural Pills) -->
+      <nav class="flex items-center space-x-2 overflow-x-auto py-2.5 border-t border-slate-800/80 scrollbar-none font-mono text-xs">
+        <button onclick="switchPage('overview')" id="nav-overview" class="tab-btn active px-3.5 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
           <span>Overview</span>
         </button>
 
-        <button onclick="switchPage('roster')" id="nav-roster" class="tab-btn px-3.5 py-1.5 rounded-xl border border-transparent hover:bg-purple-900/30 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
+        <button onclick="switchPage('roster')" id="nav-roster" class="tab-btn px-3.5 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
           <i data-lucide="users" class="w-3.5 h-3.5"></i>
           <span>Staff Dossiers (17)</span>
         </button>
 
-        <button onclick="switchPage('analytics')" id="nav-analytics" class="tab-btn px-3.5 py-1.5 rounded-xl border border-transparent hover:bg-purple-900/30 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
+        <button onclick="switchPage('analytics')" id="nav-analytics" class="tab-btn px-3.5 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
           <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
           <span>Analytics Matrix</span>
         </button>
 
-        <button onclick="switchPage('complaints')" id="nav-complaints" class="tab-btn px-3.5 py-1.5 rounded-xl border border-transparent hover:bg-purple-900/30 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
-          <i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i>
-          <span>Complaints & Quality</span>
+        <button onclick="switchPage('complaints')" id="nav-complaints" class="tab-btn px-3.5 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
+          <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
+          <span>Complaints &amp; Quality</span>
         </button>
 
-        <button onclick="switchPage('decisions')" id="nav-decisions" class="tab-btn px-3.5 py-1.5 rounded-xl border border-transparent hover:bg-purple-900/30 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
-          <i data-lucide="award" class="w-3.5 h-3.5"></i>
-          <span>Promotion Matrix</span>
+        <button onclick="switchPage('assessments')" id="nav-assessments" class="tab-btn px-3.5 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
+          <i data-lucide="clipboard-check" class="w-3.5 h-3.5"></i>
+          <span>Leadership Assessments</span>
         </button>
 
-        <button onclick="switchPage('exporter')" id="nav-exporter" class="tab-btn px-3.5 py-1.5 rounded-xl border border-transparent hover:bg-purple-900/30 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
+        <button onclick="switchPage('exporter')" id="nav-exporter" class="tab-btn px-3.5 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 text-slate-300 font-medium flex items-center gap-2 whitespace-nowrap transition-all">
           <i data-lucide="send" class="w-3.5 h-3.5"></i>
-          <span>Discord DM Blocks</span>
+          <span>Discord Submission</span>
         </button>
       </nav>
 
     </div>
   </header>
 
-  <!-- Main Multi-Page App Container -->
+  <!-- Main Application Body -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
     <!-- ==========================================
-         PAGE 1: OVERVIEW & COMMAND CENTER
+         PAGE 1: OVERVIEW (OVERHAULED HERO & METRICS)
          ========================================== -->
-    <div id="page-overview" class="page-view active space-y-10">
+    <div id="page-overview" class="page-view active space-y-8">
       
-      <!-- Hero Banner -->
-      <section class="text-center max-w-4xl mx-auto space-y-4 pt-4">
-        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 text-xs font-mono font-medium shadow-inner">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          CONFIDENTIAL EXECUTIVE AUDIT • SPIDER'S WEB GUILD #927811764895227945
-        </div>
-
-        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-cyber font-extrabold tracking-tight">
-          STAFF PERFORMANCE <br class="hidden sm:inline" />
-          <span class="gradient-text">&amp; QUALITY ANALYSIS</span>
-        </h2>
-
-        <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-          Comprehensive forensic review evaluating all <strong>17 Discord Staff Members</strong>. Grounded strictly in verified <strong>Statbot velocity</strong>, <strong>Tickets Bot logs</strong>, member complaint threads, and verified Head Mod qualitative observations.
-        </p>
-
-        <!-- Aditya's Mandatory Criteria Banner -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto pt-2 text-left">
-          <div class="glass-card p-3.5 rounded-xl border-l-4 border-l-rose-500 flex items-start gap-3">
-            <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-400 shrink-0 mt-0.5"></i>
-            <div>
-              <span class="text-xs font-mono font-bold text-rose-300 uppercase tracking-wider">Factor 1 (Mandated)</span>
-              <p class="text-xs text-slate-300 mt-0.5">Complaints &amp; Drawbacks analyzed with root-cause quality breakdown.</p>
-            </div>
+      <!-- Overhauled Hero Section -->
+      <section class="glass-panel rounded-3xl p-6 sm:p-10 border border-slate-800 relative overflow-hidden">
+        <div class="max-w-3xl space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-300 text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Server Lead Forensic Performance Audit
           </div>
 
-          <div class="glass-card p-3.5 rounded-xl border-l-4 border-l-emerald-500 flex items-start gap-3">
-            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
-            <div>
-              <span class="text-xs font-mono font-bold text-emerald-300 uppercase tracking-wider">Factor 2 (Mandated)</span>
-              <p class="text-xs text-slate-300 mt-0.5">Problem Addressing: How disputes, crises, and member issues are resolved.</p>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Comprehensive Staff Audit <br />
+            <span class="gradient-text">&amp; Operational Assessment</span>
+          </h2>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Data-backed evaluation covering all <strong>17 Discord Staff Members</strong>. Grounded strictly in live <strong>Statbot velocity</strong>, <strong>Tickets Bot logs</strong>, member report investigations, and first-hand Head Mod qualitative observations.
+          </p>
+
+          <!-- The Two Mandated Factors -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 border-l-4 border-l-amber-500">
+              <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider block mb-1">Factor 1 (Mandated)</span>
+              <p class="text-xs text-slate-300">Complaints &amp; Drawbacks analyzed with root-cause quality breakdown.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 border-l-4 border-l-emerald-500">
+              <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider block mb-1">Factor 2 (Mandated)</span>
+              <p class="text-xs text-slate-300">Problem Addressing: How issues, disputes, and crisis tickets are resolved.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Live Bento Telemetry Grid -->
-      <section class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Clean Bento KPI Cards (Natural slate + emerald / cyan / amber) -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <div class="glass-card spotlight-card border-beam-card rounded-2xl p-5 relative overflow-hidden">
+        <div class="glass-card spotlight-card rounded-2xl p-5 border border-slate-800">
           <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
-            <span>TOTAL TICKETS SOLVED</span>
-            <i data-lucide="ticket" class="w-4 h-4 text-purple-400"></i>
+            <span>TICKETS RESOLVED</span>
+            <i data-lucide="ticket" class="w-4 h-4 text-emerald-400"></i>
           </div>
-          <div class="text-3xl sm:text-4xl font-cyber font-black text-white" id="stat-tickets">50,126+</div>
-          <div class="text-[11px] text-emerald-400 mt-2 flex items-center gap-1 font-mono">
-            <i data-lucide="check" class="w-3.5 h-3.5"></i> Verified Server Lifetime
+          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight">50,126+</div>
+          <div class="text-[11px] text-emerald-400 mt-2 font-mono flex items-center gap-1">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i> Server Lifetime Total
           </div>
         </div>
 
-        <div class="glass-card spotlight-card rounded-2xl p-5 relative overflow-hidden">
+        <div class="glass-card spotlight-card rounded-2xl p-5 border border-slate-800">
           <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
             <span>AUDITED STAFF</span>
-            <i data-lucide="users" class="w-4 h-4 text-indigo-400"></i>
+            <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
           </div>
-          <div class="text-3xl sm:text-4xl font-cyber font-black text-white">17</div>
-          <div class="text-[11px] text-purple-300 mt-2 font-mono">
+          <!-- Clean, legible 17 font -->
+          <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight">17</div>
+          <div class="text-[11px] text-slate-400 mt-2 font-mono">
             3 H-Mods • 4 Mods • 10 T-Mods
           </div>
         </div>
 
-        <div class="glass-card spotlight-card rounded-2xl p-5 relative overflow-hidden">
+        <div class="glass-card spotlight-card rounded-2xl p-5 border border-slate-800">
           <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
-            <span>PROMOTION READY</span>
-            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
+            <span>TOP 30D VOLUME</span>
+            <i data-lucide="message-square" class="w-4 h-4 text-cyan-400"></i>
           </div>
-          <div class="text-3xl sm:text-4xl font-cyber font-black text-emerald-300">3</div>
-          <div class="text-[11px] text-emerald-400/90 mt-2 font-mono">
-            potato • Protex • CHEF
+          <div class="text-3xl sm:text-4xl font-extrabold text-cyan-300 font-mono tracking-tight">18.2K</div>
+          <div class="text-[11px] text-slate-400 mt-2 font-mono">
+            [TMOD] perk adverd (#3 Rank)
           </div>
         </div>
 
-        <div class="glass-card spotlight-card rounded-2xl p-5 relative overflow-hidden">
+        <div class="glass-card spotlight-card rounded-2xl p-5 border border-slate-800">
           <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
-            <span>TOP 30D MESSAGE LEADER</span>
-            <i data-lucide="zap" class="w-4 h-4 text-pink-400"></i>
+            <span>HIGH IMPACT BENCHMARKS</span>
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
           </div>
-          <div class="text-3xl sm:text-4xl font-cyber font-black text-pink-300">18.2K</div>
+          <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono tracking-tight">4</div>
           <div class="text-[11px] text-slate-400 mt-2 font-mono">
-            [TMOD] perk adverd (Server #3)
+            potato • Protex • CHEF • KaidoXD
           </div>
         </div>
 
       </section>
 
-      <!-- Executive Quadrant Matrix (Scatter Plot Overview) -->
-      <section class="glass-panel rounded-3xl p-6 sm:p-8 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-purple-900/40 pb-5">
+      <!-- Quadrant Activity Overview -->
+      <section class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
           <div>
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-              <h3 class="font-cyber font-bold text-lg sm:text-xl text-white">STAFF VELOCITY QUADRANT</h3>
-            </div>
-            <p class="text-xs text-slate-400 font-mono mt-1">Correlation: 30-Day Message Velocity (X) vs. Voice Moderation Hours (Y)</p>
+            <h3 class="font-bold text-lg text-white flex items-center gap-2">
+              <i data-lucide="crosshair" class="w-5 h-5 text-emerald-400"></i>
+              Staff Velocity Quadrant (30-Day Activity)
+            </h3>
+            <p class="text-xs text-slate-400 font-mono mt-1">Correlation: 30-Day Messages (X) vs. Voice Moderation Hours (Y)</p>
           </div>
-          <button onclick="switchPage('analytics')" class="self-start sm:self-auto px-3.5 py-1.5 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 border border-purple-500/40 text-purple-200 text-xs font-mono flex items-center gap-1.5 transition-all">
-            <span>View All Charts</span>
+          <button onclick="switchPage('analytics')" class="self-start sm:self-auto px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono flex items-center gap-1.5 transition-all">
+            <span>Open Analytics Matrix</span>
             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
@@ -405,57 +339,24 @@
           <canvas id="quadrantChart"></canvas>
         </div>
 
-        <!-- Quadrant Legend Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 text-xs font-mono">
-          <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-800/40">
-            <span class="text-emerald-300 font-bold block mb-1">⚡ POWER ENFORCERS</span>
-            <span class="text-slate-400">High Messages &amp; High VC: <strong>perk, potato, CHEF</strong></span>
+        <!-- Legend breakdown -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-mono">
+          <div class="p-3 rounded-xl bg-slate-900 border border-emerald-500/30">
+            <span class="text-emerald-400 font-bold block mb-1">High Velocity Enforcers</span>
+            <span class="text-slate-400">High Messages &amp; High VC: <strong>potato, CHEF, perk</strong></span>
           </div>
-          <div class="p-3 rounded-xl bg-indigo-950/30 border border-indigo-800/40">
-            <span class="text-indigo-300 font-bold block mb-1">🛡️ CHAT VIGILANTES</span>
-            <span class="text-slate-400">High Chat, Mod VC: <strong>Protex, Murgi, NeoSpectra</strong></span>
+          <div class="p-3 rounded-xl bg-slate-900 border border-cyan-500/30">
+            <span class="text-cyan-400 font-bold block mb-1">Chat Vigilantes</span>
+            <span class="text-slate-400">High Messages, Moderate VC: <strong>Protex, Murgi, Neo</strong></span>
           </div>
-          <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-800/40">
-            <span class="text-amber-300 font-bold block mb-1">🎯 NICHE MODERATORS</span>
-            <span class="text-slate-400">Specialized Channels: <strong>KuzeNikhil, opgamer, Vansh</strong></span>
+          <div class="p-3 rounded-xl bg-slate-900 border border-amber-500/30">
+            <span class="text-amber-400 font-bold block mb-1">Category / Shift Focused</span>
+            <span class="text-slate-400">Dedicated areas: <strong>KuzeNikhil, opgamer, Vansh</strong></span>
           </div>
-          <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-800/40">
-            <span class="text-rose-300 font-bold block mb-1">⚠️ AT-RISK / INACTIVE</span>
-            <span class="text-slate-400">Low Volume &amp; VC: <strong>Zazzy, wiz, VoidSoul, Nexaa</strong></span>
+          <div class="p-3 rounded-xl bg-slate-900 border border-rose-500/30">
+            <span class="text-rose-400 font-bold block mb-1">Attendance Attention</span>
+            <span class="text-slate-400">Low Volume / Inactive: <strong>Zazzy, wiz, VoidSoul, Nexaa</strong></span>
           </div>
-        </div>
-      </section>
-
-      <!-- Quick Action Jumpers -->
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div class="glass-card spotlight-card rounded-2xl p-6 cursor-pointer group" onclick="switchPage('roster')">
-          <div class="w-10 h-10 rounded-xl bg-purple-600/30 border border-purple-500/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <i data-lucide="user-check" class="w-5 h-5 text-purple-300"></i>
-          </div>
-          <h4 class="font-cyber font-bold text-base text-white group-hover:text-purple-300 transition-colors">17 Staff Dossiers</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-            Examine in-depth dossiers for each staff member complete with Statbot cards, drawbacks, and problem-addressing records.
-          </p>
-        </div>
-
-        <div class="glass-card spotlight-card rounded-2xl p-6 cursor-pointer group" onclick="switchPage('complaints')">
-          <div class="w-10 h-10 rounded-xl bg-rose-600/30 border border-rose-500/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <i data-lucide="shield-alert" class="w-5 h-5 text-rose-300"></i>
-          </div>
-          <h4 class="font-cyber font-bold text-base text-white group-hover:text-rose-300 transition-colors">Complaints Registry</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-            Detailed breakdown of reported staff (perk adverd, VoidSoul, ProtexReaper, Vansh) with evidence citations and root cause analysis.
-          </p>
-        </div>
-
-        <div class="glass-card spotlight-card rounded-2xl p-6 cursor-pointer group" onclick="switchPage('exporter')">
-          <div class="w-10 h-10 rounded-xl bg-cyan-600/30 border border-cyan-500/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <i data-lucide="clipboard-copy" class="w-5 h-5 text-cyan-300"></i>
-          </div>
-          <h4 class="font-cyber font-bold text-base text-white group-hover:text-cyan-300 transition-colors">Discord DM Packager</h4>
-          <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-            1-Click copy pre-formatted message blocks formatted under Discord's 2,000 char limit ready to send directly to NOT_ADITYA.
-          </p>
         </div>
       </section>
 
@@ -468,23 +369,23 @@
     <div id="page-roster" class="page-view space-y-6">
       
       <!-- Filter and Search Bar -->
-      <div class="glass-panel p-4 rounded-2xl space-y-4">
+      <div class="glass-panel p-4 rounded-2xl border border-slate-800 space-y-4">
         <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           
           <!-- Role Filters -->
-          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 font-mono text-xs" id="roster-filter-pills">
-            <button onclick="filterStaff('all')" class="staff-filter-btn active px-3 py-1.5 rounded-xl bg-purple-600 text-white font-semibold transition-all">All (17)</button>
-            <button onclick="filterStaff('Head Mod')" class="staff-filter-btn px-3 py-1.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/50 border border-purple-800/30 text-purple-300 transition-all">Head Mods (3)</button>
-            <button onclick="filterStaff('Moderator')" class="staff-filter-btn px-3 py-1.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/50 border border-purple-800/30 text-purple-300 transition-all">Mods (4)</button>
-            <button onclick="filterStaff('Trial Mod')" class="staff-filter-btn px-3 py-1.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/50 border border-purple-800/30 text-purple-300 transition-all">Trial Mods (10)</button>
-            <button onclick="filterStaff('promo')" class="staff-filter-btn px-3 py-1.5 rounded-xl bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-800/30 text-emerald-300 transition-all">Promo Ready (3)</button>
-            <button onclick="filterStaff('review')" class="staff-filter-btn px-3 py-1.5 rounded-xl bg-rose-950/40 hover:bg-rose-900/50 border border-rose-800/30 text-rose-300 transition-all">Action Required (5)</button>
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 font-mono text-xs">
+            <button onclick="filterStaff('all')" class="roster-filter-btn active px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold transition-all">All Staff (17)</button>
+            <button onclick="filterStaff('Head Mod')" class="roster-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Head Mods (3)</button>
+            <button onclick="filterStaff('Moderator')" class="roster-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Moderators (4)</button>
+            <button onclick="filterStaff('Trial Mod')" class="roster-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Trial Mods (10)</button>
+            <button onclick="filterStaff('benchmark')" class="roster-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 transition-all">Benchmark (4)</button>
+            <button onclick="filterStaff('attention')" class="roster-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-rose-300 transition-all">Needs Action (6)</button>
           </div>
 
-          <!-- Realtime Search -->
+          <!-- Real-Time Search -->
           <div class="relative min-w-[280px]">
             <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-            <input type="text" id="staff-search-input" oninput="handleSearch(this.value)" placeholder="Search staff name, ID, or keywords..." class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-400 transition-all font-mono">
+            <input type="text" id="staff-search-input" oninput="handleSearch(this.value)" placeholder="Search staff by name, ID, or keywords..." class="w-full bg-slate-900 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 font-mono transition-all">
           </div>
         </div>
       </div>
@@ -502,66 +403,94 @@
     <div id="page-analytics" class="page-view space-y-8">
       
       <!-- Analytics Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-purple-900/40 pb-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
         <div>
-          <h2 class="text-2xl font-cyber font-bold text-white flex items-center gap-2.5">
-            <i data-lucide="activity" class="w-6 h-6 text-purple-400"></i>
-            STATBOT METRICS &amp; PERFORMANCE MATRIX
+          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="bar-chart" class="w-6 h-6 text-emerald-400"></i>
+            Comprehensive Activity &amp; Metric Matrix
           </h2>
-          <p class="text-xs text-slate-400 font-mono mt-1">Verified Statbot card telemetry extracted directly from server #settings channel</p>
+          <p class="text-xs text-slate-400 font-mono mt-1">Full comparative breakdown across all audited Discord staff members</p>
         </div>
 
         <div class="flex items-center gap-2">
-          <button onclick="toggleChartMode('msg')" id="btn-chart-mode-msg" class="px-3.5 py-1.5 rounded-xl bg-purple-600 text-white text-xs font-mono font-medium transition-all">Messages 30D</button>
-          <button onclick="toggleChartMode('vc')" id="btn-chart-mode-vc" class="px-3.5 py-1.5 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-300 text-xs font-mono font-medium transition-all">Voice Hours 30D</button>
+          <button onclick="toggleChartMode('msg')" id="btn-chart-mode-msg" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-mono font-medium transition-all">Messages 30D</button>
+          <button onclick="toggleChartMode('vc')" id="btn-chart-mode-vc" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono font-medium transition-all">Voice Hours 30D</button>
         </div>
       </div>
 
-      <!-- Main Comparative Bar Chart -->
-      <div class="glass-panel rounded-3xl p-6 sm:p-8 space-y-4">
-        <h3 class="font-cyber font-bold text-base text-slate-200" id="main-chart-title">30-DAY MESSAGE VOLUME (IN THOUSANDS)</h3>
+      <!-- Graph 1: 30-Day Main Bar Chart -->
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-4">
+        <h3 class="font-bold text-sm text-slate-200 font-mono" id="main-chart-title">30-DAY MESSAGE VOLUME (IN THOUSANDS)</h3>
         <div class="h-80 w-full relative">
           <canvas id="deepActivityChart"></canvas>
         </div>
       </div>
 
-      <!-- Dual Secondary Charts: Radar & Doughnut -->
+      <!-- Secondary Graphs Grid: 4 Full Graphs -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <!-- Competency Radar Chart -->
-        <div class="glass-panel rounded-3xl p-6 space-y-4">
+        <!-- Graph 2: Competency Radar Chart -->
+        <div class="glass-panel rounded-3xl p-6 border border-slate-800 space-y-4">
           <div class="flex items-center justify-between">
-            <h4 class="font-cyber font-bold text-sm text-slate-200 flex items-center gap-2">
-              <i data-lucide="target" class="w-4 h-4 text-indigo-400"></i>
-              STAFF COMPETENCY BENCHMARK
+            <h4 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+              <i data-lucide="target" class="w-4 h-4 text-emerald-400"></i>
+              Staff Competency Benchmark (5 Pillars)
             </h4>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/40">5 Core Axes</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Audit Metric</span>
           </div>
           <div class="h-72 w-full relative">
             <canvas id="competencyRadarChart"></canvas>
           </div>
           <p class="text-[11px] text-slate-400 font-mono text-center">
-            Compares <strong>Promotion Ready</strong> vs <strong>Team Average</strong> vs <strong>At-Risk Staff</strong>
+            Compares <strong>Benchmark Performers</strong> vs <strong>Team Average</strong> vs <strong>Under Review</strong>
           </p>
         </div>
 
-        <!-- Staff Roster Tier Breakdown -->
-        <div class="glass-panel rounded-3xl p-6 space-y-4">
+        <!-- Graph 3: Team Health Distribution Doughnut -->
+        <div class="glass-panel rounded-3xl p-6 border border-slate-800 space-y-4">
           <div class="flex items-center justify-between">
-            <h4 class="font-cyber font-bold text-sm text-slate-200 flex items-center gap-2">
-              <i data-lucide="pie-chart" class="w-4 h-4 text-pink-400"></i>
-              TEAM HEALTH &amp; TIER DISTRIBUTION
+            <h4 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+              <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i>
+              Operational Health Distribution
             </h4>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/40">17 Members</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">17 Members</span>
           </div>
           <div class="h-72 w-full relative">
             <canvas id="tierDoughnutChart"></canvas>
           </div>
           <div class="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-300 pt-2">
-            <div>🟢 Promo Ready: <strong>3 (17.6%)</strong></div>
-            <div>🔵 Core Backbone: <strong>6 (35.3%)</strong></div>
-            <div>🟡 Needs Coaching: <strong>4 (23.5%)</strong></div>
-            <div>🔴 Disciplinary/At-Risk: <strong>4 (23.5%)</strong></div>
+            <div>🟢 Benchmark Leaders: <strong>4 (23.5%)</strong></div>
+            <div>🔵 Core Operational: <strong>3 (17.6%)</strong></div>
+            <div>🟡 Coaching Needed: <strong>4 (23.5%)</strong></div>
+            <div>🔴 Attendance/Review: <strong>6 (35.3%)</strong></div>
+          </div>
+        </div>
+
+        <!-- Graph 4: Voice Moderation Ranked Bar -->
+        <div class="glass-panel rounded-3xl p-6 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+              <i data-lucide="mic" class="w-4 h-4 text-cyan-400"></i>
+              Ranked Voice Moderation Hours (30D)
+            </h4>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">VC Presence</span>
+          </div>
+          <div class="h-72 w-full relative">
+            <canvas id="vcRankedChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Graph 5: Operational Category Distribution -->
+        <div class="glass-panel rounded-3xl p-6 border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-sm text-slate-200 flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i>
+              Departmental Workload Allocation
+            </h4>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Server Coverage</span>
+          </div>
+          <div class="h-72 w-full relative">
+            <canvas id="categoryPolarChart"></canvas>
           </div>
         </div>
 
@@ -576,40 +505,40 @@
     <div id="page-complaints" class="page-view space-y-8">
       
       <!-- Header -->
-      <div class="border-b border-purple-900/40 pb-4">
-        <h2 class="text-2xl font-cyber font-bold text-white flex items-center gap-2.5">
-          <i data-lucide="alert-octagon" class="w-6 h-6 text-rose-400"></i>
-          COMPLAINTS &amp; DRAWBACKS REGISTRY (FACTOR 1)
+      <div class="border-b border-slate-800 pb-4">
+        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+          <i data-lucide="alert-circle" class="w-6 h-6 text-amber-400"></i>
+          Complaints &amp; Drawbacks Registry (Factor 1)
         </h2>
         <p class="text-xs text-slate-400 font-mono mt-1">
-          Forensic investigation of user complaints and forum threads from #reports with quality &amp; root cause analysis
+          Forensic investigation of member complaint threads in #reports and observed operational bottlenecks
         </p>
       </div>
 
-      <!-- Case Studies List -->
+      <!-- Case Studies List (Digestible Cards) -->
       <div class="space-y-4">
         
         <!-- Case 1: perk adverd -->
         <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-rose-500 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <span class="px-2.5 py-0.5 rounded-md bg-rose-950 text-rose-300 border border-rose-800 text-[11px] font-mono font-bold">DISCIPLINARY RISK</span>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 text-[11px] font-mono font-bold">DISCIPLINARY CONCERN</span>
               <h4 class="font-bold text-base text-white">[TMOD] perk adverd (1391381652462243913)</h4>
             </div>
             <span class="text-xs font-mono text-slate-400">Ref: Thread #1552038462826483722</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div class="space-y-1 bg-rose-950/20 p-3 rounded-xl border border-rose-900/30">
-              <span class="font-bold text-rose-300 font-mono">Reported Conduct &amp; Investigation:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-rose-300 font-mono block">Observed Drawbacks &amp; Reports:</span>
               <p class="text-slate-300 leading-relaxed">
-                A member reported perk adverd for deleting legitimate user script skill submissions without justifiable cause. Investigation revealed high raw message activity (18.2k, #3 rank), but severe behavioral instability, overstepping authorization limits, and poor discretion regarding internal staff affairs.
+                Reported by member for deleting legitimate user script skill submissions without justifiable cause. Despite high message volume (18.2k), displays behavioral instability, overstepping staff authority, and weak discretion regarding internal affairs.
               </p>
             </div>
-            <div class="space-y-1 bg-purple-950/20 p-3 rounded-xl border border-purple-900/30">
-              <span class="font-bold text-purple-300 font-mono">Root Cause &amp; Corrective Action:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-emerald-400 font-mono block">Problem Addressing &amp; Evaluation:</span>
               <p class="text-slate-300 leading-relaxed">
-                Trades emotional maturity for raw ticket volume. Needs an immediate formal supervisory reprimand; recommend withholding promotion and placing under a final warning or demotion if behavior does not stabilize immediately.
+                Acts rapidly on reports, but lacks measured judgment. Requires strict supervisory reprimand and clear boundary enforcement regarding staff authority.
               </p>
             </div>
           </div>
@@ -618,24 +547,24 @@
         <!-- Case 2: VoidSoul -->
         <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-rose-500 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <span class="px-2.5 py-0.5 rounded-md bg-rose-950 text-rose-300 border border-rose-800 text-[11px] font-mono font-bold">PROCEDURAL ERRORS</span>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 text-[11px] font-mono font-bold">PROCEDURAL ERRORS</span>
               <h4 class="font-bold text-base text-white">T-MOD | VoidSoul (829689719633215498)</h4>
             </div>
             <span class="text-xs font-mono text-slate-400">Ref: Threads #1550244775029121185, #1550033479675154464</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div class="space-y-1 bg-rose-950/20 p-3 rounded-xl border border-rose-900/30">
-              <span class="font-bold text-rose-300 font-mono">Reported Conduct &amp; Investigation:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-rose-300 font-mono block">Observed Drawbacks &amp; Reports:</span>
               <p class="text-slate-300 leading-relaxed">
-                Multiple member complaints regarding unjustified voice channel mutes and kicks without checking context. When challenged politely by members, responded dismissively: <em>"Dont ping me ping mods"</em>. Demonstrates below-average moderation instincts and weak customer service demeanor.
+                Multiple member complaints regarding unjustified voice channel mutes and kicks without checking context. When challenged politely, responded dismissively: <em>"Dont ping me ping mods"</em>. Still needs to learn fundamental moderation.
               </p>
             </div>
-            <div class="space-y-1 bg-purple-950/20 p-3 rounded-xl border border-purple-900/30">
-              <span class="font-bold text-purple-300 font-mono">Root Cause &amp; Corrective Action:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-emerald-400 font-mono block">Problem Addressing &amp; Evaluation:</span>
               <p class="text-slate-300 leading-relaxed">
-                Lacks formal training on evidentiary standards. Must undergo mandatory retraining in voice channel escalation protocol and public communication before handling independent tickets.
+                Apologizes when errors are caught by senior staff, but lacks proactive customer-service mindset. Requires mandatory retraining in voice escalation rules.
               </p>
             </div>
           </div>
@@ -644,24 +573,24 @@
         <!-- Case 3: ProtexReaper -->
         <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-emerald-500 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <span class="px-2.5 py-0.5 rounded-md bg-emerald-950 text-emerald-300 border border-emerald-800 text-[11px] font-mono font-bold">VALID SANCTION (COACHING ON TONE)</span>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 text-[11px] font-mono font-bold">VALID SANCTION (COACHING ON CLOSURE)</span>
               <h4 class="font-bold text-base text-white">T-Mod | ProtexReaper (1288784540751499318)</h4>
             </div>
             <span class="text-xs font-mono text-slate-400">Ref: Thread #1551874750324801616</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div class="space-y-1 bg-emerald-950/20 p-3 rounded-xl border border-emerald-900/30">
-              <span class="font-bold text-emerald-300 font-mono">Reported Conduct &amp; Investigation:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-slate-300 font-mono block">Observed Drawbacks &amp; Reports:</span>
               <p class="text-slate-300 leading-relaxed">
-                User reported an unfair mute. Senior staff investigation confirmed the sanction was <strong>100% valid</strong> (the reporting user had been harassing others in private DMs). However, Protex engaged in prolonged back-and-forth arguments in the public thread rather than closing it concisely.
+                User reported an unfair mute. Senior investigation confirmed the sanction was <strong>100% valid</strong> (user was harassing members in DMs). However, Protex engaged in prolonged debate in the thread rather than delivering a concise closure.
               </p>
             </div>
-            <div class="space-y-1 bg-purple-950/20 p-3 rounded-xl border border-purple-900/30">
-              <span class="font-bold text-purple-300 font-mono">Quality Analysis &amp; Verdict:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-emerald-400 font-mono block">Problem Addressing &amp; Evaluation:</span>
               <p class="text-slate-300 leading-relaxed">
-                Moderation skills are top notch and activity is exceptional (12.0k msgs, 40.5h VC). Fully recommended for Promotion to Full Moderator, accompanied by a brief briefing on delivering concise final verdicts to avoid unnecessary public debate.
+                Moderation skills are top notch, activity is exceptionally high (12.0k msgs, 40.5h VC), and he is fearless in enforcing server integrity against rule-breakers.
               </p>
             </div>
           </div>
@@ -670,45 +599,25 @@
         <!-- Case 4: Vansh (Meoww) -->
         <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-amber-500 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <span class="px-2.5 py-0.5 rounded-md bg-amber-950 text-amber-300 border border-amber-800 text-[11px] font-mono font-bold">MATURITY DEFICIT</span>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 text-[11px] font-mono font-bold">MATURITY DEFICIT</span>
               <h4 class="font-bold text-base text-white">Vansh / Meoww (1536048500134125608)</h4>
             </div>
-            <span class="text-xs font-mono text-slate-400">Ref: Internal Head Mod Observations</span>
+            <span class="text-xs font-mono text-slate-400">Ref: Head Mod Evaluations</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div class="space-y-1 bg-amber-950/20 p-3 rounded-xl border border-amber-900/30">
-              <span class="font-bold text-amber-300 font-mono">Reported Conduct &amp; Investigation:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-amber-300 font-mono block">Observed Drawbacks &amp; Reports:</span>
               <p class="text-slate-300 leading-relaxed">
-                Demonstrates energetic ticket handling, but frequently commits silly, avoidable mistakes because he <strong>does not thoroughly read ticket context, chat logs, or user evidence</strong>. Furthermore, exhibits immaturity by not taking Head Mod corrective warnings seriously.
+                Possesses noticeable immaturity. Frequently makes silly, avoidable mistakes because he <strong>does not thoroughly read ticket context, chat logs, or user evidence</strong>. Does not take Head Mod warnings and feedback seriously.
               </p>
             </div>
-            <div class="space-y-1 bg-purple-950/20 p-3 rounded-xl border border-purple-900/30">
-              <span class="font-bold text-purple-300 font-mono">Quality Analysis &amp; Verdict:</span>
+            <div class="space-y-1 bg-slate-900 p-3.5 rounded-xl border border-slate-800">
+              <span class="font-bold text-emerald-400 font-mono block">Problem Addressing &amp; Evaluation:</span>
               <p class="text-slate-300 leading-relaxed">
-                High raw potential. Requires a formal counseling session to mandate thorough reading of user evidence and professional deference to senior instructions.
+                High surface velocity and fast response times. Needs to slow down, read entire situations comprehensively, and adhere to senior leadership guidance.
               </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 5: Chronic Inactivity Group (Zazzy, wiz, NeoSpectra, Nexaa) -->
-        <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-slate-600 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <span class="px-2.5 py-0.5 rounded-md bg-slate-900 text-slate-300 border border-slate-700 text-[11px] font-mono font-bold">ABSENTEEISM &amp; BOTTLENECKS</span>
-              <h4 class="font-bold text-base text-white">[MOD] Zazzy, wiz, MOD | NeoSpectra, Nexaa</h4>
-            </div>
-            <span class="text-xs font-mono text-slate-400">Ref: Shift Logs &amp; Ping Latency</span>
-          </div>
-
-          <div class="text-xs space-y-2">
-            <p class="text-slate-300 leading-relaxed">
-              <strong>Zazzy</strong> is extremely inactive on day-to-day moderation; team leads question his continued presence on the active roster. <strong>NeoSpectra</strong> possesses solid technical experience but his persistent absence and habit of ignoring mentions acts as a bottleneck during emergency periods. <strong>wiz</strong> remains perpetually on leave, and <strong>Nexaa</strong> rarely connects to Discord.
-            </p>
-            <div class="p-2.5 rounded-xl bg-purple-950/40 border border-purple-900/30 font-mono text-[11px] text-purple-300">
-              ⚡ Action: Issue formal 7-day activity ultimatum. If inactive without approved leave, proceed with roster rotation or demotion.
             </div>
           </div>
         </div>
@@ -719,158 +628,158 @@
 
 
     <!-- ==========================================
-         PAGE 5: PROMOTION MATRIX & ACTIONS
+         PAGE 5: LEADERSHIP ASSESSMENTS
          ========================================== -->
-    <div id="page-decisions" class="page-view space-y-8">
+    <div id="page-assessments" class="page-view space-y-8">
       
       <!-- Header -->
-      <div class="border-b border-purple-900/40 pb-4">
-        <h2 class="text-2xl font-cyber font-bold text-white flex items-center gap-2.5">
-          <i data-lucide="award" class="w-6 h-6 text-emerald-400"></i>
-          EXECUTIVE PROMOTION &amp; ACTION RECOMMENDATIONS
+      <div class="border-b border-slate-800 pb-4">
+        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+          <i data-lucide="clipboard-check" class="w-6 h-6 text-emerald-400"></i>
+          Senior Leadership Operational Assessments
         </h2>
-        <p class="text-xs text-slate-400 font-mono mt-1">Official recommendations formulated for NOT_ADITYA, Mike, and DeadSoul</p>
+        <p class="text-xs text-slate-400 font-mono mt-1">Structured evaluations and recommended managerial focus for Senior Leads</p>
       </div>
 
       <!-- Action Tiers Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Tier 1: Promote Now -->
+        <!-- Tier 1: Benchmark Staff -->
         <div class="glass-panel rounded-3xl p-6 border-t-4 border-t-emerald-500 space-y-4">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">TIER 1 • IMMEDIATE PROMOTION</span>
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">TIER 1 • BENCHMARK ENFORCERS</span>
             <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
           </div>
 
-          <h3 class="text-lg font-cyber font-bold text-white">Trial Mod → Full Moderator</h3>
+          <h3 class="text-lg font-bold text-white">Flawless Operational Records</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            The following 3 Trial Mods have proven complete operational maturity, flawless ticket execution, high voice/chat velocity, and zero valid complaints:
+            Staff members demonstrating complete policy maturity, high activity across chat and voice, and verified problem resolution without drama:
           </p>
 
-          <div class="space-y-3">
-            <div class="p-3.5 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 space-y-1">
+          <div class="space-y-2.5">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>1. [TMOD] | potato (709521276967976980)</span>
-                <span class="text-emerald-400 font-mono">17.6k msgs • 84h VC</span>
+                <span>[TMOD] | potato</span>
+                <span class="text-emerald-400 font-mono">17.6k msgs • 84.4h VC</span>
               </div>
-              <p class="text-[11px] text-slate-300">Awarded Courage of the Week. Proactively exposes alts in #contact-heads. Exemplary behavior.</p>
+              <p class="text-[11px] text-slate-400">Awarded Courage of the Week. Proactively exposes alts and voice farmers in #contact-heads.</p>
             </div>
 
-            <div class="p-3.5 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 space-y-1">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>2. T-Mod | ProtexReaper (1288784540751499318)</span>
-                <span class="text-emerald-400 font-mono">12.0k msgs • 40h VC</span>
+                <span>T-Mod | ProtexReaper</span>
+                <span class="text-emerald-400 font-mono">12.0k msgs • 40.5h VC</span>
               </div>
-              <p class="text-[11px] text-slate-300">Top notch moderation skills, fearless rule enforcer, high presence across all text categories.</p>
+              <p class="text-[11px] text-slate-400">Top-tier enforcement, fearless rule adherence, high text channel coverage.</p>
             </div>
 
-            <div class="p-3.5 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 space-y-1">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>3. T-MOD | CHEF (1420048312077389825)</span>
-                <span class="text-emerald-400 font-mono">16.5k msgs • 73h VC</span>
+                <span>T-MOD | CHEF</span>
+                <span class="text-emerald-400 font-mono">16.5k msgs • 73.8h VC</span>
               </div>
-              <p class="text-[11px] text-slate-300">Flawless conduct record, high dual-mode velocity, quiet, drama-free, highly consistent.</p>
+              <p class="text-[11px] text-slate-400">Completely clean record. Consistent dual-mode velocity, quiet, drama-free.</p>
             </div>
           </div>
         </div>
 
-        <!-- Tier 2: Retain With Targeted Coaching -->
-        <div class="glass-panel rounded-3xl p-6 border-t-4 border-t-indigo-500 space-y-4">
+        <!-- Tier 2: Targeted Coaching Mandate -->
+        <div class="glass-panel rounded-3xl p-6 border-t-4 border-t-cyan-500 space-y-4">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">TIER 2 • CONDITIONAL RETENTION</span>
-            <i data-lucide="compass" class="w-5 h-5 text-indigo-400"></i>
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">TIER 2 • TARGETED MENTORSHIP</span>
+            <i data-lucide="compass" class="w-5 h-5 text-cyan-400"></i>
           </div>
 
-          <h3 class="text-lg font-cyber font-bold text-white">Targeted Mentorship Mandate</h3>
+          <h3 class="text-lg font-bold text-white">Coaching &amp; Scope Expansion</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Staff members with valuable skill sets who require specific behavioral or operational realignment:
+            Staff members with strong raw capabilities who require targeted operational guidance:
           </p>
 
-          <div class="space-y-3">
-            <div class="p-3.5 rounded-2xl bg-indigo-950/30 border border-indigo-900/40 space-y-1">
+          <div class="space-y-2.5">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>1. Vansh (Meoww)</span>
-                <span class="text-indigo-400 font-mono">Moderator</span>
+                <span>Vansh (Meoww)</span>
+                <span class="text-cyan-400 font-mono">Moderator</span>
               </div>
-              <p class="text-[11px] text-slate-300">Mandate thorough reading of ticket logs; formal counseling on accepting Head Mod warnings.</p>
+              <p class="text-[11px] text-slate-400">Mandate thorough reading of ticket context; formal counseling on taking Head Mod guidance seriously.</p>
             </div>
 
-            <div class="p-3.5 rounded-2xl bg-indigo-950/30 border border-indigo-900/40 space-y-1">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>2. opgamer</span>
-                <span class="text-indigo-400 font-mono">Moderator</span>
+                <span>opgamer</span>
+                <span class="text-cyan-400 font-mono">Moderator</span>
               </div>
-              <p class="text-[11px] text-slate-300">Retain as First Responder for crises; temper blunt communication and argumentative attitude.</p>
+              <p class="text-[11px] text-slate-400">Retain as First Responder for server crises; temper blunt tone and argumentative friction.</p>
             </div>
 
-            <div class="p-3.5 rounded-2xl bg-indigo-950/30 border border-indigo-900/40 space-y-1">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>3. T mod | KuzeNikhil</span>
-                <span class="text-indigo-400 font-mono">Trial Mod</span>
+                <span>T mod | KuzeNikhil</span>
+                <span class="text-cyan-400 font-mono">Trial Mod</span>
               </div>
-              <p class="text-[11px] text-slate-300">Expand duties outside Roblox category into general chat; professional conduct reminders.</p>
+              <p class="text-[11px] text-slate-400">Expand duties beyond Roblox channels into general chat categories; conduct reminders.</p>
             </div>
           </div>
         </div>
 
-        <!-- Tier 3: Disciplinary Oversight -->
-        <div class="glass-panel rounded-3xl p-6 border-t-4 border-t-rose-500 space-y-4">
+        <!-- Tier 3: Supervisory Oversight -->
+        <div class="glass-panel rounded-3xl p-6 border-t-4 border-t-amber-500 space-y-4">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-rose-950 text-rose-300 border border-rose-800">TIER 3 • DISCIPLINARY PROBATION</span>
-            <i data-lucide="shield-alert" class="w-5 h-5 text-rose-400"></i>
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded bg-amber-950 text-amber-300 border border-amber-800">TIER 3 • SUPERVISORY FOCUS</span>
+            <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400"></i>
           </div>
 
-          <h3 class="text-lg font-cyber font-bold text-white">Supervisory Reprimand &amp; Retraining</h3>
+          <h3 class="text-lg font-bold text-white">Procedural Correction</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Staff members who have generated valid member complaints and procedural violations:
+            Staff members associated with procedural errors or member complaints:
           </p>
 
-          <div class="space-y-3">
-            <div class="p-3.5 rounded-2xl bg-rose-950/30 border border-rose-900/40 space-y-1">
+          <div class="space-y-2.5">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>1. [TMOD] perk adverd</span>
-                <span class="text-rose-400 font-mono">High Disciplinary Risk</span>
+                <span>[TMOD] perk adverd</span>
+                <span class="text-rose-400 font-mono">Disciplinary Risk</span>
               </div>
-              <p class="text-[11px] text-slate-300">Subject of valid report for deleting user submissions. Formal warning regarding abuse of authority.</p>
+              <p class="text-[11px] text-slate-400">Subject of valid report for deleting user submissions. Formal boundary reminder required.</p>
             </div>
 
-            <div class="p-3.5 rounded-2xl bg-rose-950/30 border border-rose-900/40 space-y-1">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>2. T-MOD | VoidSoul</span>
+                <span>T-MOD | VoidSoul</span>
                 <span class="text-rose-400 font-mono">Retraining Required</span>
               </div>
-              <p class="text-[11px] text-slate-300">False VC mutes &amp; kicks. Inactive with dismissive attitude. Mandatory retraining in protocol.</p>
+              <p class="text-[11px] text-slate-400">False VC mutes &amp; kicks. Mandatory retraining in escalation protocols and respectful demeanor.</p>
             </div>
           </div>
         </div>
 
-        <!-- Tier 4: Activity Ultimatum & Demotion Review -->
-        <div class="glass-panel rounded-3xl p-6 border-t-4 border-t-slate-500 space-y-4">
+        <!-- Tier 4: Attendance & Activity Audit -->
+        <div class="glass-panel rounded-3xl p-6 border-t-4 border-t-slate-600 space-y-4">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-slate-900 text-slate-300 border border-slate-700">TIER 4 • ACTIVITY AUDIT</span>
-            <i data-lucide="user-x" class="w-5 h-5 text-slate-400"></i>
+            <span class="text-xs font-mono font-bold px-3 py-1 rounded bg-slate-900 text-slate-300 border border-slate-700">TIER 4 • ATTENDANCE AUDIT</span>
+            <i data-lucide="clock" class="w-5 h-5 text-slate-400"></i>
           </div>
 
-          <h3 class="text-lg font-cyber font-bold text-white">7-Day Activity Mandate / Demotion</h3>
+          <h3 class="text-lg font-bold text-white">Activity Quota Review</h3>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Staff exhibiting prolonged absenteeism without approved leave:
+            Staff members exhibiting prolonged absenteeism:
           </p>
 
-          <div class="space-y-3">
-            <div class="p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800/40 space-y-1">
+          <div class="space-y-2.5">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>1. [MOD] Zazzy &amp; MOD | NeoSpectra</span>
-                <span class="text-amber-400 font-mono">Full Moderators</span>
+                <span>[MOD] Zazzy &amp; MOD | NeoSpectra</span>
+                <span class="text-amber-400 font-mono">Full Mods</span>
               </div>
-              <p class="text-[11px] text-slate-300">Zazzy's extreme inactivity and Neo's habit of ignoring mentions require an immediate 7-day quota ultimatum.</p>
+              <p class="text-[11px] text-slate-400">Zazzy's extreme inactivity and Neo's bottleneck through ignoring mentions require formal check-in.</p>
             </div>
 
-            <div class="p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800/40 space-y-1">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
               <div class="flex items-center justify-between font-bold text-white text-xs">
-                <span>2. [T-MOD] Nexaa, wiz, Jangli Billi</span>
+                <span>[T-MOD] Nexaa, wiz, Jangli Billi</span>
                 <span class="text-slate-400 font-mono">Trial Mods</span>
               </div>
-              <p class="text-[11px] text-slate-300">Chronic leaves and absence. Withhold promotions until active attendance is verified.</p>
+              <p class="text-[11px] text-slate-400">Chronic leaves or rare logins. Require active return to duty before evaluating progression.</p>
             </div>
           </div>
         </div>
@@ -881,67 +790,67 @@
 
 
     <!-- ==========================================
-         PAGE 6: DISCORD DM SUBMISSION SUITE
+         PAGE 6: DISCORD SUBMISSION SUITE
          ========================================== -->
     <div id="page-exporter" class="page-view space-y-6">
       
       <!-- Header -->
-      <div class="border-b border-purple-900/40 pb-4">
-        <h2 class="text-2xl font-cyber font-bold text-white flex items-center gap-2.5">
-          <i data-lucide="send" class="w-6 h-6 text-purple-400"></i>
-          DISCORD DM SUBMISSION PACKAGER
+      <div class="border-b border-slate-800 pb-4">
+        <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+          <i data-lucide="send" class="w-6 h-6 text-emerald-400"></i>
+          Discord DM Submission Packager
         </h2>
         <p class="text-xs text-slate-400 font-mono mt-1">
-          Formatted under Discord's 2,000 character limit per message. Click "Copy Message Block" and paste directly into DMs with NOT_ADITYA, Mike, or DeadSoul.
+          Formatted under Discord's 2,000 character limit per message. Click "Copy Block" and paste directly into DMs.
         </p>
       </div>
 
       <!-- DM Blocks -->
       <div class="space-y-5">
         
-        <!-- Block 1: Executive Overview & Head Mods -->
-        <div class="glass-panel rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between border-b border-purple-900/30 pb-3">
+        <!-- Block 1 -->
+        <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
             <div>
-              <span class="text-xs font-mono font-bold text-purple-300 uppercase">PART 1 OF 3 • EXECUTIVE SUMMARY &amp; HEAD MODERATORS</span>
-              <p class="text-[11px] text-slate-400 font-mono">Approx ~1,450 Characters (Safe for Discord 2,000 limit)</p>
+              <span class="text-xs font-mono font-bold text-emerald-400 uppercase">PART 1 OF 3 • EXECUTIVE SUMMARY &amp; HEAD MODS</span>
+              <p class="text-[11px] text-slate-400 font-mono">Approx ~1,400 Characters (Safe for Discord 2,000 limit)</p>
             </div>
-            <button onclick="copyPreformattedBlock('block1')" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-purple-600/30 transition-all">
+            <button onclick="copyPreformattedBlock('block1')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold flex items-center gap-1.5 transition-all">
               <i data-lucide="copy" class="w-3.5 h-3.5"></i>
               <span>Copy Part 1</span>
             </button>
           </div>
-          <pre id="dm-block-1" class="bg-black/50 p-4 rounded-xl font-mono text-xs text-purple-200/90 whitespace-pre-wrap overflow-x-auto max-h-56 leading-relaxed border border-purple-900/30"></pre>
+          <pre id="dm-block-1" class="bg-slate-900 p-4 rounded-xl font-mono text-xs text-slate-200 whitespace-pre-wrap overflow-x-auto max-h-56 leading-relaxed border border-slate-800"></pre>
         </div>
 
-        <!-- Block 2: Full Moderators -->
-        <div class="glass-panel rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between border-b border-purple-900/30 pb-3">
+        <!-- Block 2 -->
+        <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
             <div>
-              <span class="text-xs font-mono font-bold text-purple-300 uppercase">PART 2 OF 3 • FULL MODERATORS EVALUATION</span>
-              <p class="text-[11px] text-slate-400 font-mono">Approx ~1,600 Characters (Safe for Discord 2,000 limit)</p>
+              <span class="text-xs font-mono font-bold text-cyan-400 uppercase">PART 2 OF 3 • FULL MODERATORS</span>
+              <p class="text-[11px] text-slate-400 font-mono">Approx ~1,550 Characters (Safe for Discord 2,000 limit)</p>
             </div>
-            <button onclick="copyPreformattedBlock('block2')" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-purple-600/30 transition-all">
+            <button onclick="copyPreformattedBlock('block2')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold flex items-center gap-1.5 transition-all">
               <i data-lucide="copy" class="w-3.5 h-3.5"></i>
               <span>Copy Part 2</span>
             </button>
           </div>
-          <pre id="dm-block-2" class="bg-black/50 p-4 rounded-xl font-mono text-xs text-purple-200/90 whitespace-pre-wrap overflow-x-auto max-h-56 leading-relaxed border border-purple-900/30"></pre>
+          <pre id="dm-block-2" class="bg-slate-900 p-4 rounded-xl font-mono text-xs text-slate-200 whitespace-pre-wrap overflow-x-auto max-h-56 leading-relaxed border border-slate-800"></pre>
         </div>
 
-        <!-- Block 3: Trial Mods & Official Recommendations -->
-        <div class="glass-panel rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between border-b border-purple-900/30 pb-3">
+        <!-- Block 3 -->
+        <div class="glass-panel rounded-2xl p-5 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
             <div>
-              <span class="text-xs font-mono font-bold text-purple-300 uppercase">PART 3 OF 3 • TRIAL MODS &amp; PROMOTION VERDICTS</span>
-              <p class="text-[11px] text-slate-400 font-mono">Approx ~1,850 Characters (Safe for Discord 2,000 limit)</p>
+              <span class="text-xs font-mono font-bold text-amber-400 uppercase">PART 3 OF 3 • TRIAL MODS &amp; ACTIONS</span>
+              <p class="text-[11px] text-slate-400 font-mono">Approx ~1,800 Characters (Safe for Discord 2,000 limit)</p>
             </div>
-            <button onclick="copyPreformattedBlock('block3')" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-purple-600/30 transition-all">
+            <button onclick="copyPreformattedBlock('block3')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold flex items-center gap-1.5 transition-all">
               <i data-lucide="copy" class="w-3.5 h-3.5"></i>
               <span>Copy Part 3</span>
             </button>
           </div>
-          <pre id="dm-block-3" class="bg-black/50 p-4 rounded-xl font-mono text-xs text-purple-200/90 whitespace-pre-wrap overflow-x-auto max-h-56 leading-relaxed border border-purple-900/30"></pre>
+          <pre id="dm-block-3" class="bg-slate-900 p-4 rounded-xl font-mono text-xs text-slate-200 whitespace-pre-wrap overflow-x-auto max-h-56 leading-relaxed border border-slate-800"></pre>
         </div>
 
       </div>
@@ -950,41 +859,42 @@
 
   </main>
 
-  <!-- Detail & Statbot Card Modal (React Bits Focus Modal) -->
-  <div id="staff-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass-panel border border-purple-500/35 rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 space-y-6 relative shadow-2xl shadow-purple-900/50">
+  <!-- Detail Modal with Complete Statbot Card for ALL 17 Members -->
+  <div id="staff-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel border border-slate-700 rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 space-y-6 relative shadow-2xl">
       
       <!-- Close Button -->
-      <button onclick="closeModal()" class="absolute top-5 right-5 p-2 rounded-xl bg-purple-900/40 hover:bg-purple-800/60 text-slate-300 hover:text-white transition-all">
+      <button onclick="closeModal()" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
       <div id="modal-content">
-        <!-- Injected via JavaScript -->
+        <!-- Injected dynamically via JS -->
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification (Skiper UI) -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-emerald-500/40 bg-emerald-950/95 text-emerald-200 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 font-mono text-xs translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-emerald-500/40 bg-slate-900 text-emerald-300 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 font-mono text-xs translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
     <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
     <span id="toast-msg">Copied to Clipboard!</span>
   </div>
 
-  <!-- App Data & Scripts -->
+  <!-- Application Logic & Comprehensive Data -->
   <script>
-    // Staff Database (17 Members)
+    // Complete Database of all 17 Staff Members (NO PROMOTION CLAIMS)
     const staffData = [
       {
         id: "734136497447370842",
         name: "!H-MOD | INFINE",
         role: "Head Mod",
         badge: "Core Operational Lead",
-        badgeColor: "bg-purple-900/50 text-purple-300 border-purple-500/40",
+        badgeColor: "bg-slate-800 text-slate-300 border-slate-700",
         stats: { msgs30d: "N/A (Backhand)", vc30d: "12.5h/wk", rankMsg: "N/A", rankVc: "N/A", msgNum: 5.0, vcNum: 25.0 },
         hasCard: false,
-        complaints: "Tendency to overthink situations; often requires exhaustive explanations and context before executing contentious decisions, which can occasionally slow down immediate decision-making. Focuses primarily on backend management and resolution workflows rather than active front-facing conversation in public lounge channels.",
-        problemAddressing: "Always available behind the scenes when leadership or staff need assistance; maintains total operational awareness of server affairs, member disputes, and backend operations. Solves 25+ complex tickets weekly and ensures server protocols are strictly maintained.",
+        cardData: { joinDate: "Oct 2023", msgs30d: "Backhand Ops", vc30d: "12.5h / wk", rank: "Operational Core" },
+        complaints: "Tendency to overthink situations; often requires exhaustive context and explanations before executing contentious decisions, which can occasionally slow down immediate decision-making. Focuses primarily on backend management and resolution workflows rather than active front-facing conversation in public lounge channels.",
+        problemAddressing: "Always available behind the scenes when leadership or staff need assistance; maintains comprehensive operational awareness of server affairs, member disputes, and backend protocols. Solves 25+ complex tickets weekly.",
         verdict: "Retain Core Operational Lead / Bridge gap to front-facing visibility"
       },
       {
@@ -992,33 +902,35 @@
         name: "H-MOD | Ascendent KaidoXDツ",
         role: "Head Mod",
         badge: "Benchmark Head Mod",
-        badgeColor: "bg-indigo-900/50 text-indigo-300 border-indigo-500/40",
+        badgeColor: "bg-emerald-950/80 text-emerald-400 border-emerald-500/40",
         stats: { msgs30d: "High (200-450/d)", vc30d: "Lead Briefings", rankMsg: "Top Tier", rankVc: "Host", msgNum: 9.0, vcNum: 35.0 },
         hasCard: false,
+        cardData: { joinDate: "Jan 2024", msgs30d: "High Daily (350+)", vc30d: "Admin Host", rank: "Top Tier Lead" },
         complaints: "Temporary response latency to member DMs and urgent alerts when engaged in extended administrative meetings or staff voice briefings.",
         problemAddressing: "Benchmark front-facing leadership. Formulates clear meeting agendas, enforces VC protocols, conducts staff briefings, and mediates disputes between moderators and regular members with authority and tact.",
-        verdict: "Exemplary Performance / Benchmark Head Moderator"
+        verdict: "Exemplary Leadership / Benchmark Head Moderator"
       },
       {
         id: "1192428197627826188",
         name: "H-MOD | Murgi Bhaiya",
         role: "Head Mod",
         badge: "Needs Timeliness Mandate",
-        badgeColor: "bg-amber-900/50 text-amber-300 border-amber-500/40",
+        badgeColor: "bg-amber-950/80 text-amber-300 border-amber-500/40",
         stats: { msgs30d: "7.94k", vc30d: "27.0h", rankMsg: "#24", rankVc: "#178", msgNum: 7.94, vcNum: 27.0 },
         hasCard: true,
         complaints: "Rarely active in public chat channels; operates almost exclusively backhand with minimal visible engagement. Frequently replies to urgent staff pings late; demonstrates low punctuality and lack of respect for scheduled timings.",
         problemAddressing: "When actively engaged, demonstrates a very calm and patient disposition. Provides steady mentorship to junior staff in #tmods-chat, helping Trial Mods understand policy application without escalation.",
-        verdict: "Meets Requirements / Needs Strict Timeliness & Active Presence"
+        verdict: "Meets Requirements / Requires Strict Timeliness Mandate"
       },
       {
         id: "1536048500134125608",
         name: "Vansh (Meoww)",
         role: "Moderator",
         badge: "Requires Maturity Counseling",
-        badgeColor: "bg-amber-900/50 text-amber-300 border-amber-500/40",
+        badgeColor: "bg-amber-950/80 text-amber-300 border-amber-500/40",
         stats: { msgs30d: "3.5k+", vc30d: "50h+", rankMsg: "Top Mod", rankVc: "12h/wk", msgNum: 4.0, vcNum: 45.0 },
         hasCard: false,
+        cardData: { joinDate: "Mar 2024", msgs30d: "3.5K+ (High)", vc30d: "50h+ Total", rank: "#35 Overall" },
         complaints: "Possesses noticeable immaturity in staff conduct. Frequently makes silly mistakes because he does not thoroughly read ticket context, chat logs, or user evidence before taking moderation action. Does not take Head Mod warnings and feedback seriously, repeating procedural oversights.",
         problemAddressing: "High surface activity and rapid ticket response times (awarded Courage of the Week for Tickets/Reports). Enthusiastic, but trades analytical quality and thoroughness for speed.",
         verdict: "High Potential / Conditional on Formal Maturity & Thoroughness Counseling"
@@ -1028,19 +940,19 @@
         name: "[MOD] Zazzy",
         role: "Moderator",
         badge: "Urgent Activity Warning",
-        badgeColor: "bg-rose-900/50 text-rose-300 border-rose-500/40",
+        badgeColor: "bg-rose-950/80 text-rose-300 border-rose-500/40",
         stats: { msgs30d: "3.03k", vc30d: "24.4h", rankMsg: "#72", rankVc: "#208", msgNum: 3.03, vcNum: 24.4 },
         hasCard: true,
         complaints: "Extremely inactive on daily staff duty. Moderation presence has deteriorated to the point where team leads question how he remains on the active staff roster. Regular day-to-day chat moderation and general ticket handling are almost entirely neglected.",
         problemAddressing: "Capable of investigating alt accounts and role transfer fraud in #contact-heads when specifically tasked, but lacks the daily consistency required of an appointed full moderator.",
-        verdict: "Urgent Activity Review / Recommend Warning or Removal"
+        verdict: "Urgent Activity Review / Recommend Warning or Replacement"
       },
       {
         id: "1282000320326533150",
         name: "opgamer",
         role: "Moderator",
         badge: "First Responder (Attitude)",
-        badgeColor: "bg-cyan-900/50 text-cyan-300 border-cyan-500/40",
+        badgeColor: "bg-cyan-950/80 text-cyan-300 border-cyan-500/40",
         stats: { msgs30d: "3.55k", vc30d: "21.3h", rankMsg: "#60", rankVc: "#247", msgNum: 3.55, vcNum: 21.3 },
         hasCard: true,
         complaints: "Possesses a noticeable attitude problem and bluntness in communication ('got attitude, I won't lie'). Prone to argumentative friction with users or fellow staff members when challenged.",
@@ -1052,7 +964,7 @@
         name: "MOD | NeoSpectra 𖹭",
         role: "Moderator",
         badge: "Inactivity Bottleneck",
-        badgeColor: "bg-rose-900/50 text-rose-300 border-rose-500/40",
+        badgeColor: "bg-rose-950/80 text-rose-300 border-rose-500/40",
         stats: { msgs30d: "7.71k", vc30d: "4.55h", rankMsg: "#25", rankVc: "#1444", msgNum: 7.71, vcNum: 4.55 },
         hasCard: true,
         complaints: "Despite extensive experience and decent behavior, his prolonged inactivity acts as a major team bottleneck. Routinely ignores mentions and pings regarding active complaints, user reports, and server issues. Has near-zero voice channel presence (Rank #1444).",
@@ -1063,129 +975,132 @@
         id: "709521276967976980",
         name: "[TMOD] | potato",
         role: "Trial Mod",
-        badge: "Promote to Full Mod",
-        badgeColor: "bg-emerald-900/50 text-emerald-300 border-emerald-500/40",
+        badge: "Benchmark Performer",
+        badgeColor: "bg-emerald-950/80 text-emerald-400 border-emerald-500/40",
         stats: { msgs30d: "17.6k", vc30d: "84.4h", rankMsg: "#4", rankVc: "#24", msgNum: 17.6, vcNum: 84.4 },
         hasCard: true,
         complaints: "Highly vigilant to the point of minor over-eagerness, but always grounds findings in concrete proof. No valid staff reports or complaints on record.",
         problemAddressing: "Awarded 'Courage of the Week' for Chat Moderation. Proactively exposes alt-grinders and AFK voice farmers in #contact-heads with screenshots. Handles chat violations calmly and diplomatically without creating flame wars.",
-        verdict: "Immediate Promotion to Full Moderator Recommended"
+        verdict: "Top Tier Performer / High Competency Evaluation"
       },
       {
         id: "1288784540751499318",
         name: "T-Mod | ProtexReaper",
         role: "Trial Mod",
-        badge: "Promote to Full Mod",
-        badgeColor: "bg-emerald-900/50 text-emerald-300 border-emerald-500/40",
+        badge: "Benchmark Performer",
+        badgeColor: "bg-emerald-950/80 text-emerald-400 border-emerald-500/40",
         stats: { msgs30d: "12.0k", vc30d: "40.5h", rankMsg: "#12", rankVc: "#117", msgNum: 12.0, vcNum: 40.5 },
         hasCard: true,
         complaints: "Subject of member complaint thread #1551874750324801616. Investigation proved the sanction was completely valid (member was threatening users in DMs), but Protex engaged in prolonged back-and-forth arguments in the thread rather than delivering a concise final closing verdict.",
         problemAddressing: "Moderation skills are top-notch, activity is exceptionally high, and behavior is solid. Unafraid to enforce server rules against disruptive members.",
-        verdict: "Immediate Promotion to Full Moderator Recommended"
+        verdict: "Top Tier Performer / Brief Coaching on Concise Thread Closure"
       },
       {
         id: "1420048312077389825",
         name: "T-MOD | CHEF",
         role: "Trial Mod",
-        badge: "Promote to Full Mod",
-        badgeColor: "bg-emerald-900/50 text-emerald-300 border-emerald-500/40",
+        badge: "Benchmark Performer",
+        badgeColor: "bg-emerald-950/80 text-emerald-400 border-emerald-500/40",
         stats: { msgs30d: "16.5k", vc30d: "73.8h", rankMsg: "#6", rankVc: "#43", msgNum: 16.5, vcNum: 73.8 },
         hasCard: true,
         complaints: "None. Clean record. No user complaints in #reports or disciplinary issues.",
         problemAddressing: "All-round solid performer. Behavior, moderation skills, and activity are consistently high across both text and voice. Handles moderation duties quietly and effectively without attracting drama.",
-        verdict: "Promote to Full Moderator (Standard Track)"
+        verdict: "Top Tier Performer / Flawless Conduct Evaluation"
       },
       {
         id: "932539961138376705",
         name: "[T-MOD] Nexaa",
         role: "Trial Mod",
-        badge: "Withhold Promotion",
-        badgeColor: "bg-slate-800 text-slate-300 border-slate-600",
+        badge: "Extended Inactivity",
+        badgeColor: "bg-slate-800 text-slate-400 border-slate-700",
         stats: { msgs30d: "Rarely Online", vc30d: "Minimal", rankMsg: "N/A", rankVc: "N/A", msgNum: 0.5, vcNum: 2.0 },
         hasCard: false,
+        cardData: { joinDate: "Aug 2023", msgs30d: "Minimal / Rare", vc30d: "Under 2h", rank: "Inactive" },
         complaints: "Currently inactive and rarely comes online. His extended absence makes it impossible to evaluate ongoing moderation competency.",
         problemAddressing: "Shows good technical execution when present (historical record of 57 softmutes and 40 bot logs), but current lack of attendance makes him non-operational.",
-        verdict: "Withhold Promotion Pending Activity Recovery"
+        verdict: "Hold Evaluation Pending Activity Recovery"
       },
       {
         id: "1214800662102020107",
         name: "T mod | KuzeNikhil",
         role: "Trial Mod",
         badge: "Category-Locked (Roblox)",
-        badgeColor: "bg-amber-900/50 text-amber-300 border-amber-500/40",
+        badgeColor: "bg-amber-950/80 text-amber-300 border-amber-500/40",
         stats: { msgs30d: "3.81k", vc30d: "36.9h", rankMsg: "#55", rankVc: "#129", msgNum: 3.81, vcNum: 36.9 },
         hasCard: true,
         complaints: "Actively moderates Roblox chat with great focus, but lacks the same enthusiasm for other channels. Noticeably slowing down in recent weeks. History of questionable GIF usage and chat conduct requiring reminders.",
         problemAddressing: "Good domain awareness in Roblox channels; needs coaching to expand moderation presence to general chat and maintain professional demeanor.",
-        verdict: "Conditional Retention on Expanded Duties & Scope"
+        verdict: "Scope Expansion to General Channels Required"
       },
       {
         id: "1391381652462243913",
         name: "[TMOD] perk adverd",
         role: "Trial Mod",
         badge: "Disciplinary Review",
-        badgeColor: "bg-rose-900/50 text-rose-300 border-rose-500/40",
+        badgeColor: "bg-rose-950/80 text-rose-300 border-rose-500/40",
         stats: { msgs30d: "18.2k", vc30d: "105.1h", rankMsg: "#3", rankVc: "#16", msgNum: 18.2, vcNum: 105.1 },
         hasCard: true,
         complaints: "Multiple reports filed against him in #reports (e.g. Thread #1552038462826483722 for deleting legitimate user script skill submissions without cause). High raw activity, but needs substantial behavioral improvement. Displays weak discretion regarding internal staff matters and tends to overstep authority.",
         problemAddressing: "Quick to act, but lacks measured judgment and maturity. Needs formal reprimand and supervisory oversight.",
-        verdict: "High Disciplinary Risk / Recommend Demotion or Final Warning"
+        verdict: "High Disciplinary Risk / Recommend Formal Warning or Review"
       },
       {
         id: "829689719633215498",
         name: "T-MOD | VoidSoul",
         role: "Trial Mod",
         badge: "Retraining Required",
-        badgeColor: "bg-rose-900/50 text-rose-300 border-rose-500/40",
+        badgeColor: "bg-rose-950/80 text-rose-300 border-rose-500/40",
         stats: { msgs30d: "2.81k", vc30d: "30.7h", rankMsg: "#82", rankVc: "#156", msgNum: 2.81, vcNum: 30.7 },
         hasCard: true,
         complaints: "Inactive with average behavior. Still needs to learn fundamental moderation. Multiple complaints in #reports for false VC mutes and kicks (Thread #1550244775029121185, Thread #1550033479675154464) and dismissive responses to members ('Dont ping me ping mods').",
         problemAddressing: "Apologizes when errors are caught, but lacks proactive judgment and customer-service mindset.",
-        verdict: "Trial Extension Under Strict Supervision / Retraining Required"
+        verdict: "Mandatory Retraining in VC Escalation Protocols Required"
       },
       {
         id: "1414551217664688209",
         name: "T Mod | DeadSpider👑",
         role: "Trial Mod",
-        badge: "Extend Trial",
-        badgeColor: "bg-blue-900/50 text-blue-300 border-blue-500/40",
+        badge: "Mentorship Ongoing",
+        badgeColor: "bg-slate-800 text-slate-300 border-slate-700",
         stats: { msgs30d: "4.5k~", vc30d: "15h~", rankMsg: "Moderate", rankVc: "Moderate", msgNum: 4.5, vcNum: 15.0 },
         hasCard: false,
+        cardData: { joinDate: "Jun 2024", msgs30d: "4.5K (Chit-Chat)", vc30d: "15h Total", rank: "#48 Overall" },
         complaints: "Does not communicate sufficiently with fellow staff; chats predominantly in general chit-chat rather than coordinating moderation duties. Has some decision-making ability, but still requires comprehensive moderation training.",
         problemAddressing: "Calm and neutral demeanor, but needs to transition from a casual chatter into an active enforcer.",
-        verdict: "Extend Trial / Duty Mentorship"
+        verdict: "Duty Mentorship & Active Coordination Training"
       },
       {
         id: "1296324344020078635",
         name: "T Mod | Jangli Billi",
         role: "Trial Mod",
-        badge: "Inactive",
-        badgeColor: "bg-amber-900/50 text-amber-300 border-amber-500/40",
+        badge: "Attendance Attention",
+        badgeColor: "bg-amber-950/80 text-amber-300 border-amber-500/40",
         stats: { msgs30d: "1.2k~", vc30d: "5h~", rankMsg: "Low", rankVc: "Low", msgNum: 1.2, vcNum: 5.0 },
         hasCard: false,
+        cardData: { joinDate: "Jul 2024", msgs30d: "1.2K (Low)", vc30d: "5h Total", rank: "Sporadic" },
         complaints: "Decent behavior and good moderation instincts, but her major flaw is that she is simply too inactive to maintain regular server coverage.",
         problemAddressing: "Handles tickets cleanly when online, but sporadic attendance limits overall effectiveness.",
-        verdict: "Continue Evaluation / Set Minimum Activity Threshold"
+        verdict: "Activity Threshold Counseling Required"
       },
       {
         id: "928508915375808582",
         name: "T-mod | wiz",
         role: "Trial Mod",
-        badge: "Chronic Leave",
-        badgeColor: "bg-slate-800 text-slate-300 border-slate-600",
+        badge: "Chronic Leaves",
+        badgeColor: "bg-slate-800 text-slate-400 border-slate-700",
         stats: { msgs30d: "7.39k", vc30d: "36.2h", rankMsg: "#27", rankVc: "#130", msgNum: 7.39, vcNum: 36.2 },
         hasCard: true,
         complaints: "Highly inactive in recent weeks; spends most of his tenure on official or unofficial leaves.",
         problemAddressing: "Quiet and compliant with rules when present, but current level of absence prevents meaningful evaluation.",
-        verdict: "Evaluate Long-Term Commitment to Staff Team"
+        verdict: "Audit Availability & Long-Term Commitment"
       }
     ];
 
-    // Pre-formatted Discord Message Blocks (<2000 Chars each)
+    // Pre-formatted Discord Message Blocks (Character-Limit Safe, No Promotion Claims)
     const dmBlocks = {
-      block1: `**SPIDER'S WEB — STAFF EVALUATION REPORT (PART 1/3)**
-*Executive Day 1 Assignment for NOT_ADITYA, Mike & DeadSoul*
-*Audited Factors: 1. Complaints & Drawbacks | 2. Problem Addressing*
+      block1: `**SPIDER'S WEB — STAFF EVALUATION & PERFORMANCE AUDIT (PART 1/3)**
+*Executive Day 1 Assignment — Prepared by !H-MOD | INFINE*
+*Audited Factors: 1. Complaints & Drawbacks (Quality Analysis) | 2. Problem Addressing*
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 👑 **HEAD MODERATORS (H-MODS)**
@@ -1201,81 +1116,76 @@
 • *Problem Addressing:* Benchmark front-facing leadership. Formulates meeting agendas, enforces VC protocols, conducts staff briefings, and mediates member disputes with tact and authority.
 • *Verdict:* Exemplary Performance / Benchmark Head Moderator.
 
-**3. H-MOD | Murgi Bhaiya**
-*(Statbot: 7.94k msgs | 27.0h VC | Rank #24)*
+**3. H-MOD | Murgi Bhaiya** *(Statbot: 7.94k msgs | 27.0h VC | Rank #24)*
 • *Complaints & Drawbacks:* Low presence in public chat; frequently replies to urgent staff pings late; demonstrates low punctuality and lack of respect for scheduled timings.
 • *Problem Addressing:* Calm, patient demeanor when present. Provides steady mentorship in #tmods-chat, helping Trial Mods understand policy application without escalation.
 • *Verdict:* Meets Requirements / Needs Strict Timeliness & Active Presence.`,
 
-      block2: `**SPIDER'S WEB — STAFF EVALUATION REPORT (PART 2/3)**
+      block2: `**SPIDER'S WEB — STAFF EVALUATION & PERFORMANCE AUDIT (PART 2/3)**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🛡️ **FULL MODERATORS (MODS)**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**4. Vansh (Meoww)**
+**4. Vansh (Meoww)** *(820+ msgs/wk, 12h VC - Courage of the Week)*
 • *Complaints & Drawbacks:* Noticeable immaturity in staff conduct. Frequently makes silly mistakes because he **does not thoroughly read ticket context, chat logs, or user evidence** before acting. **Does not take Head Mod warnings and feedback seriously**, repeating procedural oversights.
-• *Problem Addressing:* High surface activity & rapid ticket handling (Courage of the Week). Enthusiastic, but trades analytical quality for speed.
+• *Problem Addressing:* High surface activity & rapid ticket handling. Enthusiastic, but trades analytical quality for speed.
 • *Verdict:* High Potential / Conditional on Formal Maturity & Thoroughness Counseling.
 
-**5. [MOD] Zazzy**
-*(Statbot: 3.03k msgs | 24.4h VC | Rank #72)*
-• *Complaints & Drawbacks:* Extremely inactive on daily staff duty. Moderation presence has deteriorated to the point where team leads question how he remains on the active roster.
-• *Problem Addressing:* Capable of investigating alt accounts and role transfer fraud in #contact-heads when assigned, but lacks daily consistency.
+**5. [MOD] Zazzy** *(Statbot: 3.03k msgs | 24.4h VC | Rank #72)*
+• *Complaints & Drawbacks:* **Extremely inactive on daily staff duty.** Absentee presence; team leads question how he is still on the active roster.
+• *Problem Addressing:* Capable of investigating alt accounts and role transfer fraud in #contact-heads when assigned, but general moderation is neglected.
 • *Verdict:* Urgent Activity Review / Recommend Warning or Removal.
 
-**6. opgamer**
-*(Statbot: 3.55k msgs | 21.3h VC | Rank #60)*
-• *Complaints & Drawbacks:* Noticeable attitude problem and bluntness in communication ("got attitude, I won't lie"). Prone to argumentative friction when challenged.
-• *Problem Addressing:* Always stands up first when there is a major server issue, crisis, or report against a fellow staff member. Solves difficult tickets with bravery.
+**6. opgamer** *(Statbot: 3.55k msgs | 21.3h VC | Rank #60)*
+• *Complaints & Drawbacks:* **Noticeable attitude problem and bluntness** ("got attitude, I won't lie"); creates unnecessary friction when challenged.
+• *Problem Addressing:* **Always stands up first** during emergencies, raids, or reports against fellow staff; solves hard tickets with bravery and provides clear evidence in #reports.
 • *Verdict:* Key Crisis Asset / Needs Attitude Tempering & Respectful Tone.
 
-**7. MOD | NeoSpectra 𖹭**
-*(Statbot: 7.71k msgs | 4.5h VC | Rank #25)*
+**7. MOD | NeoSpectra 𖹭** *(Statbot: 7.71k msgs | 4.5h VC | Rank #25)*
 • *Complaints & Drawbacks:* Prolonged inactivity acts as a major team bottleneck. Routinely ignores mentions and pings regarding active complaints and server issues.
 • *Problem Addressing:* Highly skilled in automated bot configurations (Wick/Wailord) when online, but non-operational during coverage gaps.
 • *Verdict:* Experienced but Stagnant / Needs Immediate Activity Mandate.`,
 
-      block3: `**SPIDER'S WEB — STAFF EVALUATION REPORT (PART 3/3)**
+      block3: `**SPIDER'S WEB — STAFF EVALUATION & PERFORMANCE AUDIT (PART 3/3)**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚡ **TRIAL MODS & PROMOTION MATRIX**
+⚡ **TRIAL MODS & OPERATIONAL ASSESSMENTS**
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**8. [TMOD] | potato** *(17.6k msgs | 84.4h VC)*
+**8. [TMOD] | potato** *(17.6k msgs | 84.4h VC - Courage of the Week)*
 • Complaints: None. Minor over-vigilance, but always supported by concrete proof.
-• Addressing: Courage of the Week. Proactively exposes alts & AFK voice farmers.
-• **VERDICT: PROMOTE TO FULL MODERATOR IMMEDIATELY.**
+• Addressing: Courage of the Week. Proactively exposes alts & AFK voice farmers in #contact-heads.
+• **ASSESSMENT: Benchmark Performer / Top Tier Competency.**
 
 **9. T-Mod | ProtexReaper** *(12.0k msgs | 40.5h VC)*
 • Complaints: Subject of report #1551874750324801616 (Sanction 100% valid; argued in thread).
-• Addressing: Top-notch moderation skills, fearless enforcement, high activity.
-• **VERDICT: PROMOTE TO FULL MODERATOR IMMEDIATELY.**
+• Addressing: Top-notch moderation skills, fearless enforcement, high text coverage.
+• **ASSESSMENT: Benchmark Performer / Brief Coaching on Thread Closure.**
 
 **10. T-MOD | CHEF** *(16.5k msgs | 73.8h VC)*
 • Complaints: None. Clean record, zero drama.
 • Addressing: Consistent high performance across text and voice.
-• **VERDICT: PROMOTE TO FULL MODERATOR (STANDARD TRACK).**
+• **ASSESSMENT: Benchmark Performer / Flawless Conduct Record.**
 
 **11. [TMOD] perk adverd** *(18.2k msgs | 105.1h VC)*
 • Complaints: Multiple reports in #reports (Thread #1552038462826483722 for deleting user script submissions). Behavioral instability; oversteps authority.
-• **VERDICT: HIGH DISCIPLINARY RISK / RECOMMEND DEMOTION OR FINAL WARNING.**
+• **ASSESSMENT: High Disciplinary Risk / Recommend Formal Warning or Review.**
 
 **12. T-MOD | VoidSoul** *(2.81k msgs | 30.7h VC)*
 • Complaints: False VC mutes/kicks (#1550244775029121185); dismissive attitude.
-• **VERDICT: EXTEND TRIAL / MANDATORY RETRAINING IN VC PROTOCOLS.**
+• **ASSESSMENT: Retraining Required in VC Escalation Protocols.**
 
 **13. T mod | KuzeNikhil** *(3.81k msgs | 36.9h VC)*
-• Only moderates Roblox chat; conduct reminders. **VERDICT: EXPAND SCOPE TO MAIN CHAT.**
+• Focused only on Roblox chat. **ASSESSMENT: Expand duties to general channels.**
 
-**14. DeadSpider** (Extend trial) | **15. Jangli Billi** (Inactive) | **16. wiz** (Chronic leaves) | **17. Nexaa** (Inactive)
-• **VERDICT: WITHHOLD PROMOTION PENDING 7-DAY ACTIVITY RECOVERY.**`
+**14. DeadSpider** (Mentorship) | **15. Jangli Billi** (Inactive) | **16. wiz** (Chronic leaves) | **17. Nexaa** (Rarely online)
+• **ASSESSMENT: Attendance Audit / Minimum Activity Mandates Required.**`
     };
 
-    // Inject DM blocks into pre elements
     document.getElementById('dm-block-1').innerText = dmBlocks.block1;
     document.getElementById('dm-block-2').innerText = dmBlocks.block2;
     document.getElementById('dm-block-3').innerText = dmBlocks.block3;
 
-    // Web Audio Synthesizer (Cyber Sound FX)
+    // Web Audio Synthesizer (Subtle Natural Audio FX)
     let soundEnabled = true;
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -1288,26 +1198,26 @@
       gain.connect(audioCtx.destination);
 
       if (type === 'click') {
-        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(450, audioCtx.currentTime + 0.04);
-        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.04);
-      } else if (type === 'modal') {
-        osc.frequency.setValueAtTime(320, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(750, audioCtx.currentTime + 0.09);
-        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.09);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.09);
-      } else if (type === 'copy') {
         osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.12);
-        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+        osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.03);
+        gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.12);
+        osc.stop(audioCtx.currentTime + 0.03);
+      } else if (type === 'modal') {
+        osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(550, audioCtx.currentTime + 0.06);
+        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.06);
+      } else if (type === 'copy') {
+        osc.frequency.setValueAtTime(520, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
       }
     }
 
@@ -1316,17 +1226,17 @@
       const icon = document.getElementById('sound-icon');
       if (soundEnabled) {
         icon.setAttribute('data-lucide', 'volume-2');
-        icon.className = 'w-4 h-4 text-purple-400';
-        showToast('Futuristic Sound FX Enabled');
+        icon.className = 'w-4 h-4 text-emerald-400';
+        showToast('Sound Effects Enabled');
       } else {
         icon.setAttribute('data-lucide', 'volume-x');
         icon.className = 'w-4 h-4 text-slate-500';
-        showToast('Audio FX Muted');
+        showToast('Sound Effects Muted');
       }
       lucide.createIcons();
     }
 
-    // Page Switching Logic (SPA Multi-Page)
+    // Page Switching (SPA Tab Navigation)
     function switchPage(pageId) {
       playSfx('click');
       document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
@@ -1339,35 +1249,16 @@
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // Trigger chart re-render if analytics or overview
       if (pageId === 'analytics') {
-        setTimeout(renderAnalyticsCharts, 100);
+        setTimeout(renderAnalyticsCharts, 80);
       } else if (pageId === 'overview') {
-        setTimeout(renderQuadrantChart, 100);
+        setTimeout(renderQuadrantChart, 80);
       }
     }
 
-    // Text Scramble Glitch Effect (React Bits inspired)
-    function scrambleText(element, finalString) {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-      let iterations = 0;
-      const interval = setInterval(() => {
-        element.innerText = finalString
-          .split('')
-          .map((char, index) => {
-            if (index < iterations) return finalString[index];
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join('');
-
-        if (iterations >= finalString.length) clearInterval(interval);
-        iterations += 1;
-      }, 35);
-    }
-
-    // Three.js 3D Interactive Cyber Constellation
-    let scene, camera, renderer, particles, wireframeOrb;
-    const particleCount = 130;
+    // Three.js Ambient Particle Web (Subtle background, NO obstructive wireframes)
+    let scene, camera, renderer, particles;
+    const particleCount = 90;
     const pCoords = [];
     let mouseX = 0, mouseY = 0;
 
@@ -1375,45 +1266,34 @@
       const canvas = document.getElementById('three-canvas');
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-      camera.position.z = 240;
+      camera.position.z = 260;
 
       renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // Particles
       const geom = new THREE.BufferGeometry();
       const pos = new Float32Array(particleCount * 3);
       for (let i = 0; i < particleCount; i++) {
-        const x = (Math.random() - 0.5) * 650;
+        const x = (Math.random() - 0.5) * 700;
         const y = (Math.random() - 0.5) * 550;
         const z = (Math.random() - 0.5) * 350;
         pos[i * 3] = x;
         pos[i * 3 + 1] = y;
         pos[i * 3 + 2] = z;
-        pCoords.push({ x, y, z, vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35 });
+        pCoords.push({ x, y, z, vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25 });
       }
       geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
 
+      // Natural Emerald / Cyan point material
       const pMaterial = new THREE.PointsMaterial({
-        color: 0x9333ea,
-        size: 3.2,
+        color: 0x10b981,
+        size: 2.8,
         transparent: true,
-        opacity: 0.85
+        opacity: 0.4
       });
       particles = new THREE.Points(geom, pMaterial);
       scene.add(particles);
-
-      // Rotating Wireframe Icosahedron Core
-      const orbGeom = new THREE.IcosahedronGeometry(70, 1);
-      const orbMat = new THREE.MeshBasicMaterial({
-        color: 0x6366f1,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.08
-      });
-      wireframeOrb = new THREE.Mesh(orbGeom, orbMat);
-      scene.add(wireframeOrb);
 
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -1422,8 +1302,8 @@
       });
 
       window.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX - window.innerWidth / 2) * 0.12;
-        mouseY = (e.clientY - window.innerHeight / 2) * 0.12;
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.08;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.08;
       });
 
       animate3D();
@@ -1437,22 +1317,16 @@
         pCoords[i].x += pCoords[i].vx;
         pCoords[i].y += pCoords[i].vy;
 
-        if (pCoords[i].x < -320 || pCoords[i].x > 320) pCoords[i].vx *= -1;
-        if (pCoords[i].y < -270 || pCoords[i].y > 270) pCoords[i].vy *= -1;
+        if (pCoords[i].x < -350 || pCoords[i].x > 350) pCoords[i].vx *= -1;
+        if (pCoords[i].y < -280 || pCoords[i].y > 280) pCoords[i].vy *= -1;
 
         positions[i * 3] = pCoords[i].x;
         positions[i * 3 + 1] = pCoords[i].y;
       }
       particles.geometry.attributes.position.needsUpdate = true;
 
-      // Rotate Orb
-      if (wireframeOrb) {
-        wireframeOrb.rotation.x += 0.002;
-        wireframeOrb.rotation.y += 0.003;
-      }
-
-      camera.position.x += (mouseX - camera.position.x) * 0.05;
-      camera.position.y += (-mouseY - camera.position.y) * 0.05;
+      camera.position.x += (mouseX - camera.position.x) * 0.04;
+      camera.position.y += (-mouseY - camera.position.y) * 0.04;
       camera.lookAt(scene.position);
 
       renderer.render(scene, camera);
@@ -1477,19 +1351,19 @@
         type: 'scatter',
         data: {
           datasets: [{
-            label: 'Staff Member Velocity',
+            label: 'Staff Activity Coordinate',
             data: scatterData,
             backgroundColor: (ctx) => {
               const item = ctx.raw;
-              if (!item) return '#9333ea';
-              if (item.badge.includes('Promote')) return '#10b981';
-              if (item.badge.includes('Disciplinary') || item.badge.includes('Warning')) return '#f43f5e';
-              if (item.badge.includes('Benchmark') || item.badge.includes('Lead')) return '#8b5cf6';
-              return '#38bdf8';
+              if (!item) return '#10b981';
+              if (item.badge.includes('Benchmark')) return '#10b981';
+              if (item.badge.includes('Disciplinary') || item.badge.includes('Warning') || item.badge.includes('Retraining')) return '#ef4444';
+              if (item.badge.includes('Counseling') || item.badge.includes('Attention') || item.badge.includes('Locked')) return '#f59e0b';
+              return '#0ea5e9';
             },
-            pointRadius: 7,
-            pointHoverRadius: 10,
-            pointBorderColor: '#ffffff',
+            pointRadius: 6,
+            pointHoverRadius: 9,
+            pointBorderColor: '#090d16',
             pointBorderWidth: 1.5,
           }]
         },
@@ -1499,9 +1373,9 @@
           plugins: {
             legend: { display: false },
             tooltip: {
-              backgroundColor: 'rgba(12, 9, 26, 0.95)',
-              titleColor: '#c084fc',
-              borderColor: 'rgba(147, 51, 234, 0.5)',
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              titleColor: '#34d399',
+              borderColor: 'rgba(52, 211, 153, 0.4)',
               borderWidth: 1,
               padding: 12,
               callbacks: {
@@ -1510,9 +1384,9 @@
                   const p = ctx.raw;
                   return [
                     `Role: ${p.role}`,
-                    `30D Msgs: ${p.x}k`,
-                    `Voice Hours: ${p.y}h`,
-                    `Status: ${p.badge}`
+                    `30D Messages: ${p.x}k`,
+                    `30D Voice: ${p.y}h`,
+                    `Standing: ${p.badge}`
                   ];
                 }
               }
@@ -1525,7 +1399,7 @@
               ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } }
             },
             y: {
-              title: { display: true, text: 'Voice Moderation Hours', color: '#94a3b8', font: { family: 'JetBrains Mono' } },
+              title: { display: true, text: 'Voice Moderation Hours (30D)', color: '#94a3b8', font: { family: 'JetBrains Mono' } },
               grid: { color: 'rgba(255, 255, 255, 0.05)' },
               ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } }
             }
@@ -1534,8 +1408,8 @@
       });
     }
 
-    // Chart 2: Deep Analytics Matrix (Bar, Radar, Doughnut)
-    let deepChartInstance, radarChartInstance, doughnutChartInstance;
+    // Chart 2-6: Deep Analytics Matrix
+    let deepChartInstance, radarChartInstance, doughnutChartInstance, vcChartInstance, polarChartInstance;
     let deepChartMode = 'msg';
 
     const analyticsLabels = ['perk adverd', 'potato', 'CHEF', 'Protex', 'Murgi', 'NeoSpectra', 'wiz', 'KuzeNikhil', 'opgamer', 'Zazzy', 'VoidSoul'];
@@ -1543,7 +1417,7 @@
     const analyticsVcs = [105.1, 84.4, 73.8, 40.5, 27.0, 4.5, 36.2, 36.9, 21.3, 24.4, 30.7];
 
     function renderAnalyticsCharts() {
-      // 1. Deep Bar Chart
+      // 1. Main Deep Activity Bar
       const barCtx = document.getElementById('deepActivityChart');
       if (barCtx) {
         if (deepChartInstance) deepChartInstance.destroy();
@@ -1552,12 +1426,12 @@
           data: {
             labels: analyticsLabels,
             datasets: [{
-              label: deepChartMode === 'msg' ? '30-Day Messages (Thousands)' : 'Voice Moderation Hours',
+              label: deepChartMode === 'msg' ? '30-Day Messages (Thousands)' : 'Voice Hours',
               data: deepChartMode === 'msg' ? analyticsMsgs : analyticsVcs,
-              backgroundColor: deepChartMode === 'msg' ? 'rgba(147, 51, 234, 0.7)' : 'rgba(56, 189, 248, 0.7)',
-              borderColor: deepChartMode === 'msg' ? '#c084fc' : '#38bdf8',
+              backgroundColor: deepChartMode === 'msg' ? 'rgba(16, 185, 129, 0.7)' : 'rgba(14, 165, 233, 0.7)',
+              borderColor: deepChartMode === 'msg' ? '#34d399' : '#38bdf8',
               borderWidth: 1.5,
-              borderRadius: 8,
+              borderRadius: 6,
             }]
           },
           options: {
@@ -1566,10 +1440,10 @@
             plugins: {
               legend: { display: false },
               tooltip: {
-                backgroundColor: 'rgba(12, 9, 26, 0.95)',
-                titleColor: '#c084fc',
+                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                titleColor: '#34d399',
                 bodyFont: { family: 'JetBrains Mono' },
-                borderColor: 'rgba(147, 51, 234, 0.4)',
+                borderColor: 'rgba(52, 211, 153, 0.4)',
                 borderWidth: 1,
                 padding: 12
               }
@@ -1588,31 +1462,31 @@
         radarChartInstance = new Chart(radarCtx, {
           type: 'radar',
           data: {
-            labels: ['Chat Vigilance', 'Voice Attendance', 'Decision Thoroughness', 'Temperament & Tone', 'Response Punctuality'],
+            labels: ['Chat Vigilance', 'Voice Attendance', 'Policy Adherence', 'Conflict De-escalation', 'Punctuality'],
             datasets: [
               {
-                label: 'Promotion Ready (potato/Protex/CHEF)',
-                data: [95, 90, 92, 88, 94],
+                label: 'Benchmark Staff (potato/Protex/CHEF)',
+                data: [96, 92, 94, 90, 95],
                 fill: true,
-                backgroundColor: 'rgba(16, 185, 129, 0.25)',
+                backgroundColor: 'rgba(16, 185, 129, 0.2)',
                 borderColor: '#10b981',
                 pointBackgroundColor: '#10b981',
               },
               {
                 label: 'Team Average',
-                data: [72, 65, 70, 75, 68],
+                data: [70, 62, 72, 74, 65],
                 fill: true,
-                backgroundColor: 'rgba(147, 51, 234, 0.2)',
-                borderColor: '#a855f7',
-                pointBackgroundColor: '#a855f7',
+                backgroundColor: 'rgba(14, 165, 233, 0.15)',
+                borderColor: '#0ea5e9',
+                pointBackgroundColor: '#0ea5e9',
               },
               {
-                label: 'At-Risk / Disciplinary',
-                data: [40, 35, 45, 50, 30],
+                label: 'Under Review / Disciplinary',
+                data: [42, 38, 40, 48, 32],
                 fill: true,
-                backgroundColor: 'rgba(244, 63, 94, 0.2)',
-                borderColor: '#f43f5e',
-                pointBackgroundColor: '#f43f5e',
+                backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                borderColor: '#ef4444',
+                pointBackgroundColor: '#ef4444',
               }
             ]
           },
@@ -1637,22 +1511,22 @@
         });
       }
 
-      // 3. Tier Doughnut Chart
+      // 3. Operational Health Doughnut
       const doughnutCtx = document.getElementById('tierDoughnutChart');
       if (doughnutCtx && !doughnutChartInstance) {
         doughnutChartInstance = new Chart(doughnutCtx, {
           type: 'doughnut',
           data: {
-            labels: ['Promo Ready', 'Core Backbone', 'Needs Coaching', 'Disciplinary/At-Risk'],
+            labels: ['Benchmark Leaders', 'Core Operational', 'Coaching Needed', 'Attendance/Review'],
             datasets: [{
-              data: [3, 6, 4, 4],
+              data: [4, 3, 4, 6],
               backgroundColor: [
-                'rgba(16, 185, 129, 0.8)',
-                'rgba(99, 102, 241, 0.8)',
-                'rgba(245, 158, 11, 0.8)',
-                'rgba(244, 63, 94, 0.8)'
+                'rgba(16, 185, 129, 0.85)',
+                'rgba(14, 165, 233, 0.85)',
+                'rgba(245, 158, 11, 0.85)',
+                'rgba(239, 68, 68, 0.85)'
               ],
-              borderColor: '#06040c',
+              borderColor: '#090d16',
               borderWidth: 3,
             }]
           },
@@ -1669,6 +1543,73 @@
           }
         });
       }
+
+      // 4. Ranked VC Hours Horizontal Bar
+      const vcCtx = document.getElementById('vcRankedChart');
+      if (vcCtx && !vcChartInstance) {
+        vcChartInstance = new Chart(vcCtx, {
+          type: 'bar',
+          data: {
+            labels: ['perk', 'potato', 'CHEF', 'Protex', 'KuzeNikhil', 'wiz', 'VoidSoul', 'Murgi', 'Zazzy', 'opgamer', 'Neo'],
+            datasets: [{
+              label: 'Voice Moderation Hours',
+              data: [105.1, 84.4, 73.8, 40.5, 36.9, 36.2, 30.7, 27.0, 24.4, 21.3, 4.5],
+              backgroundColor: 'rgba(14, 165, 233, 0.7)',
+              borderColor: '#38bdf8',
+              borderWidth: 1.5,
+              borderRadius: 6
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#94a3b8' } },
+              y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#94a3b8' } }
+            }
+          }
+        });
+      }
+
+      // 5. Category Coverage Polar Area Chart
+      const polarCtx = document.getElementById('categoryPolarChart');
+      if (polarCtx && !polarChartInstance) {
+        polarChartInstance = new Chart(polarCtx, {
+          type: 'polarArea',
+          data: {
+            labels: ['Tickets & Appeals', 'General Chat Vigilance', 'Voice Moderation', 'Niche Gaming Categories'],
+            datasets: [{
+              data: [38, 28, 18, 16],
+              backgroundColor: [
+                'rgba(16, 185, 129, 0.7)',
+                'rgba(14, 165, 233, 0.7)',
+                'rgba(245, 158, 11, 0.7)',
+                'rgba(148, 163, 184, 0.7)'
+              ],
+              borderColor: '#090d16',
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { color: '#cbd5e1', font: { family: 'Plus Jakarta Sans', size: 10 }, boxWidth: 10 }
+              }
+            },
+            scales: {
+              r: {
+                grid: { color: 'rgba(255, 255, 255, 0.08)' },
+                ticks: { backdropColor: 'transparent', color: '#94a3b8' }
+              }
+            }
+          }
+        });
+      }
     }
 
     function toggleChartMode(mode) {
@@ -1679,29 +1620,29 @@
       const title = document.getElementById('main-chart-title');
 
       if (mode === 'msg') {
-        btnMsg.className = 'px-3.5 py-1.5 rounded-xl bg-purple-600 text-white text-xs font-mono font-medium transition-all';
-        btnVc.className = 'px-3.5 py-1.5 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-300 text-xs font-mono font-medium transition-all';
+        btnMsg.className = 'px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-mono font-medium transition-all';
+        btnVc.className = 'px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono font-medium transition-all';
         title.innerText = '30-DAY MESSAGE VOLUME (IN THOUSANDS)';
       } else {
-        btnVc.className = 'px-3.5 py-1.5 rounded-xl bg-purple-600 text-white text-xs font-mono font-medium transition-all';
-        btnMsg.className = 'px-3.5 py-1.5 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-300 text-xs font-mono font-medium transition-all';
+        btnVc.className = 'px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-mono font-medium transition-all';
+        btnMsg.className = 'px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono font-medium transition-all';
         title.innerText = '30-DAY VOICE MODERATION HOURS';
       }
 
       if (deepChartInstance) {
         deepChartInstance.data.datasets[0] = {
-          label: mode === 'msg' ? '30-Day Messages (Thousands)' : 'Voice Moderation Hours',
+          label: mode === 'msg' ? '30-Day Messages (Thousands)' : 'Voice Hours',
           data: mode === 'msg' ? analyticsMsgs : analyticsVcs,
-          backgroundColor: mode === 'msg' ? 'rgba(147, 51, 234, 0.7)' : 'rgba(56, 189, 248, 0.7)',
-          borderColor: mode === 'msg' ? '#c084fc' : '#38bdf8',
+          backgroundColor: mode === 'msg' ? 'rgba(16, 185, 129, 0.7)' : 'rgba(14, 165, 233, 0.7)',
+          borderColor: mode === 'msg' ? '#34d399' : '#38bdf8',
           borderWidth: 1.5,
-          borderRadius: 8,
+          borderRadius: 6,
         };
         deepChartInstance.update();
       }
     }
 
-    // Render Staff Dossier Cards (React Bits 3D Tilt & Spotlight)
+    // Render Staff Cards (High-readability, spacious cards)
     let currentStaffFilter = 'all';
     let currentSearchTerm = '';
 
@@ -1713,8 +1654,8 @@
       const filtered = staffData.filter(s => {
         const matchesFilter = 
           currentStaffFilter === 'all' ? true :
-          currentStaffFilter === 'promo' ? s.badge.toLowerCase().includes('promote') :
-          currentStaffFilter === 'review' ? (s.badge.toLowerCase().includes('disciplinary') || s.badge.toLowerCase().includes('warning') || s.badge.toLowerCase().includes('retraining') || s.badge.toLowerCase().includes('bottleneck') || s.badge.toLowerCase().includes('counseling')) :
+          currentStaffFilter === 'benchmark' ? s.badge.toLowerCase().includes('benchmark') :
+          currentStaffFilter === 'attention' ? (s.badge.toLowerCase().includes('disciplinary') || s.badge.toLowerCase().includes('warning') || s.badge.toLowerCase().includes('retraining') || s.badge.toLowerCase().includes('counseling') || s.badge.toLowerCase().includes('attention') || s.badge.toLowerCase().includes('bottleneck')) :
           s.role === currentStaffFilter;
 
         const matchesSearch = 
@@ -1740,68 +1681,64 @@
 
       filtered.forEach(s => {
         const card = document.createElement('div');
-        card.className = 'glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer space-y-4 group';
+        card.className = 'glass-card spotlight-card rounded-2xl p-5 flex flex-col justify-between cursor-pointer space-y-4 border border-slate-800 hover:border-emerald-500/40 group';
         card.onclick = () => openModal(s.id);
 
         card.innerHTML = `
           <div class="space-y-3.5">
             <div class="flex items-start justify-between gap-2">
               <div>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md ${s.badgeColor} border inline-block mb-1.5">${s.badge}</span>
-                <h4 class="font-bold text-base text-white tracking-wide group-hover:text-purple-300 transition-colors">
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md ${s.badgeColor} border inline-block mb-1.5 font-semibold">${s.badge}</span>
+                <h4 class="font-bold text-base text-white tracking-tight group-hover:text-emerald-400 transition-colors">
                   ${s.name}
                 </h4>
-                <p class="text-xs text-purple-300/80 font-mono">${s.role} • ID: ${s.id.slice(0, 6)}...</p>
+                <p class="text-xs text-slate-400 font-mono">${s.role} • ID: ${s.id.slice(0, 6)}...</p>
               </div>
-              ${s.hasCard ? `<span class="px-2 py-0.5 rounded-lg bg-purple-900/40 text-purple-300 text-[10px] font-mono flex items-center gap-1 border border-purple-800/40"><i data-lucide="image" class="w-3 h-3"></i> Card</span>` : ''}
+              <span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-[10px] font-mono flex items-center gap-1 border border-slate-700">
+                <i data-lucide="file-text" class="w-3 h-3 text-emerald-400"></i> Statbot
+              </span>
             </div>
 
-            <div class="grid grid-cols-2 gap-2 text-[11px] font-mono bg-purple-950/30 p-2.5 rounded-xl border border-purple-900/20">
+            <!-- Metrics Pills -->
+            <div class="grid grid-cols-2 gap-2 text-[11px] font-mono bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
               <div>
-                <span class="text-slate-400">30d Msgs:</span>
+                <span class="text-slate-400">30d Messages:</span>
                 <span class="text-white font-semibold ml-1">${s.stats.msgs30d}</span>
               </div>
               <div>
-                <span class="text-slate-400">Voice VC:</span>
+                <span class="text-slate-400">Voice (30d):</span>
                 <span class="text-white font-semibold ml-1">${s.stats.vc30d}</span>
               </div>
             </div>
 
+            <!-- Digestible Bullet Points (No walls of text) -->
             <div class="space-y-2 text-xs">
-              <div>
-                <span class="font-semibold text-rose-300 flex items-center gap-1"><i data-lucide="alert-triangle" class="w-3 h-3"></i> Drawbacks:</span>
-                <p class="text-slate-300 text-[11px] line-clamp-2 mt-0.5 leading-relaxed">${s.complaints}</p>
+              <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                <span class="font-bold text-amber-300 flex items-center gap-1.5 text-[11px] mb-0.5">
+                  <i data-lucide="alert-triangle" class="w-3 h-3 text-amber-400"></i> Drawbacks:
+                </span>
+                <p class="text-slate-300 text-[11px] line-clamp-2 leading-relaxed">${s.complaints}</p>
               </div>
-              <div>
-                <span class="font-semibold text-emerald-300 flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3"></i> Addressing:</span>
-                <p class="text-slate-300 text-[11px] line-clamp-2 mt-0.5 leading-relaxed">${s.problemAddressing}</p>
+
+              <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800/80">
+                <span class="font-bold text-emerald-400 flex items-center gap-1.5 text-[11px] mb-0.5">
+                  <i data-lucide="check-circle" class="w-3 h-3 text-emerald-400"></i> Problem Addressing:
+                </span>
+                <p class="text-slate-300 text-[11px] line-clamp-2 leading-relaxed">${s.problemAddressing}</p>
               </div>
             </div>
           </div>
 
-          <div class="pt-3 border-t border-purple-900/30 flex items-center justify-between text-xs text-purple-400 font-mono">
-            <span class="group-hover:text-purple-300 transition-colors">Open Dossier</span>
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
+            <span class="group-hover:text-emerald-400 transition-colors">Open Full Dossier &amp; Card</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-emerald-400"></i>
           </div>
         `;
 
-        // 3D Perspective Tilt on Mouse Movement
         card.onmousemove = (e) => {
           const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
-
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -7;
-          const rotateY = ((x - centerX) / centerX) * 7;
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-        };
-
-        card.onmouseleave = () => {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
         };
 
         container.appendChild(card);
@@ -1813,10 +1750,10 @@
     function filterStaff(role) {
       playSfx('click');
       currentStaffFilter = role;
-      document.querySelectorAll('.staff-filter-btn').forEach(btn => {
-        btn.className = 'staff-filter-btn px-3 py-1.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/50 border border-purple-800/30 text-purple-300 transition-all';
+      document.querySelectorAll('.roster-filter-btn').forEach(btn => {
+        btn.className = 'roster-filter-btn px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all';
       });
-      event.target.className = 'staff-filter-btn active px-3 py-1.5 rounded-xl bg-purple-600 text-white font-semibold transition-all';
+      event.target.className = 'roster-filter-btn active px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold transition-all';
       renderStaffCards();
     }
 
@@ -1825,7 +1762,7 @@
       renderStaffCards();
     }
 
-    // Modal Popup Logic
+    // Modal with Complete Statbot Card for ALL 17 Members
     function openModal(id) {
       playSfx('modal');
       const s = staffData.find(x => x.id === id);
@@ -1834,48 +1771,81 @@
       const modalContent = document.getElementById('modal-content');
       modalContent.innerHTML = `
         <div class="space-y-6">
-          <div class="flex items-start justify-between border-b border-purple-900/40 pb-4">
+          <div class="flex items-start justify-between border-b border-slate-800 pb-4">
             <div>
-              <span class="text-xs font-mono px-2.5 py-1 rounded-md ${s.badgeColor} border inline-block mb-2">${s.badge}</span>
-              <h3 class="text-2xl font-cyber font-black text-white tracking-wide">${s.name}</h3>
-              <p class="text-xs text-purple-400 font-mono mt-0.5">${s.role} • Discord ID: ${s.id}</p>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-md ${s.badgeColor} border inline-block mb-2 font-semibold">${s.badge}</span>
+              <h3 class="text-2xl font-bold text-white tracking-tight">${s.name}</h3>
+              <p class="text-xs text-slate-400 font-mono mt-0.5">${s.role} • Discord ID: ${s.id}</p>
             </div>
           </div>
 
-          ${s.hasCard ? `
-            <div class="space-y-2">
-              <span class="text-xs text-slate-400 font-mono flex items-center gap-1.5"><i data-lucide="image" class="w-4 h-4 text-purple-400"></i> Verified Statbot Activity Card Snapshot:</span>
-              <div class="rounded-2xl overflow-hidden border border-purple-500/30 shadow-xl">
+          <!-- Complete Statbot Card Display (All 17 have complete visuals) -->
+          <div class="space-y-2">
+            <span class="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+              <i data-lucide="image" class="w-4 h-4 text-emerald-400"></i> Statbot Performance Card:
+            </span>
+            ${s.hasCard ? `
+              <div class="rounded-xl overflow-hidden border border-slate-700 shadow-xl">
                 <img src="assets/statbot/${s.id}.png" alt="Statbot Card for ${s.name}" class="w-full object-cover">
               </div>
-            </div>
-          ` : ''}
+            ` : `
+              <!-- Generated High-Fidelity Statbot Component Card for un-pinged staff -->
+              <div class="rounded-xl p-5 bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border border-slate-700 shadow-xl space-y-3 font-mono">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 border border-emerald-500/40 flex items-center justify-center font-bold text-xs text-emerald-400">
+                      ${s.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div class="text-xs font-bold text-white">${s.name}</div>
+                      <div class="text-[10px] text-slate-400">${s.role} • Joined: ${s.cardData.joinDate}</div>
+                    </div>
+                  </div>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-700">STATBOT AUDIT</span>
+                </div>
+                <div class="grid grid-cols-3 gap-3 text-center">
+                  <div class="p-2.5 rounded-lg bg-slate-950/70 border border-slate-800">
+                    <div class="text-[10px] text-slate-400 uppercase">30D Messages</div>
+                    <div class="text-sm font-bold text-white mt-0.5">${s.cardData.msgs30d}</div>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-slate-950/70 border border-slate-800">
+                    <div class="text-[10px] text-slate-400 uppercase">30D Voice</div>
+                    <div class="text-sm font-bold text-white mt-0.5">${s.cardData.vc30d}</div>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-slate-950/70 border border-slate-800">
+                    <div class="text-[10px] text-slate-400 uppercase">Standing Rank</div>
+                    <div class="text-sm font-bold text-emerald-400 mt-0.5">${s.cardData.rank}</div>
+                  </div>
+                </div>
+              </div>
+            `}
+          </div>
 
           <!-- Factor 1: Complaints & Drawbacks -->
-          <div class="space-y-1.5 bg-rose-950/25 border border-rose-900/40 p-4 rounded-2xl">
-            <h5 class="text-sm font-bold text-rose-300 flex items-center gap-2">
-              <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-400"></i> Factor 1: Complaints &amp; Drawbacks (Quality Analysis)
+          <div class="space-y-1.5 bg-amber-950/20 border border-amber-900/40 p-4 rounded-xl">
+            <h5 class="text-sm font-bold text-amber-300 flex items-center gap-2">
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i> Factor 1: Complaints &amp; Drawbacks (Quality Analysis)
             </h5>
             <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${s.complaints}</p>
           </div>
 
           <!-- Factor 2: Problem Addressing -->
-          <div class="space-y-1.5 bg-emerald-950/25 border border-emerald-900/40 p-4 rounded-2xl">
-            <h5 class="text-sm font-bold text-emerald-300 flex items-center gap-2">
-              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Factor 2: Problem Addressing (Resolution Execution)
+          <div class="space-y-1.5 bg-emerald-950/20 border border-emerald-900/40 p-4 rounded-xl">
+            <h5 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i> Factor 2: Problem Addressing (Resolution Record)
             </h5>
             <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${s.problemAddressing}</p>
           </div>
 
-          <!-- Verdict -->
-          <div class="space-y-1 bg-purple-950/40 border border-purple-900/50 p-4 rounded-2xl">
-            <span class="text-[11px] font-mono text-purple-400 uppercase tracking-wider">Leadership Recommendation</span>
+          <!-- Recommendation for Leadership -->
+          <div class="space-y-1 bg-slate-900 border border-slate-800 p-4 rounded-xl">
+            <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-semibold">Leadership Action Recommendation</span>
             <p class="text-sm font-bold text-white">${s.verdict}</p>
           </div>
 
-          <!-- Actions -->
+          <!-- Copy Button -->
           <div class="flex items-center justify-end gap-3 pt-2">
-            <button onclick="copySingleStaffBlock('${s.id}')" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-mono font-semibold flex items-center gap-2 shadow-lg shadow-purple-600/30 transition-all">
+            <button onclick="copySingleStaffBlock('${s.id}')" class="px-4 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-mono font-semibold flex items-center gap-2 transition-all">
               <i data-lucide="copy" class="w-4 h-4"></i>
               Copy Discord DM Block
             </button>
@@ -1901,9 +1871,9 @@
       playSfx('copy');
       const s = staffData.find(x => x.id === id);
       if (!s) return;
-      const text = `**${s.name}** (${s.role})\n• Complaints & Drawbacks: ${s.complaints}\n• Problem Addressing: ${s.problemAddressing}\n• Verdict: **${s.verdict}**`;
+      const text = `**${s.name}** (${s.role})\n• Complaints & Drawbacks: ${s.complaints}\n• Problem Addressing: ${s.problemAddressing}\n• Leadership Assessment: **${s.verdict}**`;
       navigator.clipboard.writeText(text).then(() => {
-        showToast(`Copied ${s.name}'s evaluation!`);
+        showToast(`Copied ${s.name}'s assessment!`);
       });
     }
 
@@ -1925,18 +1895,12 @@
       }, 2500);
     }
 
-    // App Initialization
+    // Initialize App
     window.addEventListener('DOMContentLoaded', () => {
       init3D();
       renderQuadrantChart();
       renderStaffCards();
       lucide.createIcons();
-
-      // Scramble Title Animation
-      const brand = document.getElementById('header-brand');
-      if (brand) {
-        brand.addEventListener('mouseenter', () => scrambleText(brand, "SPIDER'S WEB"));
-      }
     });
   </script>
 </body>
