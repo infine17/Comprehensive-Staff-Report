@@ -52,7 +52,7 @@
 
   <!-- Three.js for Interactive Animated 3D Constellation & Rotating Crystal -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- Chart.js for 6 Comprehensive Graphs -->
+  <!-- Chart.js for Visualizations -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -66,6 +66,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
+      padding-bottom: 70px; /* Space for mobile floating dock */
     }
 
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -73,7 +74,7 @@
     ::-webkit-scrollbar-thumb { background: #1c3d69; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #2d5a99; }
 
-    /* Hide horizontal scrollbars on mobile filter bar while keeping swipe functional */
+    /* Hide scrollbars while preserving touch scroll */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -121,7 +122,7 @@
 
     /* Frosted Glass Components in Natural Cool Glaze */
     .glass-nav {
-      background: rgba(10, 24, 46, 0.88);
+      background: rgba(10, 24, 46, 0.90);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(56, 189, 248, 0.18);
@@ -134,7 +135,7 @@
       box-shadow: 0 10px 32px rgba(4, 12, 24, 0.45);
     }
     .glass-card {
-      background: rgba(15, 33, 62, 0.72);
+      background: rgba(15, 33, 62, 0.75);
       backdrop-filter: blur(14px);
       border: 1px solid rgba(56, 189, 248, 0.20);
       box-shadow: 0 8px 24px rgba(3, 10, 20, 0.35);
@@ -142,10 +143,10 @@
     }
     @media (hover: hover) {
       .glass-card:hover {
-        background: rgba(22, 48, 88, 0.88);
-        border-color: rgba(56, 189, 248, 0.45);
+        background: rgba(22, 48, 88, 0.90);
+        border-color: rgba(56, 189, 248, 0.50);
         transform: translateY(-3px);
-        box-shadow: 0 16px 36px rgba(2, 8, 16, 0.55), 0 0 20px rgba(56, 189, 248, 0.15);
+        box-shadow: 0 16px 36px rgba(2, 8, 16, 0.55), 0 0 20px rgba(56, 189, 248, 0.20);
       }
     }
 
@@ -176,6 +177,56 @@
       box-shadow: 0 0 16px rgba(14, 165, 233, 0.4);
     }
 
+    /* Roster Ribbon Pill Active Styles */
+    .roster-pill.active {
+      background: rgba(14, 165, 233, 0.3) !important;
+      border-color: #38bdf8 !important;
+      color: #38bdf8 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Horizontal Carousel Snapping */
+    .carousel-track {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      padding: 0.5rem 0.25rem 1.5rem 0.25rem;
+    }
+    .carousel-item {
+      scroll-snap-align: center;
+      flex: 0 0 calc(100% - 0.5rem);
+      max-width: 620px;
+    }
+    @media (min-width: 768px) {
+      .carousel-item {
+        flex: 0 0 540px;
+      }
+    }
+    @media (min-width: 1280px) {
+      .carousel-item {
+        flex: 0 0 580px;
+      }
+    }
+
+    /* Grid Fallback Mode */
+    .grid-mode-track {
+      display: grid !important;
+      grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      gap: 1.5rem !important;
+      overflow-x: visible !important;
+    }
+    @media (min-width: 1024px) {
+      .grid-mode-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+    .grid-mode-track .carousel-item {
+      flex: none !important;
+      max-width: 100% !important;
+    }
+
     /* Lightbox Modal */
     #image-modal {
       display: none;
@@ -185,6 +236,15 @@
     #image-modal.active {
       display: flex;
       opacity: 1;
+    }
+
+    /* Floating Mobile Bottom Dock */
+    .mobile-bottom-dock {
+      background: rgba(10, 24, 46, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
     }
   </style>
 </head>
@@ -221,8 +281,8 @@
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center space-x-1 font-medium text-sm text-slate-300">
           <a href="#overview" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Overview</a>
-          <a href="#analytics" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Analytics (6 Charts)</a>
-          <a href="#staff-cards" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Staff Assessments</a>
+          <a href="#analytics" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Analytics (5 Charts)</a>
+          <a href="#staff-cards" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Staff Slider</a>
           <a href="#action-directives" class="px-3 py-1.5 rounded-lg hover:text-cyan-300 hover:bg-slate-800/60 transition">Directives</a>
         </nav>
 
@@ -267,7 +327,7 @@
             </p>
           </div>
 
-          <!-- Official Discord Policy Mandate Banner (Fixing Trial Mod Misconceptions) -->
+          <!-- Official Discord Policy Mandate Banner -->
           <div class="p-3.5 sm:p-4 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-start gap-3 text-xs sm:text-sm text-slate-200">
             <i data-lucide="alert-octagon" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0 mt-0.5"></i>
             <div class="space-y-1">
@@ -276,7 +336,7 @@
               </span>
               <p class="text-slate-300 leading-relaxed">
                 <span class="text-amber-200 font-semibold">"All Trial Moderators are not allowed to claim and solve reports and tickets unless assigned to the ticket department."</span>
-                Trial Mod evaluations strictly measure <span class="text-white font-medium">chat moderation, public lounge vigilance, rule adherence, and team communication</span>. Ticket handling is not assigned to general Trial Mods.
+                Trial Mod evaluations strictly measure <span class="text-white font-medium">chat moderation, public lounge vigilance, rule adherence, and team communication</span>.
               </p>
             </div>
           </div>
@@ -332,15 +392,15 @@
         </div>
       </section>
 
-      <!-- ANALYTICS SECTION: 6 Rich Interactive Charts (Mobile Responsive) -->
+      <!-- ANALYTICS SECTION: 5 Objective Verified Charts (Operational Competency Radar Removed) -->
       <section id="analytics" class="space-y-4 sm:space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div>
             <h2 class="text-xl sm:text-2xl font-heading font-bold text-white flex items-center gap-2">
               <i data-lucide="bar-chart-3" class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400"></i>
-              Staff Telemetry & Analytics Hub (6 Charts)
+              Staff Telemetry & Analytics Hub (5 Verified Charts)
             </h2>
-            <p class="text-xs sm:text-sm text-slate-400">Multi-dimensional operational metrics compiled from 30-day Statbot telemetry.</p>
+            <p class="text-xs sm:text-sm text-slate-400">Multi-dimensional operational metrics compiled directly from 30-day Statbot telemetry.</p>
           </div>
           <div class="flex items-center gap-2 font-mono text-[10px] sm:text-xs">
             <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Source: Statbot</span>
@@ -348,7 +408,7 @@
           </div>
         </div>
 
-        <!-- 6 Complete Graphs Grid -->
+        <!-- 5 Complete Graphs Grid (No Radar Chart) -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
 
           <!-- Chart 1: 30-Day Message Output by Staff -->
@@ -393,21 +453,7 @@
             </div>
           </div>
 
-          <!-- Chart 4: Multi-Axis Competency Radar -->
-          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
-            <div class="flex items-center justify-between mb-2 sm:mb-3">
-              <div>
-                <h3 class="font-heading font-semibold text-white text-sm sm:text-base">Operational Competency Radar</h3>
-                <p class="text-[11px] text-slate-400">Comparison across Core Staff Leads</p>
-              </div>
-              <i data-lucide="crosshair" class="w-4 h-4 text-cyan-400"></i>
-            </div>
-            <div class="h-56 sm:h-64 relative flex items-center justify-center">
-              <canvas id="chartRadar"></canvas>
-            </div>
-          </div>
-
-          <!-- Chart 5: 24h Coverage Profile -->
+          <!-- Chart 4: 24h Coverage Profile -->
           <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
             <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
@@ -421,12 +467,12 @@
             </div>
           </div>
 
-          <!-- Chart 6: Messages vs Voice Engagement Correlation -->
-          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between">
+          <!-- Chart 5: Messages vs Voice Engagement Correlation -->
+          <div class="glass-card p-4 sm:p-5 rounded-xl sm:rounded-2xl flex flex-col justify-between md:col-span-2 lg:col-span-2">
             <div class="flex items-center justify-between mb-2 sm:mb-3">
               <div>
                 <h3 class="font-heading font-semibold text-white text-sm sm:text-base">Engagement Matrix</h3>
-                <p class="text-[11px] text-slate-400">Messages (X) vs Voice Hours (Y)</p>
+                <p class="text-[11px] text-slate-400">Messages (X) vs Voice Hours (Y) Correlation</p>
               </div>
               <i data-lucide="scatter-chart" class="w-4 h-4 text-emerald-400"></i>
             </div>
@@ -438,55 +484,95 @@
         </div>
       </section>
 
-      <!-- STAFF ASSESSMENTS SECTION: All 17 Profiles with Statbot Cards -->
+      <!-- STAFF ASSESSMENTS SECTION: Left/Right Horizontal Slider & Roster Ribbon (No Lengthy Scroll) -->
       <section id="staff-cards" class="space-y-4 sm:space-y-6">
         
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <h2 class="text-xl sm:text-2xl font-heading font-bold text-white flex items-center gap-2">
-              <i data-lucide="clipboard-list" class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400"></i>
-              Staff Profiles & Statbot Cards (17)
+              <i data-lucide="sliders-horizontal" class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400"></i>
+              Interactive Staff Dossier & Statbot Slider (17)
             </h2>
-            <p class="text-xs sm:text-sm text-slate-400">Detailed qualitative evaluations and verified Statbot telemetry images for all 17 personnel.</p>
+            <p class="text-xs sm:text-sm text-slate-400">Swipe or click left/right arrows to slide through all 17 staff cards seamlessly.</p>
           </div>
 
-          <!-- Mobile Friendly Search & Sort Controls -->
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-            <div class="relative w-full sm:w-64">
-              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
-              <input type="text" id="staff-search" placeholder="Search staff name or role..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2 text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
-            </div>
-            <select id="staff-sort" class="w-full sm:w-auto bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
-              <option value="default">Default Order</option>
-              <option value="msgs-desc">Highest Messages</option>
-              <option value="vc-desc">Highest Voice Hours</option>
-              <option value="name-asc">Alphabetical (A-Z)</option>
-            </select>
+          <!-- View Mode Toggle & Counter -->
+          <div class="flex items-center gap-2 sm:gap-3">
+            <span id="staff-counter" class="text-xs font-mono px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-700 text-cyan-300">
+              Card 1 of 17
+            </span>
+            <button id="toggle-view-btn" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 flex items-center gap-1.5 transition">
+              <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+              <span id="view-mode-label">Grid View</span>
+            </button>
           </div>
         </div>
 
-        <!-- Filter Tab Buttons (Horizontal Touch Swipe on Mobile) -->
-        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 sm:pb-3 border-b border-slate-800" id="filter-tabs">
-          <button class="tab-btn active shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium border border-transparent transition" data-filter="all">
-            All Staff (17)
-          </button>
-          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Core & Benchmark">
-            Core Leads (4)
-          </button>
-          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="High Output">
-            High Activity (4)
-          </button>
-          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Targeted Mentorship">
-            Mentorship (4)
-          </button>
-          <button class="tab-btn shrink-0 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Review Roster">
-            Attendance Review (5)
-          </button>
+        <!-- Horizontal Roster Quick-Jump Ribbon -->
+        <div class="space-y-1.5">
+          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">Tap to jump directly to any staff:</span>
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1" id="roster-ribbon">
+            <!-- Dynamically populated roster pills -->
+          </div>
         </div>
 
-        <!-- Dynamic Responsive Grid of 17 Cards -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6" id="staff-grid">
-          <!-- Dynamically populated by JS -->
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
+          <!-- Filter Tab Buttons -->
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0" id="filter-tabs">
+            <button class="tab-btn active shrink-0 px-3 py-1.5 rounded-xl text-xs font-medium border border-transparent transition" data-filter="all">
+              All (17)
+            </button>
+            <button class="tab-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Core & Benchmark">
+              Core Leads (4)
+            </button>
+            <button class="tab-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="High Output">
+              High Output (4)
+            </button>
+            <button class="tab-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Targeted Mentorship">
+              Mentorship (4)
+            </button>
+            <button class="tab-btn shrink-0 px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/70 transition" data-filter="Review Roster">
+              Review (5)
+            </button>
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full sm:w-64">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+            <input type="text" id="staff-search" placeholder="Search staff name..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+          </div>
+        </div>
+
+        <!-- HORIZONTAL CAROUSEL SLIDER WRAPPER (Watermelon UI / ReactBits Style) -->
+        <div class="relative group mt-2">
+          
+          <!-- Prev Button -->
+          <button id="slider-prev-btn" class="absolute -left-2 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/90 border border-cyan-500/40 text-cyan-300 hover:text-white hover:bg-cyan-600 flex items-center justify-center shadow-2xl backdrop-blur-md transition-all active:scale-90" title="Previous Staff (Slide Left)">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Next Button -->
+          <button id="slider-next-btn" class="absolute -right-2 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/90 border border-cyan-500/40 text-cyan-300 hover:text-white hover:bg-cyan-600 flex items-center justify-center shadow-2xl backdrop-blur-md transition-all active:scale-90" title="Next Staff (Slide Right)">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Carousel Scroll Track (Swipeable / Snapping) -->
+          <div id="staff-carousel-track" class="carousel-track no-scrollbar">
+            <!-- Dynamically populated staff cards -->
+          </div>
+
+        </div>
+
+        <!-- Mobile Touch Action Bar for Carousel -->
+        <div class="flex items-center justify-between sm:hidden pt-2 px-1 text-xs font-mono text-slate-400">
+          <button onclick="scrollSlider(-1)" class="px-4 py-2 rounded-xl bg-slate-800/90 border border-slate-700 text-cyan-300 flex items-center gap-1.5 active:bg-cyan-900">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i> Prev Card
+          </button>
+          <span class="text-[11px] text-slate-400">Swipe Left / Right</span>
+          <button onclick="scrollSlider(1)" class="px-4 py-2 rounded-xl bg-slate-800/90 border border-slate-700 text-cyan-300 flex items-center gap-1.5 active:bg-cyan-900">
+            Next Card <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
         </div>
 
       </section>
@@ -518,10 +604,10 @@
                 <span class="font-semibold text-cyan-300">Vansh (Meoww) [Full Mod]:</span> Address silly mistakes and immaturity; pair with a senior moderator for ticket oversight; mandate thorough reading of evidence before closing tickets.
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-cyan-300">DeadSpider [Trial Mod]:</span> Focus on learning public chat moderation and active rule enforcement in general channels; increase communication in staff channels. (No tickets per policy).
+                <span class="font-semibold text-cyan-300">DeadSpider [Trial Mod]:</span> Focus on learning public chat moderation and active rule enforcement in general channels; increase communication in staff channels.
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-cyan-300">VoidSoul [Trial Mod]:</span> Basic chat moderation coaching; improve familiarity with warning thresholds and policy boundaries. (No tickets per policy).
+                <span class="font-semibold text-cyan-300">VoidSoul [Trial Mod]:</span> Basic chat moderation coaching; improve familiarity with warning thresholds and policy boundaries.
               </div>
             </div>
           </div>
@@ -558,7 +644,7 @@
             <p class="text-xs text-slate-300">Refining communication tone for high-volume contributors to prevent member friction.</p>
             <div class="space-y-2 text-xs text-slate-300">
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
-                <span class="font-semibold text-amber-300">perk adverd [Trial Mod]:</span> Outstanding volume (17.5k msgs, 80h VC), but must resolve behavioral complaints; focus on calm chat moderation without provoking users. (No tickets per policy).
+                <span class="font-semibold text-amber-300">perk adverd [Trial Mod]:</span> Outstanding volume (17.5k msgs, 80h VC), but must resolve behavioral complaints; focus on calm chat moderation without provoking users.
               </div>
               <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800">
                 <span class="font-semibold text-amber-300">opgamer [Full Mod]:</span> High ticket bravery and major report resolution; soften attitude and abrasive edge in public discussions.
@@ -595,6 +681,28 @@
 
     </main>
 
+    <!-- Floating Mobile Bottom Navigation Dock (Thumb-friendly for mobile users) -->
+    <div class="fixed bottom-3 inset-x-3 z-40 sm:hidden">
+      <div class="mobile-bottom-dock rounded-2xl px-3 py-2 flex items-center justify-around shadow-2xl">
+        <a href="#overview" class="flex flex-col items-center gap-0.5 text-slate-300 hover:text-cyan-400 transition text-[10px] font-mono">
+          <i data-lucide="home" class="w-4 h-4 text-cyan-400"></i>
+          <span>Home</span>
+        </a>
+        <a href="#analytics" class="flex flex-col items-center gap-0.5 text-slate-300 hover:text-cyan-400 transition text-[10px] font-mono">
+          <i data-lucide="bar-chart-2" class="w-4 h-4 text-teal-400"></i>
+          <span>Charts</span>
+        </a>
+        <a href="#staff-cards" class="flex flex-col items-center gap-0.5 text-slate-300 hover:text-cyan-400 transition text-[10px] font-mono">
+          <i data-lucide="users" class="w-4 h-4 text-sky-400"></i>
+          <span>Staff</span>
+        </a>
+        <a href="#action-directives" class="flex flex-col items-center gap-0.5 text-slate-300 hover:text-cyan-400 transition text-[10px] font-mono">
+          <i data-lucide="check-square" class="w-4 h-4 text-amber-400"></i>
+          <span>Directives</span>
+        </a>
+      </div>
+    </div>
+
     <!-- Footer -->
     <footer class="glass-nav border-t mt-8 sm:mt-12 py-5 text-center text-[11px] sm:text-xs text-slate-400 font-mono">
       <div class="max-w-7xl mx-auto px-4 space-y-1.5">
@@ -629,8 +737,7 @@
 
   <!-- DATA & SCRIPTS -->
   <script>
-    // Complete, accurate staff dataset for all 17 members
-    // Respecting server policy: Trial Mods do NOT handle tickets; they moderate chat/channels.
+    // Complete staff dataset for all 17 members (no ticket mentions for Trial Mods)
     const staffData = [
       {
         id: "734136497447370842",
@@ -976,12 +1083,42 @@
       }
     ];
 
-    // Render Staff Cards (Mobile Optimized)
-    function renderStaffCards(filter = 'all', searchTerm = '', sortMode = 'default') {
-      const container = document.getElementById('staff-grid');
-      container.innerHTML = '';
+    let currentCardIndex = 0;
+    let isGridView = false;
 
-      let list = [...staffData];
+    // Render Quick-Jump Roster Ribbon
+    function renderRosterRibbon() {
+      const ribbon = document.getElementById('roster-ribbon');
+      ribbon.innerHTML = '';
+
+      staffData.forEach((member, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `roster-pill shrink-0 px-2.5 py-1 rounded-lg text-[11px] font-mono border border-slate-700/80 bg-slate-900/80 text-slate-300 hover:text-cyan-300 hover:border-cyan-500/50 transition flex items-center gap-1.5 ${idx === 0 ? 'active' : ''}`;
+        btn.setAttribute('data-idx', idx);
+        
+        // Clean short name
+        let shortName = member.name.replace(/^(!H-MOD | |H-MOD | |[T-MOD] |[TMOD] | |[TMOD] |T-Mod | |T-MOD | |T mod | |T Mod | )/, '');
+        shortName = shortName.split(' ')[0];
+
+        btn.innerHTML = `
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+          <span>${shortName}</span>
+        `;
+
+        btn.addEventListener('click', () => {
+          jumpToCard(idx);
+        });
+
+        ribbon.appendChild(btn);
+      });
+    }
+
+    // Render Staff Cards into Carousel Track
+    function renderStaffCards(filter = 'all', searchTerm = '') {
+      const track = document.getElementById('staff-carousel-track');
+      track.innerHTML = '';
+
+      let list = staffData.map((member, originalIndex) => ({ ...member, originalIndex }));
 
       // Filter by category
       if (filter !== 'all') {
@@ -998,31 +1135,25 @@
         );
       }
 
-      // Sort
-      if (sortMode === 'msgs-desc') {
-        list.sort((a, b) => b.stats.msgVal - a.stats.msgVal);
-      } else if (sortMode === 'vc-desc') {
-        list.sort((a, b) => b.stats.vcVal - a.stats.vcVal);
-      } else if (sortMode === 'name-asc') {
-        list.sort((a, b) => a.name.localeCompare(b.name));
-      }
-
       if (list.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-12 text-center text-slate-400 font-mono">
+        track.innerHTML = `
+          <div class="w-full py-12 text-center text-slate-400 font-mono">
             <i data-lucide="search-x" class="w-8 h-8 mx-auto mb-2 text-slate-500"></i>
             No staff members found matching criteria.
           </div>
         `;
         lucide.createIcons();
+        updateCounter(0, 0);
         return;
       }
 
-      list.forEach(member => {
+      list.forEach((member, i) => {
         const card = document.createElement('div');
-        card.className = "glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between space-y-4 sm:space-y-5";
+        card.className = "carousel-item glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 flex flex-col justify-between space-y-4";
+        card.setAttribute('data-card-index', i);
+        card.id = `staff-card-${member.originalIndex}`;
 
-        // Positive checkmarks HTML
+        // Strengths HTML
         const strengthsHTML = member.strengths.map(s => `
           <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
             <i data-lucide="check-circle-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0 mt-0.5"></i>
@@ -1030,7 +1161,7 @@
           </li>
         `).join('');
 
-        // Bottlenecks warning HTML
+        // Bottlenecks HTML
         const bottlenecksHTML = member.bottlenecks.map(b => `
           <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-300">
             <i data-lucide="alert-triangle" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0 mt-0.5"></i>
@@ -1038,7 +1169,7 @@
           </li>
         `).join('');
 
-        // Problem Addressing / Directives HTML
+        // Directives HTML
         const directivesHTML = member.problemAddressing.map(d => `
           <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
             <i data-lucide="arrow-right-circle" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 shrink-0 mt-0.5"></i>
@@ -1048,10 +1179,10 @@
 
         card.innerHTML = `
           <!-- Card Header -->
-          <div class="space-y-2.5 sm:space-y-3">
-            <div class="flex items-start justify-between gap-2 sm:gap-3">
+          <div class="space-y-2.5">
+            <div class="flex items-start justify-between gap-2">
               <div>
-                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
                   <span class="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                     ${member.role}
                   </span>
@@ -1063,12 +1194,12 @@
                   ${member.name}
                 </h3>
               </div>
-              <span class="text-[10px] sm:text-[11px] font-mono text-slate-400 bg-slate-900/90 px-2 py-1 rounded border border-slate-800 shrink-0">
-                ID: ${member.id.substring(0, 6)}...
+              <span class="text-[10px] font-mono text-slate-400 bg-slate-900/90 px-2 py-1 rounded border border-slate-800 shrink-0">
+                #${member.originalIndex + 1}
               </span>
             </div>
 
-            <!-- Bento Stats Pills (2x2 on Mobile, 4x1 on Desktop) -->
+            <!-- Bento Stats Pills -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
               <div class="bg-slate-900/80 p-2 rounded-lg border border-slate-800 text-center">
                 <span class="text-[9px] sm:text-[10px] text-slate-400 block font-mono">30d Msgs</span>
@@ -1090,60 +1221,143 @@
           </div>
 
           <!-- Verified Statbot Image Card -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-[11px] sm:text-xs text-slate-400 font-mono">
+          <div class="space-y-1">
+            <div class="flex items-center justify-between text-[11px] text-slate-400 font-mono">
               <span class="flex items-center gap-1.5">
                 <i data-lucide="image" class="w-3.5 h-3.5 text-cyan-400"></i>
-                Verified Statbot Card
+                Verified Statbot Telemetry
               </span>
               <span class="text-[10px] text-cyan-400 flex items-center gap-1">
                 <i data-lucide="zoom-in" class="w-3 h-3"></i> Tap to enlarge
               </span>
             </div>
             <div class="statbot-img-box" onclick="openModal('assets/statbot/${member.id}.png', '${member.name}')">
-              <img src="assets/statbot/${member.id}.png" alt="${member.name} Statbot Card" class="w-full h-auto object-cover max-h-40 sm:max-h-48 rounded" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80';">
+              <img src="assets/statbot/${member.id}.png" alt="${member.name} Statbot Card" class="w-full h-auto object-cover max-h-36 sm:max-h-44 rounded" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80';">
             </div>
           </div>
 
           <!-- Evaluation Sections -->
-          <div class="space-y-2.5 sm:space-y-3 pt-1">
+          <div class="space-y-2.5 pt-1">
             <!-- Strengths -->
-            <div class="p-3 sm:p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/25 space-y-1.5 sm:space-y-2">
+            <div class="p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/25 space-y-1.5">
               <span class="text-[11px] sm:text-xs font-semibold text-emerald-400 flex items-center gap-1.5 uppercase tracking-wider font-mono">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i> Strengths & Contributions
               </span>
-              <ul class="space-y-1 sm:space-y-1.5">
+              <ul class="space-y-1">
                 ${strengthsHTML}
               </ul>
             </div>
 
             <!-- Bottlenecks -->
-            <div class="p-3 sm:p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/25 space-y-1.5 sm:space-y-2">
+            <div class="p-3 rounded-xl bg-amber-950/20 border border-amber-500/25 space-y-1.5">
               <span class="text-[11px] sm:text-xs font-semibold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider font-mono">
-                <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Drawbacks & Operational Bottlenecks
+                <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Operational Bottlenecks
               </span>
-              <ul class="space-y-1 sm:space-y-1.5">
+              <ul class="space-y-1">
                 ${bottlenecksHTML}
               </ul>
             </div>
 
             <!-- Directives -->
-            <div class="p-3 sm:p-3.5 rounded-xl bg-cyan-950/20 border border-cyan-500/25 space-y-1.5 sm:space-y-2">
+            <div class="p-3 rounded-xl bg-cyan-950/20 border border-cyan-500/25 space-y-1.5">
               <span class="text-[11px] sm:text-xs font-semibold text-cyan-300 flex items-center gap-1.5 uppercase tracking-wider font-mono">
-                <i data-lucide="target" class="w-3.5 h-3.5"></i> Problem Addressing & Directives
+                <i data-lucide="target" class="w-3.5 h-3.5"></i> Field Directives
               </span>
-              <ul class="space-y-1 sm:space-y-1.5">
+              <ul class="space-y-1">
                 ${directivesHTML}
               </ul>
             </div>
           </div>
         `;
 
-        container.appendChild(card);
+        track.appendChild(card);
       });
 
+      updateCounter(1, list.length);
       lucide.createIcons();
     }
+
+    // Scroll Carousel helper
+    function scrollSlider(direction) {
+      const track = document.getElementById('staff-carousel-track');
+      const itemWidth = track.querySelector('.carousel-item')?.offsetWidth || 350;
+      track.scrollBy({ left: direction * (itemWidth + 20), behavior: 'smooth' });
+    }
+
+    // Jump to specific card
+    function jumpToCard(index) {
+      const track = document.getElementById('staff-carousel-track');
+      const card = document.getElementById(`staff-card-${index}`);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        highlightRosterPill(index);
+      }
+    }
+
+    function highlightRosterPill(index) {
+      document.querySelectorAll('.roster-pill').forEach(pill => {
+        if (parseInt(pill.getAttribute('data-idx')) === index) {
+          pill.classList.add('active');
+          pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+      updateCounter(index + 1, staffData.length);
+    }
+
+    function updateCounter(current, total) {
+      const counter = document.getElementById('staff-counter');
+      if (counter) {
+        counter.innerText = total > 0 ? `Card ${current} of ${total}` : '0 Results';
+      }
+    }
+
+    // Listen to scroll inside carousel to update active pill and counter
+    document.getElementById('staff-carousel-track').addEventListener('scroll', () => {
+      const track = document.getElementById('staff-carousel-track');
+      const cards = track.querySelectorAll('.carousel-item');
+      const trackCenter = track.scrollLeft + track.offsetWidth / 2;
+
+      cards.forEach((card, i) => {
+        const cardLeft = card.offsetLeft;
+        const cardRight = cardLeft + card.offsetWidth;
+        if (trackCenter >= cardLeft && trackCenter <= cardRight) {
+          const originalIdx = parseInt(card.id.replace('staff-card-', ''));
+          if (!isNaN(originalIdx)) {
+            document.querySelectorAll('.roster-pill').forEach(pill => {
+              pill.classList.toggle('active', parseInt(pill.getAttribute('data-idx')) === originalIdx);
+            });
+            updateCounter(i + 1, cards.length);
+          }
+        }
+      });
+    }, { passive: true });
+
+    // Prev / Next button listeners
+    document.getElementById('slider-prev-btn').addEventListener('click', () => scrollSlider(-1));
+    document.getElementById('slider-next-btn').addEventListener('click', () => scrollSlider(1));
+
+    // Toggle Grid vs Slider view
+    document.getElementById('toggle-view-btn').addEventListener('click', () => {
+      const track = document.getElementById('staff-carousel-track');
+      const label = document.getElementById('view-mode-label');
+      isGridView = !isGridView;
+
+      if (isGridView) {
+        track.classList.add('grid-mode-track');
+        track.classList.remove('carousel-track');
+        label.innerText = 'Slider View';
+        document.getElementById('slider-prev-btn').style.display = 'none';
+        document.getElementById('slider-next-btn').style.display = 'none';
+      } else {
+        track.classList.remove('grid-mode-track');
+        track.classList.add('carousel-track');
+        label.innerText = 'Grid View';
+        document.getElementById('slider-prev-btn').style.display = 'flex';
+        document.getElementById('slider-next-btn').style.display = 'flex';
+      }
+    });
 
     // Modal Handlers
     function openModal(imgSrc, name) {
@@ -1169,26 +1383,17 @@
         btn.classList.add('active');
         const filter = btn.getAttribute('data-filter');
         const search = document.getElementById('staff-search').value;
-        const sort = document.getElementById('staff-sort').value;
-        renderStaffCards(filter, search, sort);
+        renderStaffCards(filter, search);
       });
     });
 
     document.getElementById('staff-search').addEventListener('input', (e) => {
       const activeBtn = document.querySelector('.tab-btn.active');
       const filter = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
-      const sort = document.getElementById('staff-sort').value;
-      renderStaffCards(filter, e.target.value, sort);
+      renderStaffCards(filter, e.target.value);
     });
 
-    document.getElementById('staff-sort').addEventListener('change', (e) => {
-      const activeBtn = document.querySelector('.tab-btn.active');
-      const filter = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
-      const search = document.getElementById('staff-search').value;
-      renderStaffCards(filter, search, e.target.value);
-    });
-
-    // Initialize 6 Chart.js Visualizations (Responsive)
+    // Initialize 5 Objective Charts (Radar Removed)
     function initCharts() {
       const isMobile = window.innerWidth < 640;
       const tickFontSize = isMobile ? 9 : 10;
@@ -1268,54 +1473,9 @@
         }
       });
 
-      // Chart 4: Multi-Axis Competency Radar (Incident Handling instead of Ticket Bravery)
-      const ctx4 = document.getElementById('chartRadar').getContext('2d');
+      // Chart 4: 24h Coverage Profile
+      const ctx4 = document.getElementById('chartCoverage').getContext('2d');
       new Chart(ctx4, {
-        type: 'radar',
-        data: {
-          labels: ['Chat Presence', 'Voice Immersion', 'Incident Response', 'Policy Accuracy', 'Backhand Ops'],
-          datasets: [
-            {
-              label: 'opgamer',
-              data: [98, 85, 99, 72, 70],
-              borderColor: '#38bdf8',
-              backgroundColor: 'rgba(56, 189, 248, 0.2)',
-              borderWidth: 2
-            },
-            {
-              label: 'ProtexReaper',
-              data: [78, 80, 88, 98, 85],
-              borderColor: '#2dd4bf',
-              backgroundColor: 'rgba(45, 212, 191, 0.2)',
-              borderWidth: 2
-            },
-            {
-              label: 'INFINE',
-              data: [50, 60, 85, 95, 99],
-              borderColor: '#f59e0b',
-              backgroundColor: 'rgba(245, 158, 11, 0.2)',
-              borderWidth: 2
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: tickFontSize } } } },
-          scales: {
-            r: {
-              angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-              grid: { color: 'rgba(255, 255, 255, 0.1)' },
-              pointLabels: { color: '#94a3b8', font: { size: tickFontSize } },
-              ticks: { display: false }
-            }
-          }
-        }
-      });
-
-      // Chart 5: 24h Coverage Profile
-      const ctx5 = document.getElementById('chartCoverage').getContext('2d');
-      new Chart(ctx5, {
         type: 'line',
         data: {
           labels: ['00:00-04:00', '04:00-08:00', '08:00-12:00', '12:00-16:00', '16:00-20:00', '20:00-00:00'],
@@ -1340,9 +1500,9 @@
         }
       });
 
-      // Chart 6: Engagement Scatter
-      const ctx6 = document.getElementById('chartEngagement').getContext('2d');
-      new Chart(ctx6, {
+      // Chart 5: Engagement Scatter
+      const ctx5 = document.getElementById('chartEngagement').getContext('2d');
+      new Chart(ctx5, {
         type: 'bubble',
         data: {
           datasets: [
@@ -1554,6 +1714,7 @@
 
     // Initialize application on load
     window.addEventListener('DOMContentLoaded', () => {
+      renderRosterRibbon();
       renderStaffCards('all');
       initCharts();
       initThreeConstellation();
