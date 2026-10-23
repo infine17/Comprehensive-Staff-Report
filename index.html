@@ -1097,7 +1097,7 @@
         btn.setAttribute('data-idx', idx);
         
         // Clean short name
-        let shortName = member.name.replace(/^(!H-MOD | |H-MOD | |[T-MOD] |[TMOD] | |[TMOD] |T-Mod | |T-MOD | |T mod | |T Mod | )/, '');
+        let shortName = member.name.replace("!H-MOD | ", '').replace("H-MOD | ", '').replace("[T-MOD] ", '').replace("[TMOD] | ", '').replace("[TMOD] ", '').replace("T-Mod | ", '').replace("T-MOD | ", '').replace("T mod | ", '').replace("T Mod | ", '').trim();
         shortName = shortName.split(' ')[0];
 
         btn.innerHTML = `
