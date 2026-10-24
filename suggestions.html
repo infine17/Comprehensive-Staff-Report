@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Spider's Web — Effective Team Suggestions</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2128;
+    --border: #30363d;
+    --accent: #3fb950;
+    --accent2: #58a6ff;
+    --accent3: #d29922;
+    --accent4: #f85149;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --p1: #3fb950;
+    --p2: #58a6ff;
+    --p3: #d29922;
+    --p4: #a371f7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ─── COVER PAGE ─── */
+  .cover {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 40%, #0d1117 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    padding: 60px 40px;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(63,185,80,0.08) 0%, transparent 70%);
+    top: -100px; left: -100px;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(88,166,255,0.06) 0%, transparent 70%);
+    bottom: -80px; right: -80px;
+  }
+
+  .cover-badge {
+    background: rgba(63,185,80,0.15);
+    border: 1px solid rgba(63,185,80,0.4);
+    color: var(--accent);
+    padding: 6px 18px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative; z-index: 1;
+  }
+
+  .cover-emoji {
+    font-size: 72px;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+
+  .cover h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.1;
+    position: relative; z-index: 1;
+    background: linear-gradient(135deg, #e6edf3 0%, #58a6ff 50%, #3fb950 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  .cover-sub {
+    font-size: 18px;
+    color: var(--muted);
+    text-align: center;
+    position: relative; z-index: 1;
+    margin-bottom: 40px;
+    max-width: 500px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    position: relative; z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .meta-item {
+    text-align: center;
+  }
+  .meta-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .meta-value { font-size: 15px; font-weight: 600; color: var(--text); margin-top: 2px; }
+
+  .cover-divider {
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 32px auto;
+    position: relative; z-index: 1;
+  }
+
+  .brief-box {
+    background: rgba(88,166,255,0.08);
+    border: 1px solid rgba(88,166,255,0.25);
+    border-left: 3px solid var(--accent2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    max-width: 560px;
+    position: relative; z-index: 1;
+    font-size: 13px;
+    color: #c9d1d9;
+    font-style: italic;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .cat-1 .section-icon { background: rgba(63,185,80,0.15); }
+  .cat-2 .section-icon { background: rgba(88,166,255,0.15); }
+  .cat-3 .section-icon { background: rgba(210,153,34,0.15); }
+  .cat-4 .section-icon { background: rgba(163,113,247,0.15); }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .cat-1 .section-title { color: var(--p1); }
+  .cat-2 .section-title { color: var(--p2); }
+  .cat-3 .section-title { color: var(--p3); }
+  .cat-4 .section-title { color: var(--p4); }
+
+  .section-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+  }
+
+  /* ─── SUGGESTION CARDS ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .cat-1 .card::before { background: linear-gradient(90deg, var(--p1), transparent); }
+  .cat-2 .card::before { background: linear-gradient(90deg, var(--p2), transparent); }
+  .cat-3 .card::before { background: linear-gradient(90deg, var(--p3), transparent); }
+  .cat-4 .card::before { background: linear-gradient(90deg, var(--p4), transparent); }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card-num {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .cat-1 .card-num { background: rgba(63,185,80,0.2); color: var(--p1); }
+  .cat-2 .card-num { background: rgba(88,166,255,0.2); color: var(--p2); }
+  .cat-3 .card-num { background: rgba(210,153,34,0.2); color: var(--p3); }
+  .cat-4 .card-num { background: rgba(163,113,247,0.2); color: var(--p4); }
+
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .priority-badge {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .p1-badge { background: rgba(63,185,80,0.2); color: var(--p1); border: 1px solid rgba(63,185,80,0.4); }
+  .p2-badge { background: rgba(88,166,255,0.2); color: var(--p2); border: 1px solid rgba(88,166,255,0.4); }
+  .p3-badge { background: rgba(210,153,34,0.2); color: var(--p3); border: 1px solid rgba(210,153,34,0.4); }
+  .p4-badge { background: rgba(163,113,247,0.2); color: var(--p4); border: 1px solid rgba(163,113,247,0.4); }
+
+  .card p { color: #c9d1d9; font-size: 13.5px; margin-bottom: 10px; }
+
+  .why-box {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+  }
+  .why-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .why-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .why-list li {
+    color: #c9d1d9;
+    font-size: 13px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .why-list li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .effort-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--surface2);
+  }
+  .tag.green { border-color: rgba(63,185,80,0.4); color: var(--p1); background: rgba(63,185,80,0.08); }
+  .tag.blue { border-color: rgba(88,166,255,0.4); color: var(--p2); background: rgba(88,166,255,0.08); }
+  .tag.yellow { border-color: rgba(210,153,34,0.4); color: var(--p3); background: rgba(210,153,34,0.08); }
+
+  /* ─── TABLE ─── */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+  thead { background: var(--surface2); }
+  th {
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 11px 16px;
+    font-size: 13px;
+    color: #c9d1d9;
+    border-bottom: 1px solid rgba(48,54,61,0.6);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+  .dot-green { background: var(--p1); }
+  .dot-blue { background: var(--p2); }
+  .dot-yellow { background: var(--p3); }
+  .dot-purple { background: var(--p4); }
+
+  /* ─── PRIORITY SUMMARY ─── */
+  .priority-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .priority-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .priority-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .priority-fire {
+    font-size: 20px;
+  }
+
+  .priority-card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .priority-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .priority-items li {
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* ─── MENTORSHIP TABLE ─── */
+  .mini-table-wrap {
+    background: var(--surface2);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  .mini-table-wrap table { font-size: 12.5px; }
+  .mini-table-wrap th { font-size: 10px; padding: 8px 12px; }
+  .mini-table-wrap td { padding: 7px 12px; }
+
+  /* ─── LOA FORMAT ─── */
+  .code-box {
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    color: #7ee787;
+    margin: 12px 0;
+    line-height: 1.8;
+  }
+
+  /* ─── ALERT BOX ─── */
+  .alert {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 32px 0;
+    border: 1px solid;
+  }
+  .alert-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .alert-body { font-size: 13px; }
+  .alert.important {
+    background: rgba(63,185,80,0.08);
+    border-color: rgba(63,185,80,0.3);
+  }
+  .alert.important .alert-title { color: var(--p1); }
+  .alert.tip {
+    background: rgba(88,166,255,0.08);
+    border-color: rgba(88,166,255,0.3);
+  }
+  .alert.tip .alert-title { color: var(--p2); }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    body { background: white; color: #1a1a2e; }
+    .cover { background: linear-gradient(135deg, #1a1a2e, #16213e); min-height: auto; padding: 80px 60px; }
+    .card, .priority-card, .table-wrap { break-inside: avoid; }
+    .section-header { page-break-before: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<div class="cover">
+  <div class="cover-badge">Spider's Web — Internal Document</div>
+  <div class="cover-emoji">🕸️</div>
+  <h1>Effective Team<br/>Suggestions</h1>
+  <p class="cover-sub">Strategic recommendations for the Spider's Web moderation team — low discussion, high impact.</p>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">
+    <div class="meta-item">
+      <div class="meta-label">Prepared By</div>
+      <div class="meta-value">!H-MOD | INFINE (Aditya)</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Submitted To</div>
+      <div class="meta-value">DeadSoul & Heads GC</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">October 24, 2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Suggestions</div>
+      <div class="meta-value">11 Actionable Items</div>
+    </div>
+  </div>
+  <div class="cover-divider"></div>
+  <div class="brief-box">
+    💬 DeadSoul's Brief: <em>"effective suggestion chaiye, jo hume team me dalne ke liye jadha discuss na karna ho aur bas dalne se faidha hi ho"</em>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<div class="page">
+
+  <!-- PRIORITY OVERVIEW -->
+  <div class="section-header cat-1">
+    <div class="section-icon cat-1">🏆</div>
+    <div class="section-title" style="color: var(--text);">Priority Overview</div>
+  </div>
+
+  <div class="priority-grid">
+    <div class="priority-card">
+      <div class="priority-card-header">
+        <span class="priority-fire">🔥</span>
+        <span class="priority-card-title" style="color: var(--p1);">P1 — Do It Today</span>
+      </div>
+      <ul class="priority-items">
+        <li><span class="dot dot-green"></span>Auto-Warning Bot (MEE6/Wick)</li>
+        <li><span class="dot dot-green"></span>LOA Request Channel</li>
+        <li><span class="dot dot-green"></span>Dedicated Ticket Department</li>
+      </ul>
+    </div>
+    <div class="priority-card">
+      <div class="priority-card-header">
+        <span class="priority-fire">⚡</span>
+        <span class="priority-card-title" style="color: var(--p2);">P2 — This Week</span>
+      </div>
+      <ul class="priority-items">
+        <li><span class="dot dot-blue"></span>Verification Gate</li>
+        <li><span class="dot dot-blue"></span>Trial Mod Mentorship Pairing</li>
+        <li><span class="dot dot-blue"></span>Activity Minimum Standards</li>
+      </ul>
+    </div>
+    <div class="priority-card">
+      <div class="priority-card-header">
+        <span class="priority-fire">📌</span>
+        <span class="priority-card-title" style="color: var(--p3);">P3 — This Month</span>
+      </div>
+      <ul class="priority-items">
+        <li><span class="dot dot-yellow"></span>StatBot Weekly Auto-Report</li>
+        <li><span class="dot dot-yellow"></span>Staff Strike System</li>
+        <li><span class="dot dot-yellow"></span>Weekly Community Events</li>
+      </ul>
+    </div>
+    <div class="priority-card">
+      <div class="priority-card-header">
+        <span class="priority-fire">💡</span>
+        <span class="priority-card-title" style="color: var(--p4);">P4 — Nice to Have</span>
+      </div>
+      <ul class="priority-items">
+        <li><span class="dot dot-purple"></span>Member of the Week</li>
+        <li><span class="dot dot-purple"></span>Server Feedback Channel</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CATEGORY 1: DEPARTMENT STRUCTURE -->
+  <div class="section-header cat-1">
+    <div class="section-icon cat-1">🏛️</div>
+    <div class="section-title cat-1">Department Structure</div>
+    <div class="section-count">3 suggestions</div>
+  </div>
+
+  <!-- Card 1.1 -->
+  <div class="cat-1">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">1</div>
+      <div class="card-title">Dedicated Ticket Department</div>
+      <span class="priority-badge p1-badge">🔥 P1</span>
+    </div>
+    <p>Assign 2–3 Full/Head Mods specifically to handle tickets full-time with a <strong>[Ticket Dept]</strong> role tag. No new hiring needed — just formalise existing staff.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Tickets currently fall on whoever's online — inconsistent response times</li>
+        <li>Ticket ownership = faster resolutions + clear accountability</li>
+        <li>Directly enforces existing policy (Trial Mods can't solve tickets)</li>
+        <li>Zero cost — uses existing staff, zero new hiring</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 10 min setup</span>
+      <span class="tag green">🟢 Very High Impact</span>
+      <span class="tag">No budget needed</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Card 1.2 -->
+  <div class="cat-1">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">2</div>
+      <div class="card-title">Media / Content Moderation Role</div>
+      <span class="priority-badge p2-badge">⚡ P2</span>
+    </div>
+    <p>Assign 1–2 mods specifically to monitor media channels, image posts, and file uploads for spam, NSFW, and malware links.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Most servers get hit with NSFW/spam in media channels before chat mods notice</li>
+        <li>Specialized eyes = faster catches = less damage to server reputation</li>
+        <li>Easy to implement — assign existing reliable mods to a new role tag</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 5 min setup</span>
+      <span class="tag green">🟢 High Impact</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Card 1.3 -->
+  <div class="cat-1">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">3</div>
+      <div class="card-title">Trial Mod Mentorship Pairing</div>
+      <span class="priority-badge p2-badge">⚡ P2</span>
+    </div>
+    <p>Each Trial Mod gets officially paired with a Full Mod as their mentor. The mentor guides and vouches for them during trial period.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Reduces leadership burden — mods train mods, not heads train mods</li>
+        <li>Gives Trial Mods clear guidance on what's expected</li>
+        <li>Makes promotions easier — mentor can formally vouch</li>
+        <li>Zero budget, zero new systems, zero new tools needed</li>
+      </ul>
+    </div>
+    <div class="mini-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Trial Mod</th><th>Suggested Mentor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ProtexReaper</td><td>NeoSpectra</td></tr>
+          <tr><td>CHEF</td><td>Zazzy</td></tr>
+          <tr><td>potato</td><td>Vansh (Meoww)</td></tr>
+          <tr><td>KuzeNikhil</td><td>opgamer</td></tr>
+          <tr><td>DeadSpider</td><td>NeoSpectra</td></tr>
+          <tr><td>Jangli Billi</td><td>Zazzy</td></tr>
+          <tr><td>Nexaa</td><td>opgamer</td></tr>
+          <tr><td>VoidSoul</td><td>Vansh (Meoww)</td></tr>
+          <tr><td>wiz</td><td>Zazzy</td></tr>
+          <tr><td>perk adverd</td><td>NeoSpectra</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 0 min (just announce)</span>
+      <span class="tag green">🟢 High Impact</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- CATEGORY 2: AUTOMATION -->
+  <div class="section-header cat-2">
+    <div class="section-icon cat-2">🤖</div>
+    <div class="section-title cat-2">Automation & Bots</div>
+    <div class="section-count">3 suggestions</div>
+  </div>
+
+  <!-- Card 2.1 -->
+  <div class="cat-2">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">4</div>
+      <div class="card-title">Auto-Warning System (MEE6 / Wick Bot)</div>
+      <span class="priority-badge p1-badge">🔥 P1</span>
+    </div>
+    <p>Configure automated escalation: warn → mute → kick → ban for common violations like spam, slurs, raid-pings, and excessive caps.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Mods don't have to manually type warnings for obvious violations</li>
+        <li>Consistent punishment across all mods — eliminates bias claims</li>
+        <li>MEE6/Wick used in 90%+ of large Discord servers — proven solution</li>
+        <li>Takes 15 minutes to configure — zero ongoing maintenance</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 15 min setup</span>
+      <span class="tag green">🟢 Very High Impact</span>
+      <span class="tag blue">Bot: MEE6 or Wick</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Card 2.2 -->
+  <div class="cat-2">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">5</div>
+      <div class="card-title">Verification Gate</div>
+      <span class="priority-badge p2-badge">⚡ P2</span>
+    </div>
+    <p>New members must complete a simple verification (react to message, answer question, or solve a captcha) before accessing the server.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Stops bot raids and nuker accounts completely</li>
+        <li>Reduces Trial Mod workload on dealing with obvious bot accounts</li>
+        <li>Built into Carl-bot / Wick Bot — zero coding, zero cost</li>
+        <li>Best practice for any Discord server above 100 members</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 15 min setup</span>
+      <span class="tag green">🟢 High Impact</span>
+      <span class="tag blue">Bot: Carl-bot / Wick</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Card 2.3 -->
+  <div class="cat-2">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">6</div>
+      <div class="card-title">StatBot Weekly Auto-Report (Already Installed)</div>
+      <span class="priority-badge p3-badge">📌 P3</span>
+    </div>
+    <p>Use the existing StatBot to auto-generate a weekly staff activity report in a private leadership channel. Zero new bots needed.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>StatBot is already installed and tracking all 17 staff members</li>
+        <li>Leadership can check staff activity passively — no manual auditing</li>
+        <li>Takes 5 minutes to configure the scheduled report command</li>
+        <li>Saves hours of manual tracking per month</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 5 min setup</span>
+      <span class="tag yellow">🟡 Medium Impact</span>
+      <span class="tag green">Already installed</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- CATEGORY 3: PROCESS & POLICY -->
+  <div class="section-header cat-3">
+    <div class="section-icon cat-3">📋</div>
+    <div class="section-title cat-3">Process & Policy</div>
+    <div class="section-count">3 suggestions</div>
+  </div>
+
+  <!-- Card 3.1 -->
+  <div class="cat-3">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">7</div>
+      <div class="card-title">Formal LOA (Leave of Absence) System</div>
+      <span class="priority-badge p1-badge">🔥 P1</span>
+    </div>
+    <p>Create a <strong>#loa-requests</strong> channel with a pinned format template. Staff officially announce planned inactivity in advance.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Right now inactive staff just go ghost — leadership has zero warning</li>
+        <li>LOA system = mods stay accountable without being punished for real life</li>
+        <li>Reduces unnecessary demotions of good mods with temporary issues</li>
+        <li>Zero setup cost — just create a channel + pinned message template</li>
+      </ul>
+    </div>
+    <div class="code-box">
+📋 LOA REQUEST<br/>
+Name:<br/>
+Duration:<br/>
+Reason (optional):<br/>
+Coverage needed: Yes / No
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 5 min setup</span>
+      <span class="tag green">🟢 Very High Impact</span>
+      <span class="tag">Zero cost</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Card 3.2 -->
+  <div class="cat-3">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">8</div>
+      <div class="card-title">Monthly Activity Minimum Standards</div>
+      <span class="priority-badge p2-badge">⚡ P2</span>
+    </div>
+    <p>Write and publish clear, measurable activity minimums for each staff rank — visible to all staff in a pinned document.</p>
+    <div class="mini-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Min. Messages/Week</th><th>Min. Mod Actions/Week</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Trial Mod</td><td>30 messages</td><td>3 warns/mutes</td></tr>
+          <tr><td>Full Mod</td><td>50 messages</td><td>8 warns/mutes</td></tr>
+          <tr><td>Head Mod</td><td>30 messages</td><td>Leadership duties count</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Currently no written standard — demotions feel subjective and cause drama</li>
+        <li>With written standards, demotions/promotions are obvious and drama-free</li>
+        <li>StatBot already tracks all this data — just need to write the policy</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 30 min (write doc)</span>
+      <span class="tag yellow">🟡 High Impact</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Card 3.3 -->
+  <div class="cat-3">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">9</div>
+      <div class="card-title">Standardised Strike System for Staff</div>
+      <span class="priority-badge p3-badge">📌 P3</span>
+    </div>
+    <p>An internal 3-strike system for staff discipline. Transparent, consistent, and removes bias from leadership decisions.</p>
+    <div class="why-box">
+      <div class="why-label">Strike Triggers (example)</div>
+      <ul class="why-list">
+        <li><strong>Strike 1:</strong> Unexplained inactivity over 1 week</li>
+        <li><strong>Strike 2:</strong> Unprofessional behaviour in public channels</li>
+        <li><strong>Strike 3:</strong> Policy violation (e.g., Trial Mod handling a ticket without assignment) → demotion</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ ~1 hr (write policy)</span>
+      <span class="tag yellow">🟡 Medium-High Impact</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- CATEGORY 4: COMMUNITY GROWTH -->
+  <div class="section-header cat-4">
+    <div class="section-icon cat-4">🎉</div>
+    <div class="section-title cat-4">Community Growth</div>
+    <div class="section-count">2 suggestions</div>
+  </div>
+
+  <!-- Card 4.1 -->
+  <div class="cat-4">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">10</div>
+      <div class="card-title">Member of the Week Recognition</div>
+      <span class="priority-badge p4-badge">💡 P4</span>
+    </div>
+    <p>Highlight an active, positive community member each week in announcements. Simple weekly post by any Head Mod.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Encourages positive engagement — members compete for recognition</li>
+        <li>Costs nothing, takes 5 minutes per week</li>
+        <li>Carl-bot starboard/highlight feature already handles nominations</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 5 min/week</span>
+      <span class="tag green">🟢 Easy win</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Card 4.2 -->
+  <div class="cat-4">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-num">11</div>
+      <div class="card-title">Server Feedback / Suggestions Channel</div>
+      <span class="priority-badge p4-badge">💡 P4</span>
+    </div>
+    <p>A <strong>#suggestions</strong> channel with upvote/downvote reactions. Carl-bot auto-formats posts and threshold-based pins highlight the best ideas.</p>
+    <div class="why-box">
+      <div class="why-label">Why it works</div>
+      <ul class="why-list">
+        <li>Members feel heard = better retention and community loyalty</li>
+        <li>Leadership gets real community insights passively without asking</li>
+        <li>Carl-bot suggestion feature is zero-cost and zero-maintenance</li>
+      </ul>
+    </div>
+    <div class="effort-row">
+      <span class="tag">⏱ 5 min setup</span>
+      <span class="tag green">🟢 Easy win</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- PRIORITY SUMMARY TABLE -->
+  <div class="section-header cat-1">
+    <div class="section-icon cat-1">📊</div>
+    <div class="section-title" style="color: var(--text);">Full Priority Reference</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>Suggestion</th>
+          <th>Setup Time</th>
+          <th>Impact</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="priority-badge p1-badge">🔥 P1</span></td>
+          <td>Auto-Warning Bot</td>
+          <td>15 min</td>
+          <td><span style="color:var(--p1)">● Very High</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p1-badge">🔥 P1</span></td>
+          <td>LOA Request Channel</td>
+          <td>5 min</td>
+          <td><span style="color:var(--p1)">● Very High</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p1-badge">🔥 P1</span></td>
+          <td>Ticket Department</td>
+          <td>10 min</td>
+          <td><span style="color:var(--p1)">● Very High</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p2-badge">⚡ P2</span></td>
+          <td>Verification Gate</td>
+          <td>15 min</td>
+          <td><span style="color:var(--p2)">● High</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p2-badge">⚡ P2</span></td>
+          <td>Mentorship Pairing</td>
+          <td>0 min</td>
+          <td><span style="color:var(--p2)">● High</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p2-badge">⚡ P2</span></td>
+          <td>Activity Standards</td>
+          <td>30 min</td>
+          <td><span style="color:var(--p2)">● High</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p3-badge">📌 P3</span></td>
+          <td>StatBot Weekly Report</td>
+          <td>5 min</td>
+          <td><span style="color:var(--p3)">● Medium</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p3-badge">📌 P3</span></td>
+          <td>Staff Strike System</td>
+          <td>~1 hr</td>
+          <td><span style="color:var(--p3)">● Medium-High</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4-badge">💡 P4</span></td>
+          <td>Member of the Week</td>
+          <td>5 min/wk</td>
+          <td><span style="color:var(--p4)">● Easy Win</span></td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td><span class="priority-badge p4-badge">💡 P4</span></td>
+          <td>Feedback Channel</td>
+          <td>5 min</td>
+          <td><span style="color:var(--p4)">● Easy Win</span></td>
+          <td>Free</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert important">
+    <div class="alert-title">✅ All P1 suggestions are zero-cost and zero-discussion</div>
+    <div class="alert-body">They require no new budget, no new hiring, and no new bots — just configuration of existing infrastructure and formalisation of what should already be happening.</div>
+  </div>
+
+  <div class="alert tip">
+    <div class="alert-title">💡 Recommended Heads GC Approach</div>
+    <div class="alert-body">Present P1 items in one message today. Once approved, follow up with P2 the next day. This way leadership never feels overwhelmed by too many changes at once.</div>
+  </div>
+
+  <div class="footer">
+    <span>Spider's Web — Internal Team Document · October 24, 2026</span>
+    <span>Prepared by !H-MOD | INFINE (Aditya)</span>
+  </div>
+
+</div>
+</body>
+</html>
